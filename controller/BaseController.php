@@ -40,12 +40,17 @@ class BaseController
     $this->smarty->assign($name, $object);
   }
   
+  private function getControllerName()
+  {
+    $parts = explode("\\", get_class($this));
+    return lcfirst($parts[count($parts)-1]);
+  }
+  
   public function render($action)
   {
     if ($this->doRender)
     {
-      $parts = explode("\\", get_class($this));
-      $templateFile = "view/".lcfirst($parts[count($parts)-1])."/".lcfirst($action).".tpl";
+      $templateFile = "view/".$this->getControllerName()."/".lcfirst($action).".tpl";
       if (!is_file($templateFile))
       {
         echo "Error: No such file: $templateFile";
@@ -60,15 +65,33 @@ class BaseController
     $this->doRender = false;
   }
   
-  public function redirect($controller, $action, $params)
+  public function redirect($controller = null, $action = "default", $params = null)
   {
-    $redirecturl = "index.php?controller=$controller&action=$action";
-    foreach ($params as $key=>$value)
+    if ($controller == null)
     {
-      $redirecturl .= "&$key=$value";
+      $controller = $this->getControllerName();
     }
+    $redirecturl = generate_url($controller, $action, $params);
     header("Location: $redirecturl");
     $this->dontRender();
+  }
+  
+  public function addInfo($message)
+  {
+    if (!isset($_SESSION["info"]))
+    {
+      $_SESSION["info"] = array();
+    }
+    $_SESSION["info"][] = $message;
+  }
+  
+  public function addError($message)
+  {
+    if (!isset($_SESSION["error"]))
+    {
+      $_SESSION["error"] = array();
+    }
+    $_SESSION["error"][] = $message;
   }
 }
 
