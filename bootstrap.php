@@ -48,7 +48,7 @@ if (!is_file($conn["path"]))
   $classes = array();
   while (false !== ($entry = readdir($dir))) 
   {
-      if (strlen($entry > 4) && substr($entry, strlen($entry)-4) == ".php")
+      if (strlen($entry) > 4 && substr($entry, -4) == ".php")
       {
         $className = 'Model\\'.substr($entry, 0, strlen($entry)-4);
         $classes []= $entityManager->getClassMetadata($className);

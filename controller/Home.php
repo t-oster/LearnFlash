@@ -6,7 +6,7 @@ namespace Controller;
  *
  * @author Thomas Oster <thomas.oster@rwth-aachen.de>
  */
-class Home {
+class Home extends BaseController {
   //put your code here
 }
 

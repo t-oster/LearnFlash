@@ -35,6 +35,18 @@ function smarty_url_tag($params, $smarty)
   return generate_url($ctrl, $act, $pars);
 }
 
+$smarty->registerPlugin("function","clear_errors", "smarty_clear_errors_tag");
+function smarty_clear_errors_tag($params, $smarty)
+{
+  unset($_SESSION["error"]);
+}
+
+$smarty->registerPlugin("function","clear_infos", "smarty_clear_infos_tag");
+function smarty_clear_infos_tag($params, $smarty)
+{
+  unset($_SESSION["info"]);
+}
+
 $controllerClass = "Controller\\".ucfirst($controller);
 $actionMethod = "load".ucfirst($action);
 

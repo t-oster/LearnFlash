@@ -11,11 +11,12 @@ class Register extends BaseController {
 
   public function loadRegister($name, $email, $login, $password) {
     $um = new \Manager\UserManager();
-    if ($um->register($name, $email, $login, $password)) {
+    $result = $um->register($name, $email, $login, $password);
+    if ($result == true) {
       $this->addInfo("Sucessfully registered. You can now login");
       $this->redirect("Login");
     } else {
-      $this->addError("Error. Registering failed");
+      $this->addError("Error. Registering failed: $result");
       $this->redirect();
     }
   }

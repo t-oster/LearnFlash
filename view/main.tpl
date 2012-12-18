@@ -13,7 +13,24 @@
   </header>
   <body>
     {block name="body"}
+      {block name="messages"}
+        {if isset($smarty.session.error)}
+          {foreach $smarty.session.error as $e}
+            <div class="info">{$e}</div>
+          {/foreach}
+          {clear_errors}
+        {/if}
+        {if isset($smarty.session.info)}
+          {foreach $smarty.session.info as $i}
+            <div class="info">{$i}</div>
+          {/foreach}
+          {clear_infos}
+        {/if}
+      {/block}
       {block name="menu"}
+        {if isset($smarty.session.login)}
+        You are logged in as {$smarty.session.login} <a href="{url controller="Login" action="logout"}">Logout</a>
+        {/if}
         <div id="menu">
           <a href="#">home</a>
         </div>

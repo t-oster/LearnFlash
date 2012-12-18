@@ -21,13 +21,33 @@ class UserManager {
   
   public function register($name, $email, $login, $password)
   {
-    //TODO: create new User and save in the database
+    if ($this->getUser($login) != null)
+    {
+      return "User with login '$login' already exists";
+    }
+    $u = new \Model\User();
+    $u->setEmail($email);
+    $u->setLogin($login);
+    $u->setName($name);
+    $u->setPassword($password);
+    $this->entityManager->persist($u);
+    $this->entityManager->flush();
     return true;
   }
   public function login($login, $password)
   {
-    //TODO get User-Entity from Database and check password
-    $_SESSION["login"] = $login;
+    $u = $this->getUser($login);
+    if ($u == null)
+    {
+      return "Wrong username";
+    }
+    if ($u->checkPassword($password))
+    {
+      $_SESSION["login"] = $login;
+      $this->currentUser = $u;
+      return true;
+    }
+    return "Wrong password";
   }
   public function logout()
   {
@@ -37,9 +57,13 @@ class UserManager {
   {
     if ($this->currentUser == null && isset($_SESSION["login"]))
     {
-      //TODO get User-entity from database and save as currentUser
+      $this->currentUser = $this->getUser($_SESSION["login"]);
     }
     return $this->currentUser;
+  }
+  public function getUser($login)
+  {
+    return $this->entityManager->getRepository("Model\User")->findOneBy(array("login" => $login));
   }
 }
 
