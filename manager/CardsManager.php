@@ -33,14 +33,29 @@ class CardsManager {
     return $c;
   }
   
+  public function updateCard($cardId, $title, $frontHtml, $backHtml)
+  {
+    $c = $this->findById($cardId);
+    $c->setTitle($title);
+    $c->setFrontHtml($frontHtml);
+    $c->setBackHtml($backHtml);
+    $this->em->flush();
+    return $c;
+  }
+  
   public function getCardsByUser(\Model\User $u)
   {
     return $this->em->getRepository("\Model\Card")->findBy(array("owner" => $u));
   }
   
+  public function findById($cardId)
+  {
+    return $this->em->getRepository("\Model\Card")->find($cardId);
+  }
+  
   public function deleteById($cardId)
   {
-    $c = $this->em->getRepository("\Model\Card")->find($cardId);
+    $c = $this->findById($cardId);
     if ($c == null)
     {
       return "Card with id $cardId does not exist";

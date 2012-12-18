@@ -13,6 +13,8 @@
     <script src="lib/js/jQuery-UI/jquery-ui-1.9.1.custom.min.js"></script>
     <script src="lib/js/ambiance/jquery.ambiance.js"></script>
     <script src="js/main.js"></script>
+    {block name="head"}
+    {/block}
   </header>
   <body>
     {block name="body"}

@@ -14,6 +14,44 @@ class Cards extends BaseController{
     $this->assignToView("cards", $cards);
   }
   
+  public function loadShow($cardId)
+  {
+    $cm = new \Manager\CardsManager();
+    $card = $cm->findById($cardId);
+    $this->assignToView("card", $card);
+  }
+  
+  public function loadEdit($cardId)
+  {
+    $cm = new \Manager\CardsManager();
+    $card = $cm->findById($cardId);
+    $this->assignToView("card", $card);
+  }
+  
+  public function loadUpdate($cardId, $title, $frontHtml, $backHtml, $ajax)
+  {
+    $cm = new \Manager\CardsManager();
+    $c = $cm->updateCard($cardId, $title, $frontHtml, $backHtml);
+    if ($ajax)
+    {
+      echo json_encode($c);
+      $this->dontRender();
+    }
+    else
+    {
+      if ($c instanceof \Model\Card)
+      {
+        $this->addInfo("Card '".$c->getTitle()."' successfully updated");
+        $this->redirect(null, "show", array("cardId" => $cardId));
+      }
+      else
+      {
+        $this->addError("Error: $c");
+        $this->redirect(null, "edit", array("cardId" => $cardId));
+      }
+    }
+  }
+  
   public function loadCreate($title, $frontHtml, $backHtml, $ajax)
   {
     $cm = new \Manager\CardsManager();

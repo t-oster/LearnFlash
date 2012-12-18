@@ -4,7 +4,10 @@
 <a href="{url action="add"}">Add</a>
 <ul id="cards">
 {foreach $cards as $c}
-  <li>{$c->getTitle()} <a class="deleteLink" href="{url action="delete" cardId=$c->getId()}">delete</a></li>
+  <li>
+    <a href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
+    <a class="deleteLink" href="{url action="delete" cardId=$c->getId()}">delete</a>
+  </li>
 {/foreach}
 </ul>
 <script type="text/javascript">
