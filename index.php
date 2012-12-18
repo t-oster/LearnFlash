@@ -97,6 +97,6 @@ if (method_exists($controllerInstance, $actionMethod))
         exit;
       }
   }
-  call_user_method_array($actionMethod, $controllerInstance, $pars);
+  call_user_func_array(array($controllerInstance, $actionMethod), $pars);
 }
 $controllerInstance->render($action);
