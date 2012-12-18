@@ -14,19 +14,50 @@ class Cards extends BaseController{
     $this->assignToView("cards", $cards);
   }
   
-  public function loadCreate($title, $frontHtml, $backHtml)
+  public function loadCreate($title, $frontHtml, $backHtml, $ajax)
   {
     $cm = new \Manager\CardsManager();
     $c = $cm->createCard($this->getUserManager()->getLoggedInUser(), $title, $frontHtml, $backHtml);
-    if ($c instanceof \Model\Card)
+    if ($ajax)
     {
-      $this->addInfo("Card '".$c->getTitle()."' successfully created");
-      $this->redirect();
+      echo json_encode($c);
+      $this->dontRender();
     }
     else
     {
-      $this->addError("Error: $c");
-      $this->redirect(null, "add");
+      if ($c instanceof \Model\Card)
+      {
+        $this->addInfo("Card '".$c->getTitle()."' successfully created");
+        $this->redirect();
+      }
+      else
+      {
+        $this->addError("Error: $c");
+        $this->redirect(null, "add");
+      }
+    }
+  }
+  
+  public function loadDelete($cardId, $ajax)
+  {
+    $cm = new \Manager\CardsManager();
+    $result = $cm->deleteById($cardId);
+    if ($ajax)
+    {
+      echo json_encode($result);
+      $this->dontRender();
+    }
+    else
+    {
+      if ($result == true)
+      {
+        $this->addInfo("Sucessfully deleted");
+      }
+      else 
+      {
+        $this->addError("Error: $result");
+      }
+      $this->redirect();
     }
   }
 }

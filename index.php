@@ -16,6 +16,7 @@ function generate_url($controller, $action = "default", $params = null)
 
 $controller = isset($_GET["controller"]) ? $_GET["controller"] : "home";
 $action = isset($_GET["action"]) ? $_GET["action"] : "default";
+$ajax = isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) ==	"xmlhttprequest";
 
 //plugin for the smarty {url} tag
 $smarty->registerPlugin("function","url", "smarty_url_tag");
@@ -74,7 +75,11 @@ if (method_exists($controllerInstance, $actionMethod))
   $params = $r->getParameters();
   foreach ($params as $param) {
       $name = $param->getName();
-      if (isset($_POST[$name]))
+      if ($name == "ajax")
+      {
+        $pars["ajax"] = $ajax;
+      }
+      else if (isset($_POST[$name]))
       {
         $pars[$name] = $_POST[$name];
       }

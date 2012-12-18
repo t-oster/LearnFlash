@@ -12,37 +12,10 @@
     <script src="lib/js/jquery-1.8.2.min.js"></script>
     <script src="lib/js/jQuery-UI/jquery-ui-1.9.1.custom.min.js"></script>
     <script src="lib/js/ambiance/jquery.ambiance.js"></script>
+    <script src="js/main.js"></script>
   </header>
   <body>
     {block name="body"}
-      {block name="messages"}
-        {if isset($smarty.session.error)}
-          <script type="text/javascript">
-          $(document).ready(function() {
-          {foreach $smarty.session.error as $e}
-            $.ambiance({ message: "{$e}",
-            type: "error",
-            fade: true,
-            timeout: 0 });
-          {/foreach}
-          });
-          </script>
-          {clear_errors}
-        {/if}
-        {if isset($smarty.session.info)}
-          <script type="text/javascript">
-          $(document).ready(function() {
-          {foreach $smarty.session.info as $i}
-            $.ambiance({ message: "{$i}",
-            type: "success",
-            fade: true,
-            timeout: 0 });
-          {/foreach}
-          });
-          </script>
-          {clear_infos}
-        {/if}
-      {/block}
       {block name="menu"}
         {if isset($smarty.session.login)}
         You are logged in as {$smarty.session.login} <a href="{url controller="Login" action="logout"}">Logout</a>
@@ -60,4 +33,21 @@
       {/block}
     {/block}
   </body>
+  <script type="text/javascript">
+    $(document).ready(function()
+    {
+      {if isset($smarty.session.error)}
+        {foreach $smarty.session.error as $e}
+          error("{$e}");
+        {/foreach}
+        {clear_errors}
+      {/if}
+      {if isset($smarty.session.info)}
+        {foreach $smarty.session.info as $i}
+          info("{$i}");
+        {/foreach}
+        {clear_infos}
+      {/if}
+    });
+  </script>
 </html>

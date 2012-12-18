@@ -37,6 +37,21 @@ class CardsManager {
   {
     return $this->em->getRepository("\Model\Card")->findBy(array("owner" => $u));
   }
+  
+  public function deleteById($cardId)
+  {
+    $c = $this->em->getRepository("\Model\Card")->find($cardId);
+    if ($c == null)
+    {
+      return "Card with id $cardId does not exist";
+    }
+    else
+    {
+      $this->em->remove($c);
+      $this->em->flush();
+      return true;
+    }
+  }
 }
 
 ?>
