@@ -27,7 +27,7 @@
             type: "error"} );
         }
       }) },
-        Register: function(){ window.location = $("#controls a").attr("href"); $(this).dialog("close"); }
+        Register: function(){ window.location = "{url controller="Register"}"; $(this).dialog("close"); }
       }
     });
   });

@@ -60,7 +60,7 @@ if (!class_exists($controllerClass))
 session_start();
 
 $userManager = new Manager\UserManager();
-if ($userManager->getLoggedInUser() == null && $controller != "login" && $controller != "register")
+if ($userManager->getLoggedInUser() == null && strtolower($controller) != "login" && strtolower($controller) != "register")
 {
   header("Location: ".generate_url("login", "default", array("redirect" => $_SERVER["REQUEST_URI"])));
   exit;
