@@ -17,27 +17,10 @@ class Login extends BaseController{
     }
     $this->assignToView("redirect", $redirect);
   }
-  public function loadLogin($login, $password, $redirect = null)
+  public function loadLoginAjax($login, $password)
   {
-    $result = $this->getUserManager()->login($login, $password);
-    if ($result === true && $this->getUserManager()->getLoggedInUser() != null)
-    {
-      $this->addInfo("Welcome ".$this->getUserManager()->getLoggedInUser()->getName().".");
-      if ($redirect == null)
-      {
-        $this->redirect("Home");
-      }
-      else
-      {
-        header("Location: ".$redirect);
-        exit;
-      }
-    }
-    else
-    {
-      $this->addError("Login failed: $result");
-      $this->redirect(null, "default", array("redirect" => $redirect));
-    }
+    echo json_encode($this->getUserManager()->login($login, $password));
+    $this->dontRender();
   }
   public function loadLogout()
   {

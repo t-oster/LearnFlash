@@ -3,6 +3,7 @@
   <header>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="lib/js/jQuery-UI/jquery-ui-1.9.1.custom.min.css" />
+    <link rel="stylesheet" href="lib/js/ambiance/jquery.ambiance.css" />
     <link rel="stylesheet" href="css/main.css" />
     <!--[if ie]><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=8, IE=9, chrome=1"/><![endif]-->
     <!--[if lt IE 9]>
@@ -10,20 +11,35 @@
     <![endif]-->
     <script src="lib/js/jquery-1.8.2.min.js"></script>
     <script src="lib/js/jQuery-UI/jquery-ui-1.9.1.custom.min.js"></script>
+    <script src="lib/js/ambiance/jquery.ambiance.js"></script>
   </header>
   <body>
     {block name="body"}
       {block name="messages"}
         {if isset($smarty.session.error)}
+          <script type="text/javascript">
+          $(document).ready(function() {
           {foreach $smarty.session.error as $e}
-            <div class="info">{$e}</div>
+            $.ambiance({ message: "{$e}",
+            type: "error",
+            fade: true,
+            timeout: 0 });
           {/foreach}
+          });
+          </script>
           {clear_errors}
         {/if}
         {if isset($smarty.session.info)}
+          <script type="text/javascript">
+          $(document).ready(function() {
           {foreach $smarty.session.info as $i}
-            <div class="info">{$i}</div>
+            $.ambiance({ message: "{$i}",
+            type: "success",
+            fade: true,
+            timeout: 0 });
           {/foreach}
+          });
+          </script>
           {clear_infos}
         {/if}
       {/block}
