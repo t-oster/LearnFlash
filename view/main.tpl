@@ -32,7 +32,8 @@
         You are logged in as {$smarty.session.login} <a href="{url controller="Login" action="logout"}">Logout</a>
         {/if}
         <div id="menu">
-          <a href="#">home</a>
+          <a href="{url controller="Home"}">home</a>
+          <a href="{url controller="Cards"}">cards</a>
         </div>
       {/block}
       {block name="content"}

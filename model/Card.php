@@ -29,6 +29,24 @@ class Card {
    * @var string
    */
   protected $backHtml;
+  /**
+   *
+   * @ManyToOne(targetEntity="User", inversedBy="cards")
+   *
+   * @var User
+   */
+  protected $owner;
+  /**
+   *
+   * @ManyToMany(targetEntity="Tag", mappedBy="cards")
+   *
+   * @var Tags[]
+   */
+  protected $tags;
+  
+  public function __construct() {
+    $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+  }
   
   public function getId() {
     return $this->id;
@@ -60,6 +78,24 @@ class Card {
 
   public function setBackHtml($backHtml) {
     $this->backHtml = $backHtml;
+  }
+  
+  public function getOwner() {
+    return $this->owner;
+  }
+
+  public function setOwner(User $owner) {
+    $this->owner = $owner;
+    $owner->getCards()->add($this);
+  }
+
+  public function getTags() {
+    return $this->tags;
+  }
+
+  public function addTag(Tag $tag) {
+    $this->tags->add($tag);
+    $tag->getCards()->add($this);
   }
 
 }

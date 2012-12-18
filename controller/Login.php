@@ -7,18 +7,7 @@ namespace Controller;
  * @author Thomas Oster <thomas.oster@rwth-aachen.de>
  */
 class Login extends BaseController{
-  
-  /**
-   *
-   * @var Manager\UserManager
-   */
-  protected $um;
-  
-  public function __construct() {
-    global $userManager;
-    $this->um = $userManager;
-  }
-  
+    
   public function loadDefault($redirect = null)
   {
     //prevent from redirecting to login itselt
@@ -30,10 +19,10 @@ class Login extends BaseController{
   }
   public function loadLogin($login, $password, $redirect = null)
   {
-    $result = $this->um->login($login, $password);
-    if ($result == true)
+    $result = $this->getUserManager()->login($login, $password);
+    if ($result === true && $this->getUserManager()->getLoggedInUser() != null)
     {
-      $this->addInfo("Welcome ".$this->um->getLoggedInUser()->getName().".");
+      $this->addInfo("Welcome ".$this->getUserManager()->getLoggedInUser()->getName().".");
       if ($redirect == null)
       {
         $this->redirect("Home");
@@ -52,7 +41,7 @@ class Login extends BaseController{
   }
   public function loadLogout()
   {
-    $this->um->logout();
+    $this->getUserManager()->logout();
     $this->redirect("login");
   }
 }

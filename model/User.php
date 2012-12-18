@@ -35,6 +35,23 @@ class User {
    * @var string
    */
   protected $passwordHash;
+  /**
+   * @OneToMany(targetEntity="Card", mappedBy="owner")
+   *
+   * @var Card[]
+   */
+  protected $cards;
+  /**
+   * @OneToMany(targetEntity="Tag", mappedBy="owner")
+   *
+   * @var Tags[]
+   */
+  protected $tags;
+  
+  public function __construct() {
+    $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->cards = new \Doctrine\Common\Collections\ArrayCollection();
+  }
   
   public function getId() {
     return $this->id;
@@ -78,6 +95,14 @@ class User {
 
   public function setPassword($password) {
     $this->passwordHash = $this->hashPassword($password);
+  }
+  
+  public function getCards() {
+    return $this->cards;
+  }
+
+  public function getTags() {
+    return $this->tags;
   }
 
 }

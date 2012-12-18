@@ -10,9 +10,8 @@ namespace Controller;
 class Register extends BaseController {
 
   public function loadRegister($name, $email, $login, $password) {
-    $um = new \Manager\UserManager();
-    $result = $um->register($name, $email, $login, $password);
-    if ($result == true) {
+    $result = $this->getUserManager()->register($name, $email, $login, $password);
+    if ($result === true) {
       $this->addInfo("Sucessfully registered. You can now login");
       $this->redirect("Login");
     } else {

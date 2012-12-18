@@ -58,9 +58,12 @@ if (!is_file($conn["path"]))
   $validator = new \Doctrine\ORM\Tools\SchemaValidator($entityManager);
   $errors = $validator->validateMapping();
   if (count($errors) > 0) {
+    foreach($errors as $e)
+    {
       // Lots of errors!
-      echo implode("\n\n", $errors);
-      exit;
+      echo implode("\n\n", $e);  
+    }
+    exit;
   }
 }
 ?>

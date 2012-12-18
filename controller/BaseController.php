@@ -17,6 +17,11 @@ class BaseController
    * @var Smarty
    */
   private $smarty;
+  /**
+   *
+   * @var Manager\UserManager
+   */
+  private $um;
   
   private $doRender = true;
 
@@ -26,13 +31,19 @@ class BaseController
   public function load()
   {
     global $entityManager;
+    global $userManager;
     global $smarty;
     $this->em = $entityManager;
+    $this->um = $userManager;
     $this->smarty = $smarty;
   }
   public function getEntityManager()
   {
     return $this->em;
+  }
+  public function getUserManager()
+  {
+    return $this->um;
   }
   
   public function assignToView($name, $object)

@@ -14,7 +14,7 @@ function generate_url($controller, $action = "default", $params = null)
   return $redirecturl;
 }
 
-$controller = isset($_GET["controller"]) ? $_GET["controller"] : "login";
+$controller = isset($_GET["controller"]) ? $_GET["controller"] : "home";
 $action = isset($_GET["action"]) ? $_GET["action"] : "default";
 
 //plugin for the smarty {url} tag
@@ -88,7 +88,7 @@ if (method_exists($controllerInstance, $actionMethod))
       }
       else
       {
-        echo "Error: The Method $controllerClass -> $actionName() needs the parameter $name, which is neither in GET nor in POST";
+        echo "Error: The Method $controllerClass -> $actionMethod() needs the parameter $name, which is neither in GET nor in POST";
         exit;
       }
   }
