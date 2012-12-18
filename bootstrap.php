@@ -42,11 +42,15 @@ $entityManager = \Doctrine\ORM\EntityManager::create($conn, $config, $evm);
 // check if the database exists
 if (!is_file($conn["path"]))
 {
+  if (!is_dir(dirname($conn["path"])))
+  {
+    mkdir(dirname($conn["path"]));
+  }
   $tool = new \Doctrine\ORM\Tools\SchemaTool($entityManager);
   //find all classes in entities
   $dir = opendir(__DIR__.'/model');
   $classes = array();
-  while (false !== ($entry = readdir($dir))) 
+  while (false !== ($entry = readdir($dir)))
   {
       if (strlen($entry) > 4 && substr($entry, -4) == ".php")
       {
@@ -61,7 +65,7 @@ if (!is_file($conn["path"]))
     foreach($errors as $e)
     {
       // Lots of errors!
-      echo implode("\n\n", $e);  
+      echo implode("\n\n", $e);
     }
     exit;
   }
