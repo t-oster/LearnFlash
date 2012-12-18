@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/index.php</file>
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/lib/php/Smarty-3.1.12/README</file>
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/bootstrap.php</file>
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/model/Card.php</file>
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/view/main.tpl</file>
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/controller/Register.php</file>
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/view/register/default.tpl</file>
+        <file>file:/home/thommy/NetBeansProjects/LearnFlashPhp/controller/BaseController.php</file>
+    </open-files>
+</project-private>
