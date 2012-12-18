@@ -21,6 +21,11 @@ class Login extends BaseController{
   
   public function loadDefault($redirect = null)
   {
+    //prevent from redirecting to login itselt
+    if ($redirect != null && strpos(strtolower($redirect), "login") > 0)
+    {
+      $redirect = null;
+    }
     $this->assignToView("redirect", $redirect);
   }
   public function loadLogin($login, $password, $redirect = null)
