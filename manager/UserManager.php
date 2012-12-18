@@ -22,6 +22,7 @@ class UserManager {
   public function register($name, $email, $login, $password)
   {
     //TODO: create new User and save in the database
+    return true;
   }
   public function login($login, $password)
   {

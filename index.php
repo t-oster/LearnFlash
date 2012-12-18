@@ -24,7 +24,15 @@ function smarty_url_tag($params, $smarty)
   global $controller;
   $ctrl = empty($params["controller"]) ? $controller : $params["controller"];
   $act = empty($params["action"]) ? "default" : $params["action"];
-  return generate_url($ctrl, $act);
+  $pars = array();
+  foreach ($params as $key=>$value)
+  {
+    if ($key != "controller" && $key != "action")
+    {
+      $pars[$key] = $value;
+    }
+  }
+  return generate_url($ctrl, $act, $pars);
 }
 
 $controllerClass = "Controller\\".ucfirst($controller);
@@ -37,6 +45,13 @@ if (!class_exists($controllerClass))
 }
 
 session_start();
+
+$userManager = new Manager\UserManager();
+if ($userManager->getLoggedInUser() == null && $controller != "login" && $controller != "register")
+{
+  header("Location: ".generate_url("login", "default", array("redirect" => $_SERVER["REQUEST_URI"])));
+  exit;
+}
 $controllerInstance = new $controllerClass();
 $controllerInstance->load();
 if (method_exists($controllerInstance, $actionMethod))
