@@ -58,6 +58,10 @@ class UserManager {
     if ($this->currentUser == null && isset($_SESSION["login"]))
     {
       $this->currentUser = $this->getUser($_SESSION["login"]);
+      if ($this->currentUser == null)
+      {
+        $_SESSION["login"] = null;
+      }
     }
     return $this->currentUser;
   }
