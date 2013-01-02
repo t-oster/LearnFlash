@@ -13,6 +13,8 @@ spl_autoload_register (function ($classname){
 //initialize smarty
 require('lib/php/Smarty-3.1.12/libs/Smarty.class.php');
 $smarty = new Smarty();
+$smarty->setCacheDir("tmp");
+$smarty->setCompileDir("tmp");
 
 //initialize doctrine
 date_default_timezone_set("Europe/Berlin");

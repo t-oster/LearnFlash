@@ -19,19 +19,13 @@
   <body>
     {block name="body"}
       {block name="menu"}
-        {if isset($smarty.session.login)}
-        You are logged in as {$smarty.session.login} <a href="{url controller="Login" action="logout"}">Logout</a>
-        {/if}
-        <div id="menu">
-          <a href="{url controller="Home"}">home</a>
-          <a href="{url controller="Cards"}">cards</a>
-        </div>
+        {include file="../menu.tpl"}
       {/block}
       {block name="content"}
         Please use this block to fill in content
       {/block}
       {block name="footer"}
-        This page is brought to you by us. We're awesome!
+        {include file="../footer.tpl"}
       {/block}
     {/block}
   </body>
