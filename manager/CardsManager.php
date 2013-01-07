@@ -98,7 +98,12 @@ class CardsManager extends BaseManager{
     $this->em->flush();
     return $c;
   }
-  
+
+  public function findByTitle($title)
+  {
+    return $this->em->getRepository("\Model\Card")->findOneBy(array("title" => $title));
+  }
+
   public function getCardsByUser(\Model\User $u)
   {
     return $this->em->getRepository("\Model\Card")->findBy(array("owner" => $u));

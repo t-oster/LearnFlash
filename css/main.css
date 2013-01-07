@@ -548,6 +548,11 @@ div.card
   clear: left;
 }
 
+a.createlink
+{
+  color: red;
+}
+
 #menu
 {
     line-height: 40px;

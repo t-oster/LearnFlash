@@ -2,7 +2,7 @@
 {block name="content"}
 <form action="{url action="create"}" method="POST">
   <label for="title">Title</label>
-  <input type="text" id="title" name="title"/>
+  <input type="text" id="title" name="title" value="{$title}"/>
   <label for="frontHtml">Front</label>
   <textarea class="tinymce" id="frontHtml" name="frontHtml"></textarea>
   <label for="backHtml">Back</label>
