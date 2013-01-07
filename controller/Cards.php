@@ -26,12 +26,18 @@ class Cards extends BaseController{
     $cm = new \Manager\CardsManager();
     $card = $cm->findById($cardId);
     $this->assignToView("card", $card);
+    $stringTags = "";
+    foreach ($card->getTags() as $t)
+    {
+      $stringTags .= ($stringTags == "" ? "" : ", ") . $t->getName();
+    }
+    $this->assignToView("stringTags", $stringTags);
   }
   
-  public function loadUpdate($cardId, $title, $frontHtml, $backHtml, $ajax)
+  public function loadUpdate($cardId, $title, $frontHtml, $backHtml, $ajax, $tags = null)
   {
     $cm = new \Manager\CardsManager();
-    $c = $cm->updateCard($cardId, $title, $frontHtml, $backHtml);
+    $c = $cm->updateCard($cardId, $title, $frontHtml, $backHtml, explode(",",$tags));
     if ($ajax)
     {
       echo json_encode($c);
@@ -52,10 +58,10 @@ class Cards extends BaseController{
     }
   }
   
-  public function loadCreate($title, $frontHtml, $backHtml, $ajax)
+  public function loadCreate($title, $frontHtml, $backHtml, $ajax, $tags = null)
   {
     $cm = new \Manager\CardsManager();
-    $c = $cm->createCard($this->getUserManager()->getLoggedInUser(), $title, $frontHtml, $backHtml);
+    $c = $cm->createCard($this->getUserManager()->getLoggedInUser(), $title, $frontHtml, $backHtml, $tags);
     if ($ajax)
     {
       echo json_encode($c);

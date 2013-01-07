@@ -5,11 +5,13 @@
 </script>
 {/block}
 {block name="content"}
-<h2>{$card->getTitle()}</h2><a href="{url action="edit" cardId=$card->getId()}">Edit</a>
+<h2>{$card->getTitle()}</h2><a class="editlink" href="{url action="edit" cardId=$card->getId()}">Edit</a>
 <div id="frontSide">
   {$card->getFrontHtml()}
 </div>
 <div id="backSide">
   {$card->getBackHtml()}
 </div>
+<h2>Tags</h2>
+{include file="../tags/taglist.tpl" tags=$card->getTags()}
 {/block}

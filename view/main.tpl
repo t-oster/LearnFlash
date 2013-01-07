@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-  <header>
+  <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="lib/js/jQuery-UI/jquery-ui-1.9.1.custom.min.css" />
     <link rel="stylesheet" href="lib/js/ambiance/jquery.ambiance.css" />
@@ -15,7 +15,7 @@
     <script src="js/main.js"></script>
     {block name="head"}
     {/block}
-  </header>
+  </head>
   <body>
     {block name="body"}
       {block name="menu"}

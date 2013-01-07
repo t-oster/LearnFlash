@@ -8,6 +8,8 @@
   <textarea class="tinymce" id="frontHtml" name="frontHtml">{$card->getFrontHtml()}</textarea>
   <label for="backHtml">Back</label>
   <textarea class="tinymce" id="backHtml" name="backHtml">{$card->getBackHtml()}</textarea>
+  <label for="tags">Tags</label>
+  <input type="text" id="tags" name="tags" value="{$stringTags}"/>
   <input type="submit" value="Update"/>
   or <a href="{url}">Cancel</a>
 </form>

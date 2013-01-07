@@ -98,6 +98,11 @@ class Card {
     $tag->getCards()->add($this);
   }
 
+  public function removeTag(Tag $tag) {
+    $this->tags->removeElement($tag);
+    $tag->getCards()->removeElement($this);
+  }
+
 }
 
 ?>

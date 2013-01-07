@@ -7,6 +7,7 @@
   <li>
     <a href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
     <a class="deleteLink" href="{url action="delete" cardId=$c->getId()}">delete</a>
+    {include file="../tags/taglist.tpl" tags=$c->getTags()}
   </li>
 {/foreach}
 </ul>
