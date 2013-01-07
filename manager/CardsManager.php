@@ -76,11 +76,15 @@ class CardsManager extends BaseManager{
     $c->setBackHtml($backHtml);
     $this->em->persist($c);
     $this->em->flush();
+    if ($c->getTitle() == "")
+    {
+      $c->setTitle("#".$c->getId());
+    }
     if ($tags != null)
     {
-      $this->setTags($c, $tags);
-      $this->em->flush();
-    } 
+      $this->setTags($c, $tags); 
+    }
+    $this->em->flush();
     $this->em->commit();
     return $c;
   }
