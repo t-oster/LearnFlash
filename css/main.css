@@ -530,6 +530,23 @@ background-image:gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255
                         end of all reset 
   -----------------------------------------------------------------*/
 
+div.tag
+{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 4px;
+  padding: 5px;
+  float: left;
+}
+
+div.card
+{
+  position: relative;
+  background: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  clear: left;
+}
 
 #menu
 {

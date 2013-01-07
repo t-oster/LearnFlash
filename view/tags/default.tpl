@@ -11,8 +11,8 @@
       {foreach $tags as $t}
         {
           text: "{$t->getName()}",
-          weight: 15,
-          url: "{url controller="Tags" action="show" tagId=$t->getId()}"
+          weight: "{count($t->getCards())}",
+          link: "{url controller="Tags" action="show" tagId=$t->getId()}"
         },
       {/foreach}
     ]);

@@ -34,7 +34,7 @@ class Cards extends BaseController{
     $this->assignToView("stringTags", $stringTags);
   }
   
-  public function loadUpdate($cardId, $title, $frontHtml, $backHtml, $ajax, $tags = null)
+  public function loadUpdate($cardId, $title, $frontHtml, $backHtml, $ajax, $tags)
   {
     $cm = new \Manager\CardsManager();
     $c = $cm->updateCard($cardId, $title, $frontHtml, $backHtml, explode(",",$tags));
@@ -58,10 +58,10 @@ class Cards extends BaseController{
     }
   }
   
-  public function loadCreate($title, $frontHtml, $backHtml, $ajax, $tags = null)
+  public function loadCreate($title, $frontHtml, $backHtml, $ajax, $tags)
   {
     $cm = new \Manager\CardsManager();
-    $c = $cm->createCard($this->getUserManager()->getLoggedInUser(), $title, $frontHtml, $backHtml, $tags);
+    $c = $cm->createCard($this->getUserManager()->getLoggedInUser(), $title, $frontHtml, $backHtml, explode(",",$tags));
     if ($ajax)
     {
       echo json_encode($c);

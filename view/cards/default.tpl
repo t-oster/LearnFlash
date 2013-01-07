@@ -2,15 +2,15 @@
 {block name="content"}
 <h2> Your cards </h2>
 <a href="{url action="add"}">Add</a>
-<ul id="cards">
+<div id="cards">
 {foreach $cards as $c}
-  <li>
+  <div class="card">
     <a href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
     <a class="deleteLink" href="{url action="delete" cardId=$c->getId()}">delete</a>
     {include file="../tags/taglist.tpl" tags=$c->getTags()}
-  </li>
+  </div>
 {/foreach}
-</ul>
+</div>
 <script type="text/javascript">
   $("#cards a.deleteLink").click(function()
   {
@@ -19,10 +19,10 @@
     {
       if (result == true)
       {
-          var li = $(link).parents("li");
-          li.fadeOut("normal", function()
+          var card = $(link).parents("div.card");
+          card.fadeOut("normal", function()
           {
-            li.remove();
+            card.remove();
           });
           info("Card deleted", 2);
       }

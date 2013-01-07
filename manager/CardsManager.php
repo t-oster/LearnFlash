@@ -7,15 +7,23 @@ namespace Manager;
  */
 class CardsManager extends BaseManager{
   
-  public function setTags(\Model\Card $c, array $tags)
+  public function setTags(\Model\Card $c, array $itags)
   {
+    //remove all empty tags, create 2 arrays
+    //containing trimmed tag and lower-case trimmed tag
     $ltags = array();
-    for ($i = 0; $i < count($tags); $i++)
+    $tags = array();
+    foreach ($itags as $t)
     {
-      $tags[$i] = trim($tags[$i]);
-      $ltags []= strtolower($tags[$i]);
+      $t = trim($t);
+      if ($t != "")
+      {
+        $ltags []= strtolower($t);
+        $tags [] = $t;
+      }
     }
     $this->em->beginTransaction();
+    //find all tags, which have to be removed
     $toRemove = array();
     foreach ($c->getTags() as $t)
     {
@@ -28,6 +36,7 @@ class CardsManager extends BaseManager{
     {
       $c->removeTag($t);
     }
+    //find all tags which have to be added
     $newtags = array();
     foreach ($tags as $t)
     {
@@ -66,11 +75,12 @@ class CardsManager extends BaseManager{
     $c->setFrontHtml($frontHtml);
     $c->setBackHtml($backHtml);
     $this->em->persist($c);
+    $this->em->flush();
     if ($tags != null)
     {
       $this->setTags($c, $tags);
-    }
-    $this->em->flush();
+      $this->em->flush();
+    } 
     $this->em->commit();
     return $c;
   }
@@ -99,6 +109,15 @@ class CardsManager extends BaseManager{
     return "\Model\Card";
   }
 
+  public function deleteById($id)
+  {
+    $c = $this->findById($id);
+    foreach ($c->getTags() as $t)
+    {
+      $c->removeTag($t);
+    }
+    return parent::deleteById($id);
+  }
 }
 
 ?>
