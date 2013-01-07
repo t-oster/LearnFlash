@@ -19,7 +19,7 @@
   <body>
     {block name="body"}
       {block name="menu"}
-        {include file="../menu.tpl"}
+        {include file="./menu.tpl"}
       {/block}
        <div class=center>
       {block name="content"}
@@ -27,7 +27,7 @@
       {/block}
        </div>
       {block name="footer"}
-        {include file="../footer.tpl"}
+        {include file="./footer.tpl"}
       {/block}
     {/block}
    
