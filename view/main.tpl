@@ -21,13 +21,16 @@
       {block name="menu"}
         {include file="../menu.tpl"}
       {/block}
+       <div class=center>
       {block name="content"}
         Please use this block to fill in content
       {/block}
+       </div>
       {block name="footer"}
         {include file="../footer.tpl"}
       {/block}
     {/block}
+   
   </body>
   <script type="text/javascript">
     $(document).ready(function()
