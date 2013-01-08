@@ -44,8 +44,16 @@ class Card {
    */
   protected $tags;
   
+   /**
+   * @OneToMany(targetEntity="Answer", mappedBy="card")
+   *
+   * @var Answer[]
+   */
+  protected $answers;
+  
   public function __construct() {
     $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+     $this->answers= new \Doctrine\Common\Collections\ArrayCollection();
   }
   
   public function getId() {
@@ -102,7 +110,19 @@ class Card {
     $this->tags->removeElement($tag);
     $tag->getCards()->removeElement($this);
   }
-
-}
+   public function getAnswers() {
+    return $this->answers;
+  }
+  
+   public function addAnswer(Tag $answer) {
+    $this->answers->add($answer);
+    $answer->getAnswers()->add($this);
+  }
+  
+   public function removeAnswers(Tag $answer) {
+    $this->answers->removeElement($answer);
+    $answer->getAnswers()->removeElement($this);
+  }
+  }
 
 ?>

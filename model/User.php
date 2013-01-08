@@ -48,9 +48,17 @@ class User {
    */
   protected $tags;
   
+   /**
+   * @OneToMany(targetEntity="Answer", mappedBy="owner")
+   *
+   * @var Answer[]
+   */
+  protected $answers;
+  
   public function __construct() {
     $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     $this->cards = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
   }
   
   public function getId() {
@@ -103,6 +111,10 @@ class User {
 
   public function getTags() {
     return $this->tags;
+  }
+  
+   public function getAnswers() {
+    return $this->answers;
   }
 
 }
