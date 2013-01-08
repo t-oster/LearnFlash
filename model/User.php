@@ -55,10 +55,18 @@ class User {
    */
   protected $answers;
   
+  /**
+   * @OneToMany(targetEntity="MindMap", mappedBy="owner")
+   *
+   * @var MindMap[]
+   */
+  protected $mindMaps;
+  
   public function __construct() {
     $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     $this->cards = new \Doctrine\Common\Collections\ArrayCollection();
     $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->mindMaps = new \Doctrine\Common\Collections\ArrayCollection();
   }
   
   public function getId() {
@@ -117,6 +125,9 @@ class User {
     return $this->answers;
   }
 
+  public function getMindMapss() {
+    return $this->mindMaps;
+  }
 }
 
 ?>

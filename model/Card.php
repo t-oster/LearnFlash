@@ -51,9 +51,17 @@ class Card {
    */
   protected $answers;
   
+    /**
+   * @OneToMany(targetEntity="mindMapCard", mappedBy="card")
+   *
+   * @var MindMapCard[]
+   */
+  protected $mindMapCards;
+  
   public function __construct() {
     $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
      $this->answers= new \Doctrine\Common\Collections\ArrayCollection();
+     $this->mindMapCards= new \Doctrine\Common\Collections\ArrayCollection();
   }
   
   public function getId() {
@@ -122,6 +130,10 @@ class Card {
    public function removeAnswers(Tag $answer) {
     $this->answers->removeElement($answer);
     $answer->getAnswers()->removeElement($this);
+  }
+  
+   public function getMindMapCards() {
+    return $this->mindMapCards;
   }
   }
 
