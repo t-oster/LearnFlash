@@ -10,6 +10,7 @@
   $(document).ready(function(){
     $("#loginForm").dialog({
       buttons: {
+      Register: function(){ window.location = "{url controller="Register"}"; $(this).dialog("close"); },
       Login: function(){ $.getJSON("{url action="loginAjax"}", $("#loginForm").serialize(), function(result){ 
         if (result == true)
         {
@@ -26,8 +27,7 @@
             $.ambiance({ message: result, 
             type: "error"} );
         }
-      }) },
-        Register: function(){ window.location = "{url controller="Register"}"; $(this).dialog("close"); }
+      }) }
       }
     });
   });

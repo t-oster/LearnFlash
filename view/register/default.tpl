@@ -19,8 +19,8 @@
   $("#controls").hide();
   $("#registerForm").dialog({
   buttons: {
-    Register: function(){ $("#controls input").click(); },
-    Login: function(){ window.location = $("#controls a").attr("href"); $(this).dialog("close"); }
+    Login: function(){ window.location = $("#controls a").attr("href"); $(this).dialog("close"); },
+    Register: function(){ $("#controls input").click(); }
     }
   });
 });
