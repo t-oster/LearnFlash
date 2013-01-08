@@ -1,6 +1,6 @@
 {extends file="../main.tpl"}
 {block name="content"}
-<form id="registerForm" action="{url action="register"}" method="POST">
+<form id="registerForm" action="{url action="register"}" method="POST"  title="Register">
   <label for="lf_login">Username</label>
   <input type="text" id="lf_login" name="login"/>
   <label for="lf_password">Password</label>

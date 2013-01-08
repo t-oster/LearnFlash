@@ -21,7 +21,7 @@
       {block name="menu"}
         {include file="./menu.tpl"}
       {/block}
-       <div class=center>
+       <div id="content">
       {block name="content"}
         Please use this block to fill in content
       {/block}
