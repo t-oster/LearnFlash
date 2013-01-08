@@ -26,6 +26,22 @@ class Tags extends BaseController
     $this->assignToView("tags", $this->tm->getTagsByUser($u));
   }
 
+  public function loadDelete($tagId)
+  {
+    $tag = $this->tm->findById($tagId);
+    $result = $this->tm->deleteById($tagId);
+    if ($result === true)
+    {
+      $this->addInfo("Tag '".$tag->getName()."' successfully deleted.");
+      $this->redirect();
+    }
+    else
+    {
+      $this->addError($result);
+      $this->redirect(null, "show", array("tagId" => $tagId));
+    }
+  }
+
   public function loadShow($tagId)
   {
     $this->assignToView("tag", $this->tm->findById($tagId));
