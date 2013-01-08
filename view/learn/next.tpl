@@ -8,12 +8,13 @@
   {$backHtml}
 </div>
 <button id="show">Show answer</button>
-<div id="result" style="display: none;">
-  <button>Forgotten</button>
-  <button>I was close</button>
-  <button>I knew it</button>
-  <button>Boaring</button>
-</div>
+<form action="{url action="next"}" method="POST" id="result" style="display: none;">
+  <input type="hidden" name="cardId" value="{$card->getId()}"/>
+  <button type="submit" name="result" value="0">Forgotten</button>
+  <button type="submit" name="result" value="1">I was close</button>
+  <button type="submit" name="result" value="2">I knew it</button>
+  <button type="submit" name="result" value="3">Boaring</button>
+</form>
 <script type="text/javascript">
   $("#show").click(function(){
     $("#show").fadeOut(1000);

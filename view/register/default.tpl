@@ -19,8 +19,14 @@
   $("#controls").hide();
   $("#registerForm").dialog({
   buttons: {
-    Register: function(){ $("#controls input").click(); },
-    Login: function(){ window.location = $("#controls a").attr("href"); $(this).dialog("close"); }
+    Login: function(){ window.location = $("#controls a").attr("href"); $(this).dialog("close"); },
+    Register: function(){ $("#controls input").click(); }
+    }
+  });
+  $("#registerForm").dialog("option","resizable",false);
+  $('#registerForm').live('keyup', function(e){
+    if (e.keyCode == 13) {
+      $(':button:contains("Login")').click();
     }
   });
 });

@@ -1,13 +1,13 @@
 
 <div id="menu">
   <div class=center>
-    <a href="{url controller="Home"}">home</a>
-    <a href="{url controller="Cards"}">cards</a>
-    <a href="{url controller="Tags"}">tags</a>
-    <a href="{url controller="Learn"}">learn</a>
+    <a href="{url controller="Home"}">Home</a>
+    <a href="{url controller="Cards"}">Cards</a>
+    <a href="{url controller="Tags"}">Tags</a>
+    <a href="{url controller="Learn"}">Learn</a>
     <div id="loggedinas">
     {if isset($smarty.session.login)}
-      You are logged in as {$smarty.session.login} <a href="{url controller="Login" action="logout"}">Logout</a>
+      You are logged in as <b>{$smarty.session.login}</b> <a href="{url controller="Login" action="logout"}">Logout</a>
     {/if}
     </div>
   </div>
