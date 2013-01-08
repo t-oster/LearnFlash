@@ -87,6 +87,11 @@ class BaseController
     $this->dontRender();
   }
   
+  public function stop()
+  {
+    exit();
+  }
+  
   public function addInfo($message)
   {
     if (!isset($_SESSION["info"]))

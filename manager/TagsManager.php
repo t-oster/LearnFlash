@@ -32,6 +32,19 @@ class TagsManager extends BaseManager
     return $tag;
   }
   
+  public function deleteById($tagId)
+  {
+    $tag = $this->findById($tagId);
+    if ($tag != null)
+    {
+      foreach ($tag->getCards() as $c)
+      {
+        $c->removeTag($tag);
+      }
+    }
+    return parent::deleteById($tagId);
+  }
+  
   public function updateTag($tagId, $name, $color)
   {
     $tag = $this->findById($tagId);

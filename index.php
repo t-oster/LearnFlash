@@ -62,7 +62,7 @@ session_start();
 $userManager = new Manager\UserManager();
 if ($userManager->getLoggedInUser() == null && strtolower($controller) != "login" && strtolower($controller) != "register")
 {
-  header("Location: ".generate_url("login", "default", array("redirect" => $_SERVER["REQUEST_URI"])));
+  header("Location: ".generate_url("login", "default", array("redirect" => urlencode($_SERVER["REQUEST_URI"]))));
   exit;
 }
 $controllerInstance = new $controllerClass();

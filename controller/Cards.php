@@ -7,6 +7,17 @@ namespace Controller;
  */
 class Cards extends BaseController{
 
+  /**
+   *
+   * @var \Manager\CardsManager
+   */
+  protected $cm;
+  
+  public function __construct()
+  {
+    $this->cm = new \Manager\CardsManager();
+  }
+  
   public function loadAdd($title = null)
   {
     $this->assignToView("title", $title != null ? $title : "");
@@ -14,8 +25,7 @@ class Cards extends BaseController{
 
   public function loadDefault()
   {
-    $cm = new \Manager\CardsManager();
-    $cards = $cm->getCardsByUser($this->getUserManager()->getLoggedInUser());
+    $cards = $this->cm->getCardsByUser($this->getUserManager()->getLoggedInUser());
     $this->assignToView("cards", $cards);
   }
 
@@ -53,10 +63,21 @@ class Cards extends BaseController{
     return $txt;
   }
 
-  public function loadShow($cardId)
+  private function loadCard($cardId)
   {
-    $cm = new \Manager\CardsManager();
-    $card = $cm->findById($cardId);
+    $card = $this->cm->findById($cardId);
+    if ($card == null)
+    {
+      $this->addError("Card with id $cardId doesn't exist");
+      $this->redirect();
+      $this->stop();
+    }
+    return $card;
+  }
+  
+  public function loadShow($cardId)
+  { 
+    $card = $this->loadCard($cardId);
     $this->assignToView("frontHtml", $this->replaceReferencesWithLinks($card->getFrontHtml()));
     $this->assignToView("backHtml", $this->replaceReferencesWithLinks($card->getBackHtml()));
     $this->assignToView("card", $card);
@@ -64,8 +85,7 @@ class Cards extends BaseController{
   
   public function loadEdit($cardId)
   {
-    $cm = new \Manager\CardsManager();
-    $card = $cm->findById($cardId);
+    $card = $this->loadCard($cardId);
     $this->assignToView("card", $card);
     $stringTags = "";
     foreach ($card->getTags() as $t)
@@ -77,8 +97,7 @@ class Cards extends BaseController{
   
   public function loadUpdate($cardId, $title, $frontHtml, $backHtml, $ajax, $tags)
   {
-    $cm = new \Manager\CardsManager();
-    $c = $cm->updateCard($cardId, $title, $frontHtml, $backHtml, explode(",",$tags));
+    $c = $this->cm->updateCard($cardId, $title, $frontHtml, $backHtml, explode(",",$tags));
     if ($ajax)
     {
       echo json_encode($c);
@@ -125,8 +144,7 @@ class Cards extends BaseController{
   
   public function loadDelete($cardId, $ajax)
   {
-    $cm = new \Manager\CardsManager();
-    $result = $cm->deleteById($cardId);
+    $result = $this->cm->deleteById($cardId);
     if ($ajax)
     {
       echo json_encode($result);
