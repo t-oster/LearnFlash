@@ -125,6 +125,7 @@ class CardsManager extends BaseManager{
     {
       $c->removeTag($t);
     }
+    $this->em->flush();
     return parent::deleteById($id);
   }
 }

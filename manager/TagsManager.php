@@ -41,6 +41,7 @@ class TagsManager extends BaseManager
       {
         $c->removeTag($tag);
       }
+      $this->em->flush();
     }
     return parent::deleteById($tagId);
   }
