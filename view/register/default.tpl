@@ -23,6 +23,7 @@
     Register: function(){ $("#controls input").click(); }
     }
   });
+  $("#registerForm").dialog("option","resizable",false);
 });
 </script>
 {/block}

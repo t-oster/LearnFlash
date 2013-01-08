@@ -30,6 +30,7 @@
       }) }
       }
     });
+    $("#loginForm").dialog("option","resizable",false);
   });
 </script>
 {/block}
