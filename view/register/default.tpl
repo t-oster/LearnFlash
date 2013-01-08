@@ -24,6 +24,11 @@
     }
   });
   $("#registerForm").dialog("option","resizable",false);
+  $('#registerForm').live('keyup', function(e){
+    if (e.keyCode == 13) {
+      $(':button:contains("Login")').click();
+    }
+  });
 });
 </script>
 {/block}

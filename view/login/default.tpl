@@ -31,6 +31,11 @@
       }
     });
     $("#loginForm").dialog("option","resizable",false);
+    $('#loginForm').live('keyup', function(e){
+      if (e.keyCode == 13) {
+        $(':button:contains("Login")').click();
+      }
+    });
   });
 </script>
 {/block}
