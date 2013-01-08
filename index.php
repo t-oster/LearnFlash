@@ -87,7 +87,7 @@ if (method_exists($controllerInstance, $actionMethod))
       {
         $pars[$name] = $_GET[$name];
       }
-      else if ($param->isOptional())
+      else if ($param->isOptional() || $param->isDefaultValueAvailable())
       {
         $pars[$name] = $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null;
       }
