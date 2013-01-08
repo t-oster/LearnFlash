@@ -31,6 +31,19 @@ class TagsManager extends BaseManager
     $this->em->persist($tag);
     return $tag;
   }
+  
+  public function updateTag($tagId, $name, $color)
+  {
+    $tag = $this->findById($tagId);
+    if ($tag == null)
+    {
+      return "Tag with id $tagId doesn't exist";
+    }
+    $tag->setName($name);
+    $tag->setColor($color);
+    $this->em->flush();
+    return true;
+  }
 
   public function getModelClassname()
   {

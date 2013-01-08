@@ -26,6 +26,26 @@ class Tags extends BaseController
     $this->assignToView("tags", $this->tm->getTagsByUser($u));
   }
 
+  public function loadEdit($tagId)
+  {
+    $this->assignToView("tag", $this->tm->findById($tagId));
+  }
+  
+  public function loadUpdate($tagId, $name, $color)
+  {
+    $result = $this->tm->updateTag($tagId, $name, $color);
+    if ($result === true)
+    {
+      $this->addInfo("Tag $name successfully updated");
+      $this->redirect(null, "show", array("tagId" => $tagId));
+    }
+    else
+    {
+      $this->addError($result);
+      $this->redirect(null, "edit", array("tagId" => $tagId));
+    }
+  }
+  
   public function loadDelete($tagId)
   {
     $tag = $this->tm->findById($tagId);
