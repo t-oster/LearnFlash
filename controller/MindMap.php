@@ -63,10 +63,15 @@ class MindMap extends BaseController {
     $this->assignToView("node",$node);
   }
   
-  public function loadUpdate($nodeId, $x, $y, $isCollapsed)
+  public function loadUpdateNodes($ids, $xs, $ys, $collapseds)
   {
-    $node = $this->mnm->findById($nodeId);
-    $this->mnm->updateNode($map, $x, $y, $isCollapsed);
+    for ($i = 0; $i < count($ids); $i++)
+    {
+      $node = $this->mnm->findById($ids[$i]);
+      $this->mnm->updateNode($node, $xs[$i], $ys[$i], $collapseds[$i]);
+    }
+    echo "true";
+    $this->dontRender();
   }
 }
 
