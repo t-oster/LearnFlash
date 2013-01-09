@@ -37,7 +37,7 @@ class Answer {
 
   /**
    *
-   * @ManyToOne(targetEntity="User", inversedBy="cards")
+   * @ManyToOne(targetEntity="User", inversedBy="answers")
    *
    * @var User
    */
