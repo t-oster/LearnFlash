@@ -13,7 +13,7 @@ class MindMap extends MindMapNode {
   protected $name;
   
   /**
-   * @OneToMany(targetEntity="MindMapNode", mappedBy="parent", nullable=true)
+   * @OneToMany(targetEntity="MindMapNode", mappedBy="parent")
    **/
   protected $children;
   
