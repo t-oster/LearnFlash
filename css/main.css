@@ -581,6 +581,27 @@ background-color: #fff;
   display: table;
 }
 
+.button {
+    border: 1px solid silver;
+    padding: 4px;
+    border-radius: 3px;
+    text-shadow: 0px 1px white;
+    /*background-color: rgba(192, 192, 192, 0.13);*/
+    background-image: linear-gradient(bottom, rgb(181,181,181) 0%, rgb(240,240,240) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(181,181,181) 0%, rgb(240,240,240) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(181,181,181) 0%, rgb(240,240,240) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(181,181,181) 0%, rgb(240,240,240) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(181,181,181) 0%, rgb(240,240,240) 100%);
+
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, rgb(181,181,181)),
+      color-stop(1, rgb(240,240,240))
+    );
+}
+
 
 
 /*= --------------------------------------------

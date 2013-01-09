@@ -12,6 +12,7 @@ class MindMap extends BaseController {
   
   /*
    * @var \Manager\MindMapNodeManager
+   * @var \Model\MindMap
    */
   private $mnm;
   public function __construct()
@@ -24,9 +25,10 @@ class MindMap extends BaseController {
     $this->assignToView("mindmaps", $this->mnm->getTopLevelMindMaps($u));
   }
   
-  public function loadShow($minMapId)
+  public function loadShow($mindMapId)
   {
-    
+    $currentMindMap = $this->mnm->findById($mindMapId);
+    $this->assignToView("mindmap", $this->mnm->findById($mindMapId));
   }
           
   
