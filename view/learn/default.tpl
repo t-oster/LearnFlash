@@ -6,7 +6,7 @@
 <input class="updateInfo" id="rdTags" type="radio" name="selection" value="byTags"/>By Tags<br/>
 <div id="tags" style="display: none;">
 {foreach $tags as $t}
-  <input class="updateInfo" type="checkbox" name="tagIds[]" value="{$t->getId()}"/>{include file="../tags/tag.tpl" tag=$t}<br/>
+  <div class=wrap> <input class="updateInfo" type="checkbox" name="tagIds[]" value="{$t->getId()}"/>{include file="../tags/tag.tpl" tag=$t}</div>
 {/foreach}
 </div>
 

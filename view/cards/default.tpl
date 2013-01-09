@@ -1,11 +1,11 @@
 {extends file="../main.tpl"}
 {block name="content"}
 <h2> Your cards </h2>
-<a href="{url action="add"}">Add</a>
+<a class="addCard" href="{url action="add"}">Add</a>
 <div id="cards">
 {foreach $cards as $c}
   <div class="card">
-    <a href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
+    <a class="getTitle" href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
     <a class="deleteLink" href="{url action="delete" cardId=$c->getId()}">delete</a>
     {include file="../tags/taglist.tpl" tags=$c->getTags()}
   </div>
