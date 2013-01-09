@@ -40,6 +40,11 @@ class MindMapNodeManager extends BaseManager {
     $mc = new \Model\MindMapCard();
     $mc->SetCollapsed($isCollapsed);
     $mc->setCard($card);
+    $mc->setX($x);
+    $mc->setY($y);
+    $mc->setParent($map);
+    $this->em->persist($mc);
+    $this->em->flush();
   }
 }
 
