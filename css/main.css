@@ -115,6 +115,7 @@ position: relative;
 }
 h1,h2,h3,h4,h5,h6{
 text-transform:uppercase;
+border-bottom: 1px dotted currentcolor;
 }
 h1 {
 display: block;
@@ -621,22 +622,11 @@ background-color: #fff;
     );
 }
 
-.center {
-  margin:0px auto;
-  width:100%;
-  max-width: 940px;
-  min-width: 750px;  
-}
-
-.ui-dialog-titlebar-close {
-  visibility: hidden;
-}
-
-#content {
-  margin:5px auto;
-  width:100%;
-  max-width: 940px;
-  min-width: 750px;
+.center{
+    margin:0 auto;
+    width:100%;
+    max-width: 940px;
+    position:relative;
 }
 
 #registerForm label,#loginForm label{
