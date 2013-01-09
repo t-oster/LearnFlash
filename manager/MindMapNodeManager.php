@@ -34,6 +34,14 @@ class MindMapNodeManager extends BaseManager {
     return $result;
   }
   
+  public function createSubMindMap(\Model\MindMap $parent, $name)
+  {
+    $m = $this->createMindMap($name);
+    $m->setParent($parent);
+    $this->em->flush();
+    return $m;
+  }
+  
   public function addCardToMindMap(\Model\MindMap $map, \Model\Card $card, $x = 0, $y = 0, $isCollapsed = false)
   {
     $mc = new \Model\MindMapCard();
