@@ -10,28 +10,46 @@ namespace Controller;
 
 class MindMap extends BaseController {
   
-  /*
+  /**
    * @var \Manager\MindMapNodeManager
-   * @var \Model\MindMap
    */
   private $mnm;
+  
+  /**
+   * @var \Manager\CardsManager
+   */
+  private $cm;
+  
+  /**
+   *
+   * @var \Manager\TagsManager
+   */
+  private $tm;
   public function __construct()
   {
     $this->mnm = new \Manager\MindMapNodeManager();
+    $this->cm = new \Manager\CardsManager();
+    $this->tm = new \Manager\TagsManager();
   }
   
   public function loadDefault(){
-    $u = $this->getUserManager()->getLoggedInUser();
-    $this->assignToView("mindmaps", $this->mnm->getTopLevelMindMaps($u));
+    $this->assignToView("mindmaps", $this->mnm->getTopLevelMindMaps());
   }
  
   public function loadShow($mindMapId)
   {
     $currentMindMap = $this->mnm->findById($mindMapId);
-    //$this->assignToView("mindmap", $this->mnm->findById($mindMapId));
     $this->assignToView("mindmap", $currentMindMap);
+    $this->assignToView("cards", $this->cm->getCardsByUser());
+    $this->assignToView("tags", $this->tm->getTagsByUser());
   }
    
+  public function loadCardListBody($tagId = -1)
+  {
+    $cards = $this->cm->findCards(null, $tagId == -1 ? null : array($tagId));
+    $this->assignToView("cards", $cards);
+  }
+  
   public function loadAddMindMap($name)
   {
     $map = $this->mnm->createMindMap($name);

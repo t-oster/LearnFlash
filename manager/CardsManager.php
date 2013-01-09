@@ -54,10 +54,10 @@ class CardsManager extends BaseManager{
     foreach ($newtags as $t)
     {
       //try to find existing tag
-      $tag = $tm->findByName($c->getOwner(), strtolower($t));
+      $tag = $tm->findByName(strtolower($t));
       if ($tag == null)
       {
-        $tag = $tm->createTag($t, $c->getOwner(), "#00ff00");
+        $tag = $tm->createTag($t, "#00ff00");
       }
       $c->addTag($tag);
     }
@@ -65,8 +65,12 @@ class CardsManager extends BaseManager{
     $this->em->commit();
   }
 
-  public function createCard(\Model\User $owner, $title, $frontHtml, $backHtml, $tags = null)
+  public function createCard(\Model\User $owner = null, $title, $frontHtml, $backHtml, $tags = null)
   {
+    if ($owner == null)
+    {
+      $owner = $this->um->getLoggedInUser();
+    }
     $this->em->beginTransaction();
     $c = new \Model\Card();
     $c->setOwner($owner);
@@ -103,8 +107,12 @@ class CardsManager extends BaseManager{
     return $c;
   }
 
-  public function findCards(\Model\User $u, $tagIds = null, $unlearned = false)
+  public function findCards(\Model\User $u = null, $tagIds = null, $unlearned = false)
   {
+    if ($u == null)
+    {
+      $u = $this->um->getLoggedInUser();
+    }
     //TODO make more efficient with DQL query
     $cards = $this->getCardsByUser($u);
     $result = array();
@@ -139,8 +147,12 @@ class CardsManager extends BaseManager{
     return $this->em->getRepository("\Model\Card")->findOneBy(array("title" => $title));
   }
 
-  public function getCardsByUser(\Model\User $u)
+  public function getCardsByUser(\Model\User $u = null)
   {
+    if ($u == null)
+    {
+      $u = $this->um->getLoggedInUser();
+    }
     return $this->em->getRepository("\Model\Card")->findBy(array("owner" => $u));
   }
 

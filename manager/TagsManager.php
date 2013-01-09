@@ -9,24 +9,32 @@ namespace Manager;
 class TagsManager extends BaseManager
 {
 
-  public function findByName(\Model\User $owner, $name)
+  public function findByName($name, \Model\User $owner = null)
   {
+    if ($owner == null)
+    {
+      $owner = $this->um->getLoggedInUser();
+    }
     $query = $this->em->createQuery('SELECT t FROM \Model\Tag t WHERE LOWER(t.name) = :name and t.owner = :owner');
     $query->setParameter("owner", $owner);
     $query->setParameter("name", strtolower($name));
     return $query->getOneOrNullResult();
   }
 
-  public function getTagsByUser(\Model\User $u)
+  public function getTagsByUser(\Model\User $u = null)
   {
+    if ($u == null)
+    {
+      $u = $this->um->getLoggedInUser();
+    }
     return $this->em->getRepository("\Model\Tag")->findBy(array("owner" => $u));
   }
 
-  public function createTag($name, \Model\User $owner, $color)
+  public function createTag($name, $color)
   {
     $tag = new \Model\Tag();
     $tag->setName($name);
-    $tag->setOwner($owner);
+    $tag->setOwner($this->um->getLoggedInUser());
     $tag->setColor($color);
     $this->em->persist($tag);
     return $tag;

@@ -38,8 +38,12 @@ class MindMapNodeManager extends BaseManager {
     $this->em->flush();
   }
   
-  public function getTopLevelMindMaps(\Model\User $user)
+  public function getTopLevelMindMaps(\Model\User $user = null)
   {
+    if ($user == null)
+    {
+      $user = $this->um->getLoggedInUser();
+    }
     $result = $this->em->getRepository("\Model\MindMap")->findBy(array(
         "parent" => null,
         "owner" => $user

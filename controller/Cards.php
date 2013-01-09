@@ -14,7 +14,7 @@ class Cards extends BaseCards{
 
   public function loadDefault()
   {
-    $cards = $this->cm->getCardsByUser($this->getUserManager()->getLoggedInUser());
+    $cards = $this->cm->getCardsByUser();
     $this->assignToView("cards", $cards);
   }
   
@@ -64,7 +64,7 @@ class Cards extends BaseCards{
   public function loadCreate($title, $frontHtml, $backHtml, $ajax, $tags)
   {
     $cm = new \Manager\CardsManager();
-    $c = $cm->createCard($this->getUserManager()->getLoggedInUser(), $title, $frontHtml, $backHtml, explode(",",$tags));
+    $c = $cm->createCard(null, $title, $frontHtml, $backHtml, explode(",",$tags));
     if ($ajax)
     {
       echo json_encode($c);

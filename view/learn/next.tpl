@@ -17,7 +17,7 @@
 </form>
 <script type="text/javascript">
   $("#show").click(function(){
-    $("#show").fadeOut(1000);
+    $("#show").hide();
     $("#backSide").fadeIn(1000);
     $("#result").fadeIn(1000);
   });
