@@ -667,15 +667,6 @@ top: 0px;
 right: 12px;
 }
 
-
-
-#tags{
-width: 100%;
-margin: 20px 0;
-background: #CFCFCF;
-padding: 30px 20px;
-}
-
 /*= --------------------------------------------
         learn
     --------------------------------------------*/
@@ -694,4 +685,24 @@ padding: 30px 20px;
     height: 100px;
     width:100%;
     clear: both;
+}
+
+#backHtml_tbl,#frontHtml_tbl{
+    width:100%;
+}
+.testForm{
+    background-color: #F7F7F7;
+    margin-top: 20px;
+    padding:20px;
+}
+
+.marginNullAuto{ 
+     display: table;
+     margin: 10px 0;
+     font-weight: 900;
+     text-transform: uppercase;
+}
+
+#title{
+width: 100%;
 }
