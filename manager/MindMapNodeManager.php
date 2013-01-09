@@ -23,6 +23,7 @@ class MindMapNodeManager extends BaseManager {
     $m->setName($name);
     $this->em->persist($m);
     $this->em->flush();
+    return $m;
   }
   
   public function getTopLevelMindMaps(\Model\User $user)
