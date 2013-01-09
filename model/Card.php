@@ -52,7 +52,7 @@ class Card {
   protected $answers;
   
     /**
-   * @OneToMany(targetEntity="mindMapCard", mappedBy="card")
+   * @OneToMany(targetEntity="MindMapCard", mappedBy="card")
    *
    * @var MindMapCard[]
    */
