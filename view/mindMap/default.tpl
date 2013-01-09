@@ -2,6 +2,7 @@
 {block name="content"}
 <h2>Mindmap</h2>
 <h3>Here you see an overview of all your mindmap.</h3>
+
       {foreach $mindmaps as $mm}
         <p><a href="{url action="show" mindMapId=$mm->getId()}">{$mm->getName()}</a><p>
       {/foreach}
@@ -10,7 +11,7 @@
       
       <form style="display: none;" id="addMindMapForm" action="{url action="addMindMap"}" method="POST" title="Add new MindMap">
         <label for="mindMapName">Name</label>
-        <input type="text" id="mindMapName" name="mindMapName"/>
+        <input type="text" id="mindMapName" name="name"/>
         <div id="controls">
           <input type="submit" value="addMindMap"/>
           </div>

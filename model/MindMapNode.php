@@ -38,6 +38,10 @@ abstract class MindMapNode {
    */
   protected $collapsed;
   
+  public function getId(){
+    return $this->id;
+  }
+  
   public function getParent() {
     return $this->parent;
   }

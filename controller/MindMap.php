@@ -31,9 +31,11 @@ class MindMap extends BaseController {
     $this->assignToView("mindmap", $this->mnm->findById($mindMapId));
   }
    
-  public function loadAddMindMap($mindMapName)
+  public function loadAddMindMap($name)
   {
-    
+    $this->mnm->createMindMap($name);
+    $this->addInfo("MindMap ".$name." sucessfully created.");
+    $this->redirect("MindMap");
   }
   
 /*  public function loadRegister($name, $email, $login, $password) {

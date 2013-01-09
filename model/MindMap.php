@@ -27,7 +27,6 @@ class MindMap extends MindMapNode {
   public function __construct() 
   {
      $this->children = new \Doctrine\Common\Collections\ArrayCollection();
-     $dummyMindMap = new \Model\MindMap();
   }
 
   public function getName()

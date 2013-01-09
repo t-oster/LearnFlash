@@ -17,6 +17,9 @@ class MindMapNodeManager extends BaseManager {
   {
     $m = new \Model\MindMap();
     $m->setOwner($this->um->getLoggedInUser());
+    $m->setX(0);
+    $m->setY(0);
+    $m->setCollapsed(FALSE);
     $m->setName($name);
     $this->em->persist($m);
     $this->em->flush();
@@ -37,7 +40,6 @@ class MindMapNodeManager extends BaseManager {
     $mc->SetCollapsed($isCollapsed);
     $mc->setCard($card);
   }
-
 }
 
 ?>
