@@ -12,12 +12,8 @@ class MindMap extends MindMapNode {
    */
   protected $name;
   
-   /**
-   * @ManyToMany(targetEntity="MindMapNode")
-   * @JoinTable(name="mindMap_mindMapNodes",
-   *      joinColumns={@JoinColumn(name="mindMapNode_id", referencedColumnName="id")},
-   *      inverseJoinColumns={@JoinColumn(name="mindMap_id", referencedColumnName="id", unique=true)}
-   *      )
+  /**
+   * @OneToMany(targetEntity="MindMapNode", mappedBy="parent", nullable=true)
    **/
   protected $children;
   
@@ -30,9 +26,9 @@ class MindMap extends MindMapNode {
   
   public function __construct() 
   {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+     $this->children = new \Doctrine\Common\Collections\ArrayCollection();
   }
-  
+
   public function getName()
   {
     return $this->name;

@@ -22,6 +22,12 @@ class MindMapNodeManager extends BaseManager {
     $this->em->flush();
   }
   
+  public function getTopLevelMindMaps(\Model\User $user)
+  {
+    $q = $this->em->createQuery("SELECT m FROM \Model\MindMap m WHERE m.parent = null");
+    return $q->getResult();
+  }
+  
   public function addCardToMindMap(\Model\MindMap $map, \Model\Card $card, $x = 0, $y = 0, $isCollapsed = false)
   {
     $mc = new \Model\MindMapCard();

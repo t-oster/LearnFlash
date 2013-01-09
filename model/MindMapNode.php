@@ -15,6 +15,11 @@ abstract class MindMapNode {
    */
   protected $id;
   
+  /**
+   * @ManyToOne(targetEntity="MindMapNode", inversedBy="children")
+   **/
+  protected $parent;
+  
   /** 
    * @Column(type="decimal") 
    * @var double
@@ -32,6 +37,15 @@ abstract class MindMapNode {
    * @var boolean
    */
   protected $collapsed;
+  
+  public function getParent() {
+    return $this->parent;
+  }
+
+  public function setParent(\Model\MindMap $parent) {
+    $this->parent = $parent;
+    $parent->getChildren()->add($this);
+  }
   
   public function getX()
   {
