@@ -1,5 +1,7 @@
 <?php
+
 namespace Model;
+
 /**
  * Description of Card
  *
@@ -7,6 +9,7 @@ namespace Model;
  * @Entity
  */
 class Card {
+
   /**
    * @Id
    * @Column(type="integer")
@@ -14,21 +17,25 @@ class Card {
    * @var int
    */
   protected $id;
+
   /**
    * @Column(type="string")
    * @var string
    */
   protected $title;
+
   /**
    * @Column(type="string")
    * @var string
    */
   protected $frontHtml;
+
   /**
    * @Column(type="string")
    * @var string
    */
   protected $backHtml;
+
   /**
    *
    * @ManyToOne(targetEntity="User", inversedBy="cards")
@@ -36,6 +43,7 @@ class Card {
    * @var User
    */
   protected $owner;
+
   /**
    *
    * @ManyToMany(targetEntity="Tag", mappedBy="cards")
@@ -43,11 +51,27 @@ class Card {
    * @var Tags[]
    */
   protected $tags;
+
+  /**
+   * @OneToMany(targetEntity="Answer", mappedBy="card")
+   *
+   * @var Answer[]
+   */
+  protected $answers;
+  
+    /**
+   * @OneToMany(targetEntity="MindMapCard", mappedBy="card")
+   *
+   * @var MindMapCard[]
+   */
+  protected $mindMapCards;
   
   public function __construct() {
     $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+     $this->answers= new \Doctrine\Common\Collections\ArrayCollection();
+     $this->mindMapCards= new \Doctrine\Common\Collections\ArrayCollection();
   }
-  
+
   public function getId() {
     return $this->id;
   }
@@ -79,7 +103,7 @@ class Card {
   public function setBackHtml($backHtml) {
     $this->backHtml = $backHtml;
   }
-  
+
   public function getOwner() {
     return $this->owner;
   }
@@ -98,6 +122,28 @@ class Card {
     $tag->getCards()->add($this);
   }
 
-}
+  public function removeTag(Tag $tag) {
+    $this->tags->removeElement($tag);
+    $tag->getCards()->removeElement($this);
+  }
+
+  public function getAnswers() {
+    return $this->answers;
+  }
+
+  public function addAnswer(Tag $answer) {
+    $this->answers->add($answer);
+    $answer->getAnswers()->add($this);
+  }
+
+  public function removeAnswers(Tag $answer) {
+    $this->answers->removeElement($answer);
+    $answer->getAnswers()->removeElement($this);
+  }
+  
+   public function getMindMapCards() {
+    return $this->mindMapCards;
+  }
+  }
 
 ?>

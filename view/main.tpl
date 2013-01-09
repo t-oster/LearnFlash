@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-  <header>
+  <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="lib/js/jQuery-UI/jquery-ui-1.9.1.custom.min.css" />
     <link rel="stylesheet" href="lib/js/ambiance/jquery.ambiance.css" />
@@ -15,19 +15,19 @@
     <script src="js/main.js"></script>
     {block name="head"}
     {/block}
-  </header>
+  </head>
   <body>
     {block name="body"}
       {block name="menu"}
-        {include file="../menu.tpl"}
+        {include file="./menu.tpl"}
       {/block}
-       <div class=center>
+       <div id="content">
       {block name="content"}
         Please use this block to fill in content
       {/block}
        </div>
       {block name="footer"}
-        {include file="../footer.tpl"}
+        {include file="./footer.tpl"}
       {/block}
     {/block}
    

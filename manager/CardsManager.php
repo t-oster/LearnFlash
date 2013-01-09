@@ -5,20 +5,67 @@ namespace Manager;
  *
  * @author Thomas Oster <thomas.oster@rwth-aachen.de>
  */
-class CardsManager {
-  /**
-   *
-   * @var \Doctrine\ORM\EntityManager
-   */
-  protected $em;
+class CardsManager extends BaseManager{
   
-  public function __construct()
+  public function setTags(\Model\Card $c, array $itags)
   {
-    global $entityManager;
-    $this->em = $entityManager;
+    //remove all empty tags, create 2 arrays
+    //containing trimmed tag and lower-case trimmed tag
+    $ltags = array();
+    $tags = array();
+    foreach ($itags as $t)
+    {
+      $t = trim($t);
+      if ($t != "")
+      {
+        $ltags []= strtolower($t);
+        $tags [] = $t;
+      }
+    }
+    $this->em->beginTransaction();
+    //find all tags, which have to be removed
+    $toRemove = array();
+    foreach ($c->getTags() as $t)
+    {
+      if (!in_array(strtolower($t->getName()), $ltags))
+      {
+        $toRemove []= $t;
+      }
+    }
+    foreach ($toRemove as $t)
+    {
+      $c->removeTag($t);
+    }
+    //find all tags which have to be added
+    $newtags = array();
+    foreach ($tags as $t)
+    {
+      foreach ($c->getTags() as $tt)
+      {
+        if (strtolower($tt->getName()) == strtolower($t))
+        {
+          continue 2;
+        }
+      }
+      //not found
+      $newtags []= $t;
+    }
+    $tm = new TagsManager();
+    foreach ($newtags as $t)
+    {
+      //try to find existing tag
+      $tag = $tm->findByName($c->getOwner(), strtolower($t));
+      if ($tag == null)
+      {
+        $tag = $tm->createTag($t, $c->getOwner(), "#00ff00");
+      }
+      $c->addTag($tag);
+    }
+    $this->em->flush();
+    $this->em->commit();
   }
-  
-  public function createCard(\Model\User $owner, $title, $frontHtml, $backHtml)
+
+  public function createCard(\Model\User $owner, $title, $frontHtml, $backHtml, $tags = null)
   {
     $this->em->beginTransaction();
     $c = new \Model\Card();
@@ -29,43 +76,88 @@ class CardsManager {
     $c->setBackHtml($backHtml);
     $this->em->persist($c);
     $this->em->flush();
+    if ($c->getTitle() == "")
+    {
+      $c->setTitle("#".$c->getId());
+    }
+    if ($tags != null)
+    {
+      $this->setTags($c, $tags); 
+    }
+    $this->em->flush();
     $this->em->commit();
     return $c;
   }
   
-  public function updateCard($cardId, $title, $frontHtml, $backHtml)
+  public function updateCard($cardId, $title, $frontHtml, $backHtml, $tags = null)
   {
     $c = $this->findById($cardId);
     $c->setTitle($title);
     $c->setFrontHtml($frontHtml);
     $c->setBackHtml($backHtml);
+    if ($tags != null)
+    {
+      $this->setTags($c, $tags);
+    }
     $this->em->flush();
     return $c;
   }
+
+  public function findCards(\Model\User $u, $tagIds = null, $unlearned = false)
+  {
+    //TODO make more efficient with DQL query
+    $cards = $this->getCardsByUser($u);
+    $result = array();
+    foreach ($cards as $c)
+    {
+      if ($tagIds != null)
+      {
+        $found = false;
+        foreach ($c->getTags() as $t)
+        {
+          if (in_array($t->getId(), $tagIds))
+          {
+            $found = true;
+          }
+        }
+        if (!$found)
+        {
+          continue;
+        }
+      }
+      if ($unlearned == true && count($c->getAnswers()) != 0)
+      {
+        continue;
+      }
+      $result []= $c;
+    }
+    return $result;
+  }
   
+  public function findByTitle($title)
+  {
+    return $this->em->getRepository("\Model\Card")->findOneBy(array("title" => $title));
+  }
+
   public function getCardsByUser(\Model\User $u)
   {
     return $this->em->getRepository("\Model\Card")->findBy(array("owner" => $u));
   }
-  
-  public function findById($cardId)
+
+  public function getModelClassname()
   {
-    return $this->em->getRepository("\Model\Card")->find($cardId);
+    return "\Model\Card";
   }
-  
-  public function deleteById($cardId)
+
+  public function deleteById($id)
   {
-    $c = $this->findById($cardId);
-    if ($c == null)
+    $c = $this->findById($id);
+    foreach ($c->getTags() as $t)
     {
-      return "Card with id $cardId does not exist";
+      $c->removeTag($t);
     }
-    else
-    {
-      $this->em->remove($c);
-      $this->em->flush();
-      return true;
-    }
+    $this->em->flush();
+    return parent::deleteById($id);
   }
 }
 

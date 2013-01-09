@@ -1,6 +1,6 @@
 {extends file="../main.tpl"}
 {block name="content"}
-<form id="loginForm">
+<form id="loginForm" title="Login">
   <label for="lf_login">Username</label>
   <input type="text" id="lf_login" name="login"/>
   <label for="lf_password">Password</label>
@@ -10,6 +10,7 @@
   $(document).ready(function(){
     $("#loginForm").dialog({
       buttons: {
+      Register: function(){ window.location = "{url controller="Register"}"; $(this).dialog("close"); },
       Login: function(){ $.getJSON("{url action="loginAjax"}", $("#loginForm").serialize(), function(result){ 
         if (result == true)
         {
@@ -26,8 +27,13 @@
             $.ambiance({ message: result, 
             type: "error"} );
         }
-      }) },
-        Register: function(){ window.location = "{url controller="Register"}"; $(this).dialog("close"); }
+      }) }
+      }
+    });
+    $("#loginForm").dialog("option","resizable",false);
+    $('#loginForm').live('keyup', function(e){
+      if (e.keyCode == 13) {
+        $(':button:contains("Login")').click();
       }
     });
   });

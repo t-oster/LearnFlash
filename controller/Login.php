@@ -15,7 +15,7 @@ class Login extends BaseController{
     {
       $redirect = null;
     }
-    $this->assignToView("redirect", $redirect);
+    $this->assignToView("redirect", urldecode($redirect));
   }
   public function loadLoginAjax($login, $password)
   {
