@@ -28,7 +28,8 @@ class MindMap extends BaseController {
   public function loadShow($mindMapId)
   {
     $currentMindMap = $this->mnm->findById($mindMapId);
-    $this->assignToView("mindmap", $this->mnm->findById($mindMapId));
+    //$this->assignToView("mindmap", $this->mnm->findById($mindMapId));
+    $this->assignToView("mindmap", $currentMindMap);
   }
    
   public function loadAddMindMap($name)

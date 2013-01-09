@@ -80,6 +80,11 @@ abstract class MindMapNode {
   {
     $this->collapsed = $isCollapsed;
   }
+  
+  public function isMindMapCard()
+  {
+    $this instanceof \Model\MindMapCard;
+  }
 }
 
 ?>
