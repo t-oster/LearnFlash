@@ -23,9 +23,14 @@
       {/block}
        <div id="content">
       {block name="content"}
-        Please use this block to fill in content
-      {/block}
+        <div id="mainContent">
+        {block name="mainContent"}{/block}
        </div>
+        <div id="sidebar">
+        {block name="sidebar"}{/block}
+       </div>
+      {/block}
+       </div>   
       {block name="footer"}
         {include file="./footer.tpl"}
       {/block}

@@ -47,6 +47,11 @@ function import_dir($path, $tags)
   }
 }
 
-
+$mnm = new Manager\MindMapNodeManager();
+$map = $mnm->createMindMap("niceMindMap");
+$cards = $cm->getCardsByUser($um->getLoggedInUser());
+foreach ($cards as $c){
+  $mnm->addCardToMindMap($map, $card);
+}
 
 ?>
