@@ -81,7 +81,8 @@ class Answer {
   }
 
   public function setCard($card) {
-    $this->email = $card;
+    $this->card = $card;
+    $this->card->getAnswers()->add($this);
   }
 
 }
