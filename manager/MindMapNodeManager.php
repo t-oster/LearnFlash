@@ -13,17 +13,30 @@ class MindMapNodeManager extends BaseManager {
     return "Model\MindMapNode";
   }
   
-  public function createMindMap($name)
+  public function createMindMap($name, $x = 0, $y = 0, $isCollapsed = false, \Model\MindMap $parent = null)
   {
     $m = new \Model\MindMap();
     $m->setOwner($this->um->getLoggedInUser());
-    $m->setX(0);
-    $m->setY(0);
-    $m->setCollapsed(FALSE);
+    $m->setX($x);
+    $m->setY($y);
+    $m->setCollapsed($isCollapsed);
     $m->setName($name);
+    if ($parent != null)
+    {
+     $m->setParent($parent);
+    }
     $this->em->persist($m);
     $this->em->flush();
     return $m;
+  }
+  
+  public function updateMindMap(\Model\MindMap $map, $name, $x, $y, $isCollapsed)
+  {
+    $map->setName($name);
+    $map->setX($x);
+    $map->setY($y);
+    $map->setCollapsed($isCollapsed);
+    $this->em->flush();
   }
   
   public function getTopLevelMindMaps(\Model\User $user)
@@ -33,14 +46,6 @@ class MindMapNodeManager extends BaseManager {
         "owner" => $user
     ));
     return $result;
-  }
-  
-  public function createSubMindMap(\Model\MindMap $parent, $name)
-  {
-    $m = $this->createMindMap($name);
-    $m->setParent($parent);
-    $this->em->flush();
-    return $m;
   }
   
   public function addCardToMindMap(\Model\MindMap $map, \Model\Card $card, $x = 0, $y = 0, $isCollapsed = false)

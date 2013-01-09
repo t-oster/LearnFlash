@@ -1,17 +1,18 @@
 {extends file="../main.tpl"}
 {block name="content"}
-<form action="{url action="create"}" method="POST">
-  <label for="title">Title</label>
+<form class=testForm action="{url action="create"}" method="POST">
+  <label class=marginNullAuto for="title">Title</label>
   <input type="text" id="title" name="title" value="{$title}"/>
-  <label for="frontHtml">Front</label>
+  <label class=marginNullAuto for="frontHtml">Front</label>
   <textarea class="tinymce" id="frontHtml" name="frontHtml"></textarea>
-  <label for="backHtml">Back</label>
+  <label class=marginNullAuto for="backHtml">Back</label>
   <textarea class="tinymce" id="backHtml" name="backHtml"></textarea>
   <label for="tags">Tags</label>
   <input type="text" id="tags" name="tags" value=""/>
   <input type="submit" value="Create"/>
   or <a href="{url}">Cancel</a>
 </form>
+<hr class=freeBox>
 <script type="text/javascript" src="lib/js/tinymce/jscripts/tiny_mce/jquery.tinymce.js"></script>
 <script type="text/javascript">
   $(document).ready(function()
