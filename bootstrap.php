@@ -69,7 +69,9 @@ if (!is_file($conn["path"]))
       // Lots of errors!
       echo implode("\n\n", $e);
     }
+    unlink("tmp/db.sqlite");
     exit;
   }
+  include "exampleData.php";
 }
 ?>
