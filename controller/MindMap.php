@@ -24,7 +24,7 @@ class MindMap extends BaseController {
     $u = $this->getUserManager()->getLoggedInUser();
     $this->assignToView("mindmaps", $this->mnm->getTopLevelMindMaps($u));
   }
-  
+ 
   public function loadShow($mindMapId)
   {
     $currentMindMap = $this->mnm->findById($mindMapId);
@@ -34,22 +34,22 @@ class MindMap extends BaseController {
    
   public function loadAddMindMap($name)
   {
-    $this->mnm->createMindMap($name);
+    $map = $this->mnm->createMindMap($name);
     $this->addInfo("MindMap ".$name." sucessfully created.");
-    $this->redirect("MindMap");
+    $this->redirect(null,"show",array("mindMapId"=>$map->getId()));
   }
   
-/*  public function loadRegister($name, $email, $login, $password) {
-    $result = $this->getUserManager()->register($name, $email, $login, $password);
-    if ($result === true) {
-      $this->addInfo("Sucessfully registered. You can now login");
-      $this->redirect("Login");
-    } else {
-      $this->addError("Error. Registering failed: $result");
-      $this->redirect();
-    }
-  }*/
-
+  public function loadNode($nodeId)
+  {
+    $node = $this->mnm->findById($nodeId);
+    $this->assignToView("node",$node);
+  }
+  
+  public function loadUpdate($nodeId, $x, $y, $isCollapsed)
+  {
+    $node = $this->mnm->findById($nodeId);
+    $this->mnm->updateNode($map, $x, $y, $isCollapsed);
+  }
 }
 
 ?>

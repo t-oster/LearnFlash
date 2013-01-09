@@ -704,5 +704,12 @@ right: 12px;
 }
 
 #title{
-width: 100%;
+  width: 100%;
+}
+
+.mindMapNode {
+  position: absolute;
+  border: 1px solid black;
+  width: 100px;
+  height: 75px;
 }

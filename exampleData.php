@@ -50,8 +50,12 @@ function import_dir($path, $tags)
 $mnm = new Manager\MindMapNodeManager();
 $map = $mnm->createMindMap("niceMindMap");
 $cards = $cm->getCardsByUser($um->getLoggedInUser());
+$x=0;
 foreach ($cards as $c){
+  if($x++ == 5) break;
   $mnm->addCardToMindMap($map, $c);
 }
+$mnm->createMindMap("untermap",300,200,false,$map);
+$mnm->createMindMap("untermap",600,300,true,$map);
 
 ?>

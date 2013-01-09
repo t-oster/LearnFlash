@@ -83,7 +83,7 @@ abstract class MindMapNode {
   
   public function isMindMapCard()
   {
-    $this instanceof \Model\MindMapCard;
+    return $this instanceof \Model\MindMapCard;
   }
 }
 

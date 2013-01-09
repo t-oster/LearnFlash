@@ -30,7 +30,8 @@
         {block name="sidebar"}{/block}
        </div>
       {/block}
-       </div>   
+       </div>
+       <div style="clear: both; height: 50px;"></div>
       {block name="footer"}
         {include file="./footer.tpl"}
       {/block}

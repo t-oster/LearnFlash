@@ -30,9 +30,8 @@ class MindMapNodeManager extends BaseManager {
     return $m;
   }
   
-  public function updateMindMap(\Model\MindMap $map, $name, $x, $y, $isCollapsed)
+  public function updateNode(\Model\MindMapNode $map, $x, $y, $isCollapsed)
   {
-    $map->setName($name);
     $map->setX($x);
     $map->setY($y);
     $map->setCollapsed($isCollapsed);
