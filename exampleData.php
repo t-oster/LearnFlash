@@ -1,15 +1,52 @@
 <?php
 
+set_time_limit(0);
+
 $um = new Manager\UserManager();
 $um->register("Max Mustermann", "max@musterstadt.eu", "test", "test");
 $um->login("test", "test");
 
 $cm = new \Manager\CardsManager();
-$cm->createCard($um->getLoggedInUser(), "Card A", "Hello", "World", array("tag1","tag2","tagC"));
 
-$cm->createCard($um->getLoggedInUser(), "Card B", "Hello", "World", array("tag2","tagC"));
+import_dir(__DIR__.'/exampleCards', array());
 
-$cm->createCard($um->getLoggedInUser(), "Card C", "Hello", "World", array("tagC"));
+function import_file($path, $tags)
+{
+  global $cm, $um;
+  $f = fopen($path, "r");
+  while(!feof($f))
+  {
+    $line = fgets($f);
+    $qa = explode("\t", $line);
+    if (!isset($qa[0]) || !isset($qa[1]) || $qa[0] == "" || $qa[1] == "")
+    {
+      continue;
+    }
+    $cm->createCard($um->getLoggedInUser(), "", $qa[0], $qa[1], $tags);
+  }
+  fclose($f);
+}
+
+function import_dir($path, $tags)
+{
+  $dir = opendir($path);
+  while (false !== ($entry = readdir($dir)))
+  {
+    $f = $path."/".$entry;
+    if (strlen($entry) > 2)
+    {
+      if (is_dir($f))
+      {
+        import_dir($f, array_merge($tags, array($entry)));
+      }
+      else if (is_file($f))
+      {
+        import_file($f, array_merge($tags, array($entry)));
+      }
+    }
+  }
+}
+
 
 
 ?>
