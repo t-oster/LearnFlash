@@ -8,18 +8,21 @@ namespace Controller;
  */
 class Learn extends BaseCards{
   
-  public function loadDefault()
+  public function loadDefault($ignoreSession = false)
   {
+    if (!$ignoreSession && isset($_SESSION["toLearn"]) && count($_SESSION["toLearn"]) > 0)
+    {
+      $this->redirect(null, "continueQuestion");
+      return;
+    }
     $tm = new \Manager\TagsManager();
     $tags = $tm->getTagsByUser($this->getUserManager()->getLoggedInUser());
     $this->assignToView("tags", $tags);
   }
   
-  public function loadPrepareLearning($selection = "all", $tagIds = null, $random = false, $unlearned = false, $ajax)
+  public function loadPrepareLearning($selection = "all", $tagIds = null, $random = false, $unlearned = false, $ajax = false)
   {
-    //TODO select cards by given criteria
-    //save IDs in session
-    $cards = $this->cm->getCardsByUser($this->getUserManager()->getLoggedInUser());
+    $cards = $this->cm->findCards($this->getUserManager()->getLoggedInUser(), $selection == "all" ? null : $tagIds, $unlearned);
     $_SESSION["toLearn"] = array();
     $count_unlearned = 0;
     $count = 0;
@@ -27,10 +30,14 @@ class Learn extends BaseCards{
     {
       $_SESSION["toLearn"] []= $c->getId();
       $count++;
-      if (true) //TODO: if card is not learned aka no answer exists
+      if (count($c->getAnswers()) == 0)
       {
         $count_unlearned++;
       }
+    }
+    if ($random == true)
+    {
+      shuffle($_SESSION["toLearn"]);
     }
     if ($ajax)
     {
@@ -50,13 +57,14 @@ class Learn extends BaseCards{
       //TODO save answer for first card
       //remove first card
       echo "Result: $result";
+      $_SESSION["toLearn"] = array_slice($_SESSION["toLearn"], 1);
     }
     if (count($_SESSION["toLearn"]) <= 0)
     {
       $this->redirect();
       return;
     }
-    $card = $this->findCardOrError(array_pop($_SESSION["toLearn"]));
+    $card = $this->findCardOrError($_SESSION["toLearn"][0]);
     $this->assignToView("card", $card);
     $this->assignToView("frontHtml", $this->replaceReferencesWithLinks($card->getFrontHtml()));
     $this->assignToView("backHtml", $this->replaceReferencesWithLinks($card->getBackHtml()));

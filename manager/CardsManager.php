@@ -103,6 +103,37 @@ class CardsManager extends BaseManager{
     return $c;
   }
 
+  public function findCards(\Model\User $u, $tagIds = null, $unlearned = false)
+  {
+    //TODO make more efficient with DQL query
+    $cards = $this->getCardsByUser($u);
+    $result = array();
+    foreach ($cards as $c)
+    {
+      if ($tagIds != null)
+      {
+        $found = false;
+        foreach ($c->getTags() as $t)
+        {
+          if (in_array($t->getId(), $tagIds))
+          {
+            $found = true;
+          }
+        }
+        if (!$found)
+        {
+          continue;
+        }
+      }
+      if ($unlearned == true && count($c->getAnswers()) == 0)
+      {
+        continue;
+      }
+      $result []= $c;
+    }
+    return $result;
+  }
+  
   public function findByTitle($title)
   {
     return $this->em->getRepository("\Model\Card")->findOneBy(array("title" => $title));
