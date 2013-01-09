@@ -16,7 +16,7 @@ abstract class MindMapNode {
   protected $id;
   
   /**
-   * @ManyToOne(targetEntity="MindMapNode", inversedBy="children")
+   * @ManyToOne(targetEntity="MindMap", inversedBy="children")
    **/
   protected $parent;
   
