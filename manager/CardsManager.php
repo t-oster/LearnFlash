@@ -125,7 +125,7 @@ class CardsManager extends BaseManager{
           continue;
         }
       }
-      if ($unlearned == true && count($c->getAnswers()) == 0)
+      if ($unlearned == true && count($c->getAnswers()) != 0)
       {
         continue;
       }

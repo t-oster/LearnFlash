@@ -17,5 +17,5 @@
       {/foreach}
     ]);
   });
-</script>
+</script>8
 {/block}

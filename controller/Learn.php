@@ -54,9 +54,9 @@ class Learn extends BaseCards{
   {
     if ($cardId != null && $result != null)
     {
-      //TODO save answer for first card
-      //remove first card
-      echo "Result: $result";
+      $card = $this->findCardOrError($cardId);
+      $am = new \Manager\AnswerManager();
+      $am->create($this->getUserManager()->getLoggedInUser(), $card, $result);
       $_SESSION["toLearn"] = array_slice($_SESSION["toLearn"], 1);
     }
     if (count($_SESSION["toLearn"]) <= 0)

@@ -15,11 +15,18 @@ abstract class BaseManager
    * @var \Doctrine\ORM\EntityManager
    */
   protected $em;
+  
+  /**
+   *
+   * @var Manager\UserManager
+   */
+  protected $um;
 
   public function __construct()
   {
     global $entityManager;
     $this->em = $entityManager;
+    $this->um = new \Manager\UserManager();
   }
 
   public function findById($id)
