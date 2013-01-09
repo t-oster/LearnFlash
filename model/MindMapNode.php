@@ -76,7 +76,7 @@ abstract class MindMapNode {
     return $this->collapsed;
   }
   
-  public function SetCollapsed($isCollapsed)
+  public function setCollapsed($isCollapsed)
   {
     $this->collapsed = $isCollapsed;
   }
