@@ -12,7 +12,8 @@
         {
           text: "{$t->getName()}",
           weight: "{count($t->getCards())}",
-          link: "{url controller="Tags" action="show" tagId=$t->getId()}"
+          link: "{url controller="Tags" action="show" tagId=$t->getId()}",
+          color: "{$t->getColor()}"
         },
       {/foreach}
     ]);
