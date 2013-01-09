@@ -1,7 +1,7 @@
 {extends file="../main.tpl"}
 {block name="content"}
 <h2> Your cards </h2>
-<a class="addCard" href="{url action="add"}">Add</a>
+<a class="button" href="{url action="add"}">Add</a>
 <div id="cards">
 {foreach $cards as $c}
   <div class="card">
