@@ -9,8 +9,10 @@
     <a class="deleteLink" href="{url action="delete" cardId=$c->getId()}">delete</a>
     {include file="../tags/taglist.tpl" tags=$c->getTags()}
   </div>
+  
 {/foreach}
 </div>
+<hr class=freeBox>
 <script type="text/javascript">
   $("#cards a.deleteLink").click(function()
   {
