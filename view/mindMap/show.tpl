@@ -1,4 +1,7 @@
 {extends file="../main.tpl"}
+{block name="head"}
+  <link rel="stylesheet" href="css/mindMap.css" />
+{/block}
 {block name="mainContent"}
 <h2>Mindmap</h2>
   Displaying MindMap with name="{$mindmap->getName()}"
@@ -9,9 +12,9 @@
   {/foreach}
   </div>
   <script type="text/javascript">
-    $(".mindMapNode").draggable();
+    $(".mindMapNode").draggable({ containment: "parent" });
     $("#save").click(function(){
-      $("#save").hide();
+      $("#save").attr("disabled","disabled");
       var ids = [];
       var xs = [];
       var ys = [];
@@ -35,8 +38,8 @@
           collapseds: collapseds
         },
         function(result){
-          alert("Saved Successfully");
-          $("#save").show();
+          success("Saved Successfully");
+          $("#save").removeAttr("disabled");
         },
         "json"
       );

@@ -1,0 +1,27 @@
+/* 
+    Document   : mindMap
+    Created on : 10.01.2013, 01:00:11
+    Author     : Thomas Oster <thomas.oster@rwth-aachen.de>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.mindMapNode {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: white;
+  width: 100px;
+  height: 75px;
+}
+
+#mindMap {
+  /*
+  TODO: Fix that it is not in pixel, but percent... and still works ;0
+  */
+  background-color: lightgoldenrodyellow;
+  height: 800px;
+  width: 600px;
+  padding: 15px;
+  float: left;
+}

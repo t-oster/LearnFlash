@@ -1,4 +1,4 @@
-<div id="node{$node->getId()}" class="mindMapNode" style="top: {$node->getX()}px; left: {$node->getY()}px;">
+<div id="node{$node->getId()}" class="mindMapNode" style="top: {$node->getY()}px; left: {$node->getX()}px;">
   {if ($node->isMindMapCard())}
     Card: {$node->getCard()->getTitle()}
   {else}
