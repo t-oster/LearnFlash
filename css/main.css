@@ -603,23 +603,6 @@ background-color: #fff;
     );
 }
 
-
-
-/*= --------------------------------------------
-        cards
-    --------------------------------------------*/
-
-div.card {
-border-radius: 2px;
-float: left;
-width: 47.4%;
-margin: 2% 0 0 2%;
-background: #AFE6F3;
-padding: 30px 10px 2px 10px;
-position: relative;
-border: 1px solid #70E8F8;
-box-shadow: 0 0 0 2px white, 0 0 0 4px #C2C2C2;
-}
 #content{
     margin: 0 auto 40px auto;
     width: 100%;
@@ -659,13 +642,6 @@ div.tag {
 color: black;
 font-weight: 900;
 }
-.addCard {
-font-weight: 900;
-border-bottom: 2px solid cornflowerBlue;
-position: absolute;
-top: 0px;
-right: 12px;
-}
 
 /*= --------------------------------------------
         learn
@@ -687,9 +663,6 @@ right: 12px;
     clear: both;
 }
 
-#backHtml_tbl,#frontHtml_tbl{
-    width:100%;
-}
 .testForm{
     background-color: #F7F7F7;
     margin-top: 20px;

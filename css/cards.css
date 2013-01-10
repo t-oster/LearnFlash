@@ -1,0 +1,33 @@
+/* 
+    Document   : cards
+    Created on : 10.01.2013, 01:17:43
+    Author     : Thomas Oster <thomas.oster@rwth-aachen.de>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#backHtml_tbl,#frontHtml_tbl{
+  width:100%;
+}
+
+.addCard {
+  font-weight: 900;
+  border-bottom: 2px solid cornflowerBlue;
+  position: absolute;
+  top: 0px;
+  right: 12px;
+}
+
+
+div.card {
+  border-radius: 2px;
+  float: left;
+  width: 47.4%;
+  margin: 2% 0 0 2%;
+  background: #AFE6F3;
+  padding: 30px 10px 2px 10px;
+  position: relative;
+  border: 1px solid #70E8F8;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #C2C2C2;
+}
+

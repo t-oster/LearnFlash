@@ -1,4 +1,9 @@
 {extends file="../main.tpl"}
+
+{block name="head"}
+  <link rel="stylesheet" href="css/cards.css" />
+{/block}
+
 {block name="content"}
 <form class=testForm action="{url action="create"}" method="POST">
   <label class=marginNullAuto for="title">Title</label>

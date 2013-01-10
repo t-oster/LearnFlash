@@ -1,4 +1,9 @@
 {extends file="../main.tpl"}
+
+{block name="head"}
+  <link rel="stylesheet" href="css/cards.css" />
+{/block}
+
 {block name="content"}
 <form action="{url action="update"}" method="POST">
   <input type="hidden" name="cardId" value="{$card->getId()}"/>

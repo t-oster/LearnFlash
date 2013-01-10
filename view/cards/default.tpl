@@ -1,4 +1,9 @@
 {extends file="../main.tpl"}
+
+{block name="head"}
+  <link rel="stylesheet" href="css/cards.css" />
+{/block}
+
 {block name="content"}
 <h2> Your cards </h2>
 <a class="button" href="{url action="add"}">Add</a>

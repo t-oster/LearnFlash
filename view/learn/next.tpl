@@ -1,4 +1,9 @@
 {extends file="../main.tpl"}
+
+{block name="head"}
+  <link rel="stylesheet" href="css/cards.css" />
+{/block}
+
 {block name="content"}
 <h1>{$card->getTitle()}</h1>
 <div id="frontSide">
