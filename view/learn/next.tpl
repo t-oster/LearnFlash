@@ -25,7 +25,7 @@
 <script type="text/javascript">
   $("#show").click(function(){
     $("#show").hide();
-    $("#backSide").fadeIn(1000);
+    $("#backSide").slideDown(500);
     $("#result").fadeIn(1000);
   });
   /*
@@ -48,7 +48,6 @@
         $("#cardId").val(cardInfo.cardId);
         $("#title").html(cardInfo.title);
         $("#frontSide").slideDown(500);
-        $("#backSide").slideDown(500);
         $("#show").show();
       },
       "json"
