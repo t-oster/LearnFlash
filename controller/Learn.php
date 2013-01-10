@@ -50,7 +50,7 @@ class Learn extends BaseCards{
     }
   }
   
-  public function loadNext($cardId = null, $result = null)
+  public function loadNext($cardId = null, $result = null, $ajax = false)
   {
     if ($cardId != null && $result != null)
     {
@@ -65,9 +65,22 @@ class Learn extends BaseCards{
       return;
     }
     $card = $this->findCardOrError($_SESSION["toLearn"][0]);
-    $this->assignToView("card", $card);
-    $this->assignToView("frontHtml", $this->replaceReferencesWithLinks($card->getFrontHtml()));
-    $this->assignToView("backHtml", $this->replaceReferencesWithLinks($card->getBackHtml()));
+    if ($ajax)
+    {
+      echo json_encode(array(
+          "title" => $card->getTitle(),
+          "cardId" => $card->getId(),
+          "frontHtml" => $this->replaceReferencesWithLinks($card->getFrontHtml()),
+          "backHtml" => $this->replaceReferencesWithLinks($card->getBackHtml())
+      ));
+      $this->dontRender();
+    }
+    else 
+    {
+      $this->assignToView("card", $card);
+      $this->assignToView("frontHtml", $this->replaceReferencesWithLinks($card->getFrontHtml()));
+      $this->assignToView("backHtml", $this->replaceReferencesWithLinks($card->getBackHtml()));
+    }
   }
 }
 
