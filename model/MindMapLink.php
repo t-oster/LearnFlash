@@ -86,6 +86,15 @@ class MindMapLink {
   {
     $this->rightArrow = $isRightArrow;
   }
+
+  public function getText() {
+    return $this->text;
+  }
+
+  public function setText($text) {
+    $this->text = $text;
+  }
+  
 }
 
 ?>
