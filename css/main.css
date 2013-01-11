@@ -610,6 +610,18 @@ background-color: #fff;
     position: relative;
 }
 
+#mainContent {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#sidebar {
+  position: absolute;
+  right: 0;
+  top: 60px;
+}
+
 div.tag {
     color: white;
     margin: 10px 0 0 0;

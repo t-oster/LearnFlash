@@ -65,6 +65,11 @@ function nodeDragged(node)
 function drawLinks()
 {
   var canvas = document.getElementById('linkLayer');
+  if (canvas.width != $("#mindMap").width() || canvas.height != $("#mindMap").height())
+  {
+    canvas.width = $("#mindMap").width();
+    canvas.height = $("#mindMap").height();
+  }
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height)
   for (var i = 0; i < mindMapLinks.length; i++)
