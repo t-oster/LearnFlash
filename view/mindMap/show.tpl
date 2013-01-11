@@ -17,6 +17,7 @@
   </div>
   <script type="text/javascript">
     saveChangesUrl = "{url action="saveChanges" mindMapId=$mindmap->getId()}";
+    newCardNodeUrl ="{url action="node"}";
     mindMapLinks = {$linksAsJson};
   </script>
 {/block}

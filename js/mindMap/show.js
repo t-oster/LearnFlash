@@ -1,6 +1,7 @@
 //These are filled by the Template
 var mindMapLinks = [];
 var saveChangesUrl = "";
+var newCardNodeUrl = "";
 
 //a map indexed by the nodeId and mapping
 //to infos containing state: "updated" or "new" or "deleted"
@@ -16,9 +17,30 @@ function drawLine(ctx, x1, y1, x2, y2)
   ctx.stroke();
 }
 
+function deleteLink(linkIndex)
+{
+  if (mindMapLinks[linkIndex].state == "new")
+  {
+    delete mindMapLinks[linkIndex];
+  }
+  else
+  {
+    mindMapLinks[linkIndex].state = "deleted";
+  }
+}
+
 function deleteNode(nodeObject)
 {
   var id = nodeObject.attr("id");
+  //delete all links
+  var idNr = id.substring(4);
+  for (var i = 0; i < mindMapLinks.length; i++)
+  {
+    if (mindMapLinks[i].leftId == idNr || mindMapLinks[i].rightId == idNr)
+    {
+      deleteLink(i);
+    }
+  }
   if (nodeInfos[id] && nodeInfos[id].state == "new")
   {//if was a new node, just remove it
     delete nodeInfos[id];
@@ -26,23 +48,8 @@ function deleteNode(nodeObject)
   else
   {
     nodeInfos[id] = {state: "deleted"};
-    nodeObject.fadeOut(500, function(){nodeObject.remove();});
   }
-  var idNr = id.substring(4);
-  for (var i = 0; i < mindMapLinks.length; i++)
-  {
-    if (mindMapLinks[i].leftId == idNr || mindMapLinks[i].rightId == idNr)
-    {
-      if (mindMapLinks[i].state == "new")
-      {
-        delete mindMapLinks[i];
-      }
-      else
-      {
-        mindMapLinks[i].state = "deleted";
-      }
-    }
-  }
+  nodeObject.fadeOut(500, function(){nodeObject.remove();});
   drawLinks();
 }
 
@@ -75,6 +82,25 @@ function drawLinks()
   }
 }
 
+/**
+ * Creates a new MindMapCard for the given card id.
+ * More precise: the CardHtml is fetched from the server
+ * and an Entry in nodeInfos is generated.
+ * The actual save should happen in the saveChanges method
+ */
+var lastNewId = 0;
+function addNodeForCard(cardId)
+{
+  $.get(newCardNodeUrl, {cardId: cardId}, function(html){
+    lastNewId += 1;
+    element = $(html);
+    element.attr("id", "ncrd"+lastNewId);
+    initializeNodeEvents(element);
+    $("#mindMap").append(element);
+    nodeInfos["ncrd"+lastNewId] = {state: "new", cardId: cardId};
+  }, "html");
+}
+
 function saveChanges()
 {
   $("#save").attr("disabled","disabled");
@@ -84,6 +110,10 @@ function saveChanges()
   for (var i = 0; i < mindMapLinks.length; i++)
   {
     var l = mindMapLinks[i];
+    if (l == undefined)
+    {
+      continue;
+    }
     if (l.state == "deleted")
     {
       changes.push({
@@ -152,12 +182,17 @@ function saveChanges()
     );
 }
 
-$(document).ready(function(){
-  $(".mindMapNode").draggable({
+function initializeNodeEvents(nodeElement)
+{
+  nodeElement.draggable({
     containment: "parent",
     stop: function(event, ui) {nodeDragged(event.target)}
   });
-  $(".mindMapNode .deleteLink").click(function(){deleteNode($(this).parents(".mindMapNode"));});
+  nodeElement.find(".deleteLink").click(function(){deleteNode($(this).parents(".mindMapNode"));});
+}
+
+$(document).ready(function(){
+  $(".mindMapNode").each(function(){initializeNodeEvents($(this));});
   $("#save").click(saveChanges);
   drawLinks();
 });

@@ -1,4 +1,4 @@
-<div id="node{$node->getId()}" class="mindMapNode {if $node->isMindMapCard()}mindMapCard{else}mindMap{/if}" style="top: {$node->getY()}px; left: {$node->getX()}px;">
+<div {if $node->getId() != null}id="node{$node->getId()}"{/if} class="mindMapNode {if $node->isMindMapCard()}mindMapCard{else}mindMap{/if}" style="top: {$node->getY()}px; left: {$node->getX()}px;">
   <a class="deleteLink"></a>
   {if ($node->isMindMapCard())}
     Card: {$node->getCard()->getTitle()}
