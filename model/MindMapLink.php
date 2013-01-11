@@ -34,16 +34,14 @@ class MindMapLink {
   protected $rightArrow;
   
   /**
-   * @OneToOne(targetEntity="MindMapNode")
-   * @JoinColumn(name="mindMapNode_id", referencedColumnName="id")
-   * @var User
+   * @ManyToOne(targetEntity="MindMapNode")
+   * @var MindMapNode
    */
   protected $leftNode;
   
   /**
-   * @OneToOne(targetEntity="MindMapNode")
-   * @JoinColumn(name="mindMapNode_id", referencedColumnName="id")
-   * @var User
+   * @ManyToOne(targetEntity="MindMapNode")
+   * @var MindMapNode
    */
   protected $rightNode;
   

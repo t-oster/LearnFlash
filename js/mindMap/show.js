@@ -3,7 +3,17 @@ var updateNodesUrl = "";
 
 function drawLinks()
 {
-//TODO: Draw links in canvas
+  var ctx = document.getElementById('linkLayer').getContext('2d');
+  ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+  for (var i = 0; i < links.length; i++)
+  {
+    var x1 = $("#node"+links[i].leftId).attr("left");
+    var y1 = $("#node"+links[i].leftId).attr("top");
+    var x2 = $("#node"+links[i].rightId).attr("left");
+    var y2 = $("#node"+links[i].rightId).attr("top");
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+  }
 }
 
 function saveChanges()
@@ -43,5 +53,6 @@ $(document).ready(function(){
   $(".mindMapNode").draggable({
     containment: "parent"
   });
-  $("#save").click(saveChanges);  
+  $("#save").click(saveChanges);
+  drawLinks();
 });

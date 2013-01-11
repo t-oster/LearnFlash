@@ -43,7 +43,18 @@ class MindMap extends BaseController {
     $this->assignToView("cards", $this->cm->getCardsByUser());
     $this->assignToView("tags", $this->tm->getTagsByUser());
     //TODO
-    $this->assignToView("linksAsJson", "[]");
+    $lm = new \Manager\MindMapLinkManager();
+    $links = $lm->findByMindMap($currentMindMap);
+    $linksArray = array();
+    foreach ($links as $l)
+    {
+      $linksArray [] = array(
+        "leftId" => $l->getLeftNode()->getId(),
+        "rightId" => $l->getRightNode()->getId(),
+          //TODO text, arrows
+      );
+    }
+    $this->assignToView("linksAsJson", json_encode($linksArray));
   }
    
   public function loadCardListBody($tagId = -1)

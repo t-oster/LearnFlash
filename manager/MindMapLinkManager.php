@@ -30,6 +30,13 @@ class MindMapLinkManager extends BaseManager {
     $this->em->flush();
   }
 
+  public function findByMindMap(\Model\MindMap $currentMindMap)
+  {
+    //TODO
+    //
+    //$q = $this->em->cr
+    return $this->em->getRepository($this->getModelClassname())->findAll();
+  }
 }
 
 ?>
