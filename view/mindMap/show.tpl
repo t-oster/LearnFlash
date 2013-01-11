@@ -9,7 +9,7 @@
   Displaying MindMap with name="{$mindmap->getName()}"
   <button id="save">Save</button>
   <div id="mindMap">
-    <canvas id="linkLayer">
+    <canvas id="linkLayer" width="800" height="600">
     </canvas>
   {foreach $mindmap->getChildren() as $c}    
     {include file="./node.tpl" node=$c}

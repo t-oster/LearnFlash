@@ -1,18 +1,29 @@
-var links = [];
+var mindMapLinks = [];
 var updateNodesUrl = "";
+
+function drawLine(ctx, x1, y1, x2, y2)
+{
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
 
 function drawLinks()
 {
-  var ctx = document.getElementById('linkLayer').getContext('2d');
-  ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-  for (var i = 0; i < links.length; i++)
+  var canvas = document.getElementById('linkLayer');
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height)
+  for (var i = 0; i < mindMapLinks.length; i++)
   {
-    var x1 = $("#node"+links[i].leftId).attr("left");
-    var y1 = $("#node"+links[i].leftId).attr("top");
-    var x2 = $("#node"+links[i].rightId).attr("left");
-    var y2 = $("#node"+links[i].rightId).attr("top");
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
+    var left = $("#node"+mindMapLinks[i].leftId);   
+    var right = $("#node"+mindMapLinks[i].rightId);
+    var x1 = left.position().left + left.width() / 2;
+    var y1 = left.position().top + left.height() / 2;
+    var x2 = right.position().left + right.width() / 2;
+    var y2 = right.position().top + right.height() / 2;
+    drawLine(ctx, x1, y1, x2, y2);
   }
 }
 
@@ -51,7 +62,8 @@ function saveChanges()
 
 $(document).ready(function(){
   $(".mindMapNode").draggable({
-    containment: "parent"
+    containment: "parent",
+    drag: drawLinks
   });
   $("#save").click(saveChanges);
   drawLinks();

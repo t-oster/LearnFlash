@@ -20,8 +20,8 @@
   TODO: Fix that it is not in pixel, but percent... and still works ;0
   */
   background-color: lightgoldenrodyellow;
-  height: 800px;
-  width: 600px;
+  height: 600px;
+  width: 800px;
   position: relative;
   padding: 15px;
   float: left;

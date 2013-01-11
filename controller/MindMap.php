@@ -51,6 +51,7 @@ class MindMap extends BaseController {
       $linksArray [] = array(
         "leftId" => $l->getLeftNode()->getId(),
         "rightId" => $l->getRightNode()->getId(),
+        "state" => "clean",
           //TODO text, arrows
       );
     }
