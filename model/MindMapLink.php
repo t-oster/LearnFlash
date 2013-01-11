@@ -45,6 +45,11 @@ class MindMapLink {
    */
   protected $rightNode;
   
+  public function getId() 
+  {
+    return $this->id;
+  }
+  
   public function getLeftNode()
   {
     return $this->leftNode;

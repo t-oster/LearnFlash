@@ -52,6 +52,7 @@ class MindMap extends BaseController {
     foreach ($links as $l)
     {
       $linksArray [] = array(
+        "id" => $l->getId(),
         "leftId" => $l->getLeftNode()->getId(),
         "rightId" => $l->getRightNode()->getId(),
         "state" => "clean",
@@ -125,7 +126,7 @@ class MindMap extends BaseController {
         }
         else if ($c->type == "link")
         {
-          //TODO
+          $this->lm->deleteById($c->id);
         }
       }
     }

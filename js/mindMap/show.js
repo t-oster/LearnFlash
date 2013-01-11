@@ -80,6 +80,24 @@ function saveChanges()
   $("#save").attr("disabled","disabled");
   //changes in format {type: map|card|link, state: new|updated|deleted, (x, y, collapsed, text |name)}
   var changes = [];
+  //collect infos on links
+  for (var i = 0; i < mindMapLinks.length; i++)
+  {
+    var l = mindMapLinks[i];
+    if (l.state == "deleted")
+    {
+      changes.push({
+        state: l.state,
+        type: "link",
+        id: l.id
+      });
+    }
+    else if (l.state == "updated" || l.state == "new")
+    {
+      l.type = "link";
+      changes.push(l);
+    }
+  }
   //collect infos on cards and maps
   for (var eid in nodeInfos)
   {
@@ -118,6 +136,8 @@ function saveChanges()
         if (errors.length == 0)
         {
           success("Saved Successfully");
+          nodeInfos = {};
+          //TODO reset changes, set links to clean
         }
         else
         {
