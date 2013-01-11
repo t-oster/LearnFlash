@@ -21,15 +21,20 @@ class MindMap extends BaseController {
   private $cm;
   
   /**
-   *
    * @var \Manager\TagsManager
    */
   private $tm;
+  
+  /**
+   * @var \Manager\MindMapLinkManager
+   */
+  private $lm;
   public function __construct()
   {
     $this->mnm = new \Manager\MindMapNodeManager();
     $this->cm = new \Manager\CardsManager();
     $this->tm = new \Manager\TagsManager();
+    $this->lm = new \Manager\MindMapLinkManager();
   }
   
   public function loadDefault(){
@@ -42,9 +47,7 @@ class MindMap extends BaseController {
     $this->assignToView("mindmap", $currentMindMap);
     $this->assignToView("cards", $this->cm->getCardsByUser());
     $this->assignToView("tags", $this->tm->getTagsByUser());
-    //TODO
-    $lm = new \Manager\MindMapLinkManager();
-    $links = $lm->findByMindMap($currentMindMap);
+    $links = $this->lm->findByMindMap($currentMindMap);
     $linksArray = array();
     foreach ($links as $l)
     {
@@ -52,7 +55,9 @@ class MindMap extends BaseController {
         "leftId" => $l->getLeftNode()->getId(),
         "rightId" => $l->getRightNode()->getId(),
         "state" => "clean",
-          //TODO text, arrows
+        "text" => $l->getText(),
+        "leftArrow" => $l->isLeftArrow(),
+        "rightArrow" => $l->isRightArrow()
       );
     }
     $this->assignToView("linksAsJson", json_encode($linksArray));
@@ -77,15 +82,55 @@ class MindMap extends BaseController {
     $this->assignToView("node",$node);
   }
   
-  public function loadUpdateNodes($ids, $xs, $ys, $collapseds)
+  public function loadSaveChanges($mindMapId, $changesAsJson)
   {
-    for ($i = 0; $i < count($ids); $i++)
+    $errors = array();
+    $changes = json_decode($changesAsJson);
+    foreach ($changes as $c)
     {
-      $node = $this->mnm->findById($ids[$i]);
-      $this->mnm->updateNode($node, $xs[$i], $ys[$i], $collapseds[$i]);
+      if ($c->state == "new")
+      {
+        $parent = $this->mnm->findById($mindMapId);
+        if ($c->type == "card")
+        {
+          $card = $this->cm->findById($c->cardId);
+          $this->mnm->addCardToMindMap($parent, $card, $c->x, $c->y, $c->collapsed);
+        }
+        else if ($c->type == "map")
+        {
+          $this->mnm->createMindMap($c->name, $c->x, $c->y, $c->collapsed, $parent);
+        }
+        else if ($c->type == "link")
+        {
+          //TODO
+        }
+      }
+      else if ($c->state == "updated")
+      {
+        if ($c->type == "card" || $c->type == "map")
+        {
+          $node = $this->mnm->findById($c->id);
+          $this->mnm->updateNode($node, $c->x, $c->y, $c->collapsed);
+        }
+        else if ($c->type == "link")
+        {
+          //TODO
+        }
+      }
+      else if ($c->state == "deleted")
+      {
+        if ($c->type == "card" || $c->type == "map")
+        {
+          $this->mnm->deleteById($c->id);
+        }
+        else if ($c->type == "link")
+        {
+          //TODO
+        }
+      }
     }
-    echo "true";
-    $this->dontRender();
+    echo json_encode($errors);
+    $this->dontRender();  
   }
 }
 

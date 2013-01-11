@@ -16,7 +16,7 @@
   {/foreach}
   </div>
   <script type="text/javascript">
-    updateNodesUrl = "{url action="updateNodes"}";
+    saveChangesUrl = "{url action="saveChanges" mindMapId=$mindmap->getId()}";
     mindMapLinks = {$linksAsJson};
   </script>
 {/block}

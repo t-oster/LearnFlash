@@ -1,12 +1,11 @@
 //These are filled by the Template
 var mindMapLinks = [];
-var updateNodesUrl = "";
-var updateLinksUrl = "";
+var saveChangesUrl = "";
 
 //a map indexed by the nodeId and mapping
-//to either "changed" or "new" or "deleted"
+//to infos containing state: "updated" or "new" or "deleted"
 //used to keep track of changed/added nodes
-var nodeStates = {};
+var nodeInfos = {};
 
 function drawLine(ctx, x1, y1, x2, y2)
 {
@@ -20,13 +19,13 @@ function drawLine(ctx, x1, y1, x2, y2)
 function deleteNode(nodeObject)
 {
   var id = nodeObject.attr("id");
-  if (nodeStates[id] == "new")
+  if (nodeInfos[id] && nodeInfos[id].state == "new")
   {//if was a new node, just remove it
-    delete nodeStates[id];
+    delete nodeInfos[id];
   }
   else
   {
-    nodeStates[id] = "deleted";
+    nodeInfos[id] = {state: "deleted"};
     nodeObject.fadeOut(500, function(){nodeObject.remove();});
   }
   var idNr = id.substring(4);
@@ -49,10 +48,11 @@ function deleteNode(nodeObject)
 
 function nodeDragged(node)
 {
-  if (!nodeStates[$(node).attr("id")])
+  if (!nodeInfos[$(node).attr("id")])
   {
-    nodeStates[$(node).attr("id")] = "changed";
+    nodeInfos[$(node).attr("id")] = {state: "updated"};
   }
+  drawLinks();
 }
 
 function drawLinks()
@@ -78,52 +78,63 @@ function drawLinks()
 function saveChanges()
 {
   $("#save").attr("disabled","disabled");
-  var ids = [];
-  var xs = [];
-  var ys = [];
-  var collapseds = [];
-  //collect infos
-  foreach ()
-  nodeStates.foreach(function(id, state){
-    if (state == "changed")
-    {
-      //remove the "node" prefix from the id
-      ids.push(id.substring(4));
-      //remove the "px" suffix from the x and y
-      xs.push($("#"+id).position().left);
-      ys.push($("#"+id).position().top);
-      //TODO update collapsed state
-      collapseds.push(false);
-    }
-    else if (state == "new")
-    {
-      //TODO create method to create new nodes
-    }
-    else if (state == "deleted")
-    {
-      //TODO
-    }
-  });
-  //update database
-  $.post(updateNodesUrl,
+  //changes in format {type: map|card|link, state: new|updated|deleted, (x, y, collapsed, text |name)}
+  var changes = [];
+  //collect infos on cards and maps
+  for (var eid in nodeInfos)
   {
-    ids: ids,
-    xs: xs,
-    ys: ys,
-    collapseds: collapseds
-  },
-  function(result){
-    success("Saved Successfully");
-    $("#save").removeAttr("disabled");
-  },
-  "json"
-  );
+    var element = $("#"+eid);
+    var info = nodeInfos[eid];
+    //remove the node-prefix to get the db-id
+    var id = eid.substring(4);
+    var type = element.hasClass("mindMapCard") ? "card" : "map";
+    if (info.state == "deleted")
+    {
+      changes.push({
+        state: info.state,
+        type: type,
+        id: id
+      });
+    }
+    else
+    {
+      changes.push({
+        type: type,
+        state: info.state,
+        id: id,//used only for state=changed
+        x: element.position().left,
+        y: element.position().top,
+        collapsed: false, //TODO
+        name: info.name,//used only for type=map
+        cardId: info.cardId,//used only for type=card
+      });
+    }
+  }
+  //TODO collect infos on links
+  //update database
+  $.post(saveChangesUrl,
+    { changesAsJson: JSON.stringify(changes) },
+    function(errors){
+        if (errors.length == 0)
+        {
+          success("Saved Successfully");
+        }
+        else
+        {
+          for(var k = 0; k < errors.length; k++)
+          {
+            error(errors[k]);
+          }
+        }
+        $("#save").removeAttr("disabled");
+    },
+    "json"
+    );
 }
 
 $(document).ready(function(){
   $(".mindMapNode").draggable({
     containment: "parent",
-    drag: drawLinks,
     stop: function(event, ui) {nodeDragged(event.target)}
   });
   $(".mindMapNode .deleteLink").click(function(){deleteNode($(this).parents(".mindMapNode"));});
