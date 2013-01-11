@@ -3,6 +3,6 @@
   {if ($node->isMindMapCard())}
     Card: {$node->getCard()->getTitle()}
   {else}
-    Map: {$node->getName()}
+    <a href="{url action="show" mindMapId=$node->getId()}">Map: {$node->getName()}</a>
   {/if}
 </div>

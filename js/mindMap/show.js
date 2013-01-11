@@ -191,8 +191,38 @@ function initializeNodeEvents(nodeElement)
   nodeElement.find(".deleteLink").click(function(){deleteNode($(this).parents(".mindMapNode"));});
 }
 
+function askConfirmationIfUnsaved()
+{
+  var dirty = false;
+  for (var i = 0; i < mindMapLinks.length; i++)
+  {
+    var l = mindMapLinks[i];
+    if (l != undefined && l.state != "clean")
+    {
+      dirty = true;
+      break;
+    }
+  }
+  if (dirty == false)
+  {
+    for (k in nodeInfos)
+    {
+      if (nodeInfos[k] != undefined)
+      {
+        dirty = true;
+        break;
+      }
+    }
+  }
+  if (dirty)
+  {
+    return "you have unsaved changes";
+  }
+}
+
 $(document).ready(function(){
   $(".mindMapNode").each(function(){initializeNodeEvents($(this));});
   $("#save").click(saveChanges);
   drawLinks();
+  $(window).bind('beforeunload', askConfirmationIfUnsaved);
 });
