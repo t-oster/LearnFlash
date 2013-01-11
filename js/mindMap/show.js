@@ -103,6 +103,7 @@ function addNodeForCard(cardId)
     initializeNodeEvents(element);
     $("#mindMap").append(element);
     nodeInfos["ncrd"+lastNewId] = {state: "new", cardId: cardId};
+    success("Card added");
   }, "html");
 }
 
