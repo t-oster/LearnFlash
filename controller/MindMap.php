@@ -77,11 +77,19 @@ class MindMap extends BaseController {
     $this->redirect(null,"show",array("mindMapId"=>$map->getId()));
   }
   
-  public function loadNode($cardId)
+  public function loadNode($cardId = null, $name = null)
   {
-    $card = $this->cm->findById($cardId);
-    $node = new \Model\MindMapCard();
-    $node->setCard($card);
+    if ($cardId != null)
+    {
+      $card = $this->cm->findById($cardId);
+      $node = new \Model\MindMapCard();
+      $node->setCard($card);
+    }
+    else if ($name != null)
+    {
+      $node = new \Model\MindMap();
+      $node->setName($name);
+    }
     $this->assignToView("node",$node);
   }
   

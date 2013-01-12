@@ -1,7 +1,7 @@
 //These are filled by the Template
 var mindMapLinks = [];
 var saveChangesUrl = "";
-var newCardNodeUrl = "";
+var newNodeUrl = "";
 
 //a map indexed by the nodeId and mapping
 //to infos containing state: "updated" or "new" or "deleted"
@@ -27,6 +27,19 @@ function deleteLink(linkIndex)
   {
     mindMapLinks[linkIndex].state = "deleted";
   }
+}
+
+function addMindMap(name)
+{
+  $.get(newNodeUrl, {name: name}, function(html){
+    lastNewId += 1;
+    element = $(html);
+    element.attr("id", "nmap"+lastNewId);
+    initializeNodeEvents(element);
+    $("#mindMap").append(element);
+    nodeInfos["nmap"+lastNewId] = {state: "new", name: name};
+    success("Map added");
+  }, "html");
 }
 
 function deleteNode(nodeObject)
@@ -125,9 +138,9 @@ function drawLinks()
  * The actual save should happen in the saveChanges method
  */
 var lastNewId = 0;
-function addNodeForCard(cardId)
+function addCard(cardId)
 {
-  $.get(newCardNodeUrl, {cardId: cardId}, function(html){
+  $.get(newNodeUrl, {cardId: cardId}, function(html){
     lastNewId += 1;
     element = $(html);
     element.attr("id", "ncrd"+lastNewId);

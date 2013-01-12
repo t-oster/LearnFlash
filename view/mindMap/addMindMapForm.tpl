@@ -3,25 +3,19 @@
 <form style="display: none;" id="addMindMapForm" action="{url action="addMindMap"}" method="POST" title="Add new MindMap">
       <label for="mindMapName">Name</label>
   <input type="text" id="mindMapName" name="name"/>
-  <div id="controls">
-    <input type="submit" value="addMindMap"/>
-  </div>
 </form>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#controls").hide();
-  });
   function showAddMindMapDialog(){
     $("#addMindMapForm").dialog({
       buttons: {
-        Add: function(){ $("#controls input").click(); }
-      }
+        Add: function(){ addMindMap($("#mindMapName").val()); $(this).dialog("close");}
+      },
+      resizable: false
     });
-    $("#addMindMapForm").dialog("option","resizable",false);
     $('#addMindMapForm').live('keyup', function(e){
       if (e.keyCode == 13) {
-        $(':button:contains("Add")').click();
+        addMindMap($("#mindMapName").val());
       }
     });
   }

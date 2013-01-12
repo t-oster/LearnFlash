@@ -1,3 +1,3 @@
 {foreach $cards as $c}
-  <li>{$c->getTitle()} <a href="#" class="addLink" onclick="addNodeForCard({$c->getId()})">add</a></li>
+  <li>{$c->getTitle()} <a href="javascript:addCard({$c->getId()})" class="addLink">add</a></li>
 {/foreach}

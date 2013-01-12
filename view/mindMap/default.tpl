@@ -12,4 +12,10 @@
       
       {include file="./addMindMapForm.tpl"}
 
+      <script type="text/javascript">
+        function addMindMap(name)
+        {
+          window.location = "{url action="addMindMap"}&name="+encodeURI(name);
+        }
+      </script>
 {/block}
