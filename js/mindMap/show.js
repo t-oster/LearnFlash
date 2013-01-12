@@ -17,6 +17,24 @@ function drawLine(ctx, x1, y1, x2, y2)
   ctx.stroke();
 }
 
+function linkButtonClicked(nodeId)
+{
+  var selectedIds = [];
+  $(".selectedNode").each(function(){selectedIds.push($(this).attr("id"))});
+  if (selectedIds.length == 0)
+  {//just mark the clicked node as selected
+    $("#"+nodeId).addClass("selectedNode");
+  }
+  else
+  {
+    alert("TODO: Link both nodes");
+    $(".selectedNode").removeClass("selectedNode");
+    //PROBLEM: ids of new nodes don't exist yet
+    //SOLUTION: refactor that the complete ids "cardX","nmap" etc are
+    //used and decide from prefix
+  }
+}
+
 function deleteLinkById(linkId)
 {
   for (var i = 0; i < mindMapLinks.length; i++)

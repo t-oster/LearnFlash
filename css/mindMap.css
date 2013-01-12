@@ -15,6 +15,10 @@
   height: 75px;
 }
 
+.mindMapNode.selectedNode {
+  border: 2px solid yellow;
+}
+
 .linkText {
   position: absolute;
   border: 1px solid black;
