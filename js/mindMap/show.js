@@ -17,8 +17,10 @@ function drawLine(ctx, x1, y1, x2, y2)
   ctx.stroke();
 }
 
+var lastNewLinkId = 0;
 function linkButtonClicked(nodeId)
 {
+  
   var selectedIds = [];
   $(".selectedNode").each(function(){selectedIds.push($(this).attr("id"))});
   if (selectedIds.length == 0)
@@ -27,11 +29,20 @@ function linkButtonClicked(nodeId)
   }
   else
   {
-    alert("TODO: Link both nodes");
+    lastNewLinkId -= 1;
+    mindMapLinks.push({
+      id: lastNewLinkId,
+      leftId: selectedIds[0],
+      rightId: nodeId,
+      text: "newLink",
+      state: "new",
+      leftArrow: false,
+      rightArrow: false
+    });
+    updateLinkPosition(mindMapLinks.length-1);
     $(".selectedNode").removeClass("selectedNode");
-    //PROBLEM: ids of new nodes don't exist yet
-    //SOLUTION: refactor that the complete ids "cardX","nmap" etc are
-    //used and decide from prefix
+    drawLinks();
+    //TODO: Add link-text-element
   }
 }
 
@@ -110,11 +121,9 @@ function draggingStarted(node)
 {
   connectedLinks = [];
   var id = $(node).attr("id");
-  //delete all links
-  var idNr = id.substring(4);
   for (var i = 0; i < mindMapLinks.length; i++)
   {
-    if (mindMapLinks[i].leftId == idNr || mindMapLinks[i].rightId == idNr)
+    if (mindMapLinks[i].leftId == id || mindMapLinks[i].rightId == id)
     {
       connectedLinks.push(i);
     }
@@ -125,7 +134,7 @@ function dragging()
 {
   for (var i = 0; i < connectedLinks.length; i++)
   {
-    updateLinkPosition(i);
+    updateLinkPosition(connectedLinks[i]);
   }
   drawLinks();
 }
@@ -140,8 +149,8 @@ function nodeDragged(node)
 
 function updateLinkPosition(linkIndex)
 {
-  var left = $("#node"+mindMapLinks[linkIndex].leftId);   
-  var right = $("#node"+mindMapLinks[linkIndex].rightId);
+  var left = $("#"+mindMapLinks[linkIndex].leftId);   
+  var right = $("#"+mindMapLinks[linkIndex].rightId);
   mindMapLinks[linkIndex].x1 = left.position().left + left.width() / 2;
   mindMapLinks[linkIndex].y1 = left.position().top + left.height() / 2;
   mindMapLinks[linkIndex].x2 = right.position().left + right.width() / 2;
@@ -251,7 +260,6 @@ function saveChanges()
       });
     }
   }
-  //TODO collect infos on links
   //update database
   $.post(saveChangesUrl,
     { changesAsJson: JSON.stringify(changes) },
@@ -259,8 +267,9 @@ function saveChanges()
         if (errors.length == 0)
         {
           success("Saved Successfully");
+          mindMapLinks = [];
           nodeInfos = {};
-          //TODO reset changes, set links to clean
+          window.location.reload(true);
         }
         else
         {

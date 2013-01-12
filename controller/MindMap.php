@@ -54,8 +54,8 @@ class MindMap extends BaseController {
     {
       $linksArray [] = array(
         "id" => $l->getId(),
-        "leftId" => $l->getLeftNode()->getId(),
-        "rightId" => $l->getRightNode()->getId(),
+        "leftId" => "node".$l->getLeftNode()->getId(),
+        "rightId" => "node".$l->getRightNode()->getId(),
         "state" => "clean",
         "text" => $l->getText(),
         "leftArrow" => $l->isLeftArrow(),
@@ -97,6 +97,8 @@ class MindMap extends BaseController {
   public function loadSaveChanges($mindMapId, $changesAsJson)
   {
     $errors = array();
+    //used to map the temporary id of nodes to the new database ids
+    $newNodes = array();
     $changes = json_decode($changesAsJson);
     foreach ($changes as $c)
     {
@@ -106,15 +108,35 @@ class MindMap extends BaseController {
         if ($c->type == "card")
         {
           $card = $this->cm->findById($c->cardId);
-          $this->mnm->addCardToMindMap($parent, $card, $c->x, $c->y, $c->collapsed);
+          $nc = $this->mnm->addCardToMindMap($parent, $card, $c->x, $c->y, $c->collapsed);
+          $newNodes[$c->id] = $nc;
         }
         else if ($c->type == "map")
         {
-          $this->mnm->createMindMap($c->name, $c->x, $c->y, $c->collapsed, $parent);
+          $m = $this->mnm->createMindMap($c->name, $c->x, $c->y, $c->collapsed, $parent);
+          $newNodes[$c->id] = $m;
         }
         else if ($c->type == "link")
         {
-          //TODO
+          $lid = substr($c->leftId, 4);
+          if (substr($c->leftId, 0, 4) != "node")
+          {//the link refers to a new created node
+            $left = $newNodes[$lid];
+          }
+          else 
+          {
+            $left = $this->mnm->findById($lid);
+          }
+          $rid = substr($c->rightId, 4);
+          if (substr($c->rightId, 0, 4) != "node")
+          {//the link refers to a new created node
+            $right = $newNodes[$lid];
+          }
+          else 
+          {
+            $right = $this->mnm->findById($rid);
+          }
+          $this->lm->createLink($left, $right, $c->text, $c->leftArrow, $c->rightArrow);
         }
       }
       else if ($c->state == "updated")
