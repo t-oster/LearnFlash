@@ -38,6 +38,18 @@
   float: left;
 }
 
+.deleteLink {
+  display: none;
+}
+
+.mindMapNode:hover .deleteLink{
+  display: inline;
+}
+
+.linkText:hover .deleteLink{
+  display: inline;
+}
+
 #linkLayer {
   position: absolute;
   top: 0;
