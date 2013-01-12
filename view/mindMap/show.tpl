@@ -7,7 +7,7 @@
 {block name="mainContent"}
 <h2>Mindmap</h2>
   Displaying MindMap with name="{$mindmap->getName()}"
-  <button id="save">Save</button>
+  <button id="save">Save</button>{include file="./addMindMapForm.tpl"}
   <div id="mindMap">
     <canvas id="linkLayer">
     </canvas>
