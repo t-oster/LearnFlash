@@ -15,6 +15,15 @@
   height: 75px;
 }
 
+.linkText {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: #09f;
+  width: 50px;
+  height: 50px;
+}
+
 #mindMap {
   /*
   TODO: Fix that it is not in pixel, but percent... and still works ;0

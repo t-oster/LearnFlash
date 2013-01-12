@@ -17,8 +17,27 @@ function drawLine(ctx, x1, y1, x2, y2)
   ctx.stroke();
 }
 
+function deleteLinkById(linkId)
+{
+  for (var i = 0; i < mindMapLinks.length; i++)
+  {
+    if (mindMapLinks[i] && mindMapLinks[i].id == linkId)
+    {
+      deleteLink(i);
+      drawLinks();
+      success("Link deleted");
+      break;
+    }
+  }
+}
+
 function deleteLink(linkIndex)
 {
+  var text = $("#link"+mindMapLinks[linkIndex].id);
+  if (text)
+  {
+    text.remove();
+  }
   if (mindMapLinks[linkIndex].state == "new")
   {
     delete mindMapLinks[linkIndex];
@@ -109,6 +128,12 @@ function updateLinkPosition(linkIndex)
   mindMapLinks[linkIndex].y1 = left.position().top + left.height() / 2;
   mindMapLinks[linkIndex].x2 = right.position().left + right.width() / 2;
   mindMapLinks[linkIndex].y2 = right.position().top + right.height() / 2;
+  var text = $("#link"+mindMapLinks[linkIndex].id);
+  if (text)
+  {
+    text.css("left", (mindMapLinks[linkIndex].x1+mindMapLinks[linkIndex].x2) / 2);
+    text.css("top", (mindMapLinks[linkIndex].y1+mindMapLinks[linkIndex].y2) / 2);
+  }
 }
 
 function drawLinks()

@@ -14,6 +14,9 @@
   {foreach $mindmap->getChildren() as $c}    
     {include file="./node.tpl" node=$c}
   {/foreach}
+  {foreach $links as $l}
+    {include file="./linkText.tpl" link=$l x=($l->getLeftNode()->getX()+$l->getRightNode()->getX())/2 y=($l->getLeftNode()->getY()+$l->getRightNode()->getY())/2}
+  {/foreach}
   </div>
   <script type="text/javascript">
     saveChangesUrl = "{url action="saveChanges" mindMapId=$mindmap->getId()}";
