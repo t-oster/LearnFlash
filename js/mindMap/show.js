@@ -53,13 +53,49 @@ function deleteNode(nodeObject)
   drawLinks();
 }
 
+//used to update only links connected to the currently dragged node
+var connectedLinks = [];
+
+function draggingStarted(node)
+{
+  connectedLinks = [];
+  var id = $(node).attr("id");
+  //delete all links
+  var idNr = id.substring(4);
+  for (var i = 0; i < mindMapLinks.length; i++)
+  {
+    if (mindMapLinks[i].leftId == idNr || mindMapLinks[i].rightId == idNr)
+    {
+      connectedLinks.push(i);
+    }
+  }
+}
+
+function dragging()
+{
+  for (var i = 0; i < connectedLinks.length; i++)
+  {
+    updateLinkPosition(i);
+  }
+  drawLinks();
+}
+
 function nodeDragged(node)
 {
   if (!nodeInfos[$(node).attr("id")])
   {
     nodeInfos[$(node).attr("id")] = {state: "updated"};
   }
-  drawLinks();
+}
+
+function updateLinkPosition(linkIndex)
+{
+  var left = $("#node"+mindMapLinks[linkIndex].leftId);   
+  var right = $("#node"+mindMapLinks[linkIndex].rightId);
+  mindMapLinks[linkIndex].x1 = left.position().left + left.width() / 2;
+  mindMapLinks[linkIndex].y1 = left.position().top + left.height() / 2;
+  mindMapLinks[linkIndex].x2 = right.position().left + right.width() / 2;
+  mindMapLinks[linkIndex].y2 = right.position().top + right.height() / 2;
 }
 
 function drawLinks()
@@ -74,15 +110,10 @@ function drawLinks()
   ctx.clearRect(0,0,canvas.width,canvas.height)
   for (var i = 0; i < mindMapLinks.length; i++)
   {
-    if (mindMapLinks[i] && mindMapLinks[i].state != "deleted")
+    var l = mindMapLinks[i];
+    if (l && l.state != "deleted")
     {
-      var left = $("#node"+mindMapLinks[i].leftId);   
-      var right = $("#node"+mindMapLinks[i].rightId);
-      var x1 = left.position().left + left.width() / 2;
-      var y1 = left.position().top + left.height() / 2;
-      var x2 = right.position().left + right.width() / 2;
-      var y2 = right.position().top + right.height() / 2;
-      drawLine(ctx, x1, y1, x2, y2);
+      drawLine(ctx, l.x1, l.y1, l.x2, l.y2);
     }
   }
 }
@@ -192,7 +223,9 @@ function initializeNodeEvents(nodeElement)
 {
   nodeElement.draggable({
     containment: "parent",
-    stop: function(event, ui) {nodeDragged(event.target)}
+    start: function(event) {draggingStarted(event.target)},
+    drag: dragging,
+    stop: function(event) {nodeDragged(event.target)}
   });
   nodeElement.find(".deleteLink").click(function(){deleteNode($(this).parents(".mindMapNode"));});
 }
@@ -229,6 +262,10 @@ function askConfirmationIfUnsaved()
 $(document).ready(function(){
   $(".mindMapNode").each(function(){initializeNodeEvents($(this));});
   $("#save").click(saveChanges);
+  for (var i = 0; i < mindMapLinks.length; i++)
+  {
+    updateLinkPosition(i);
+  }
   drawLinks();
   $(window).bind('beforeunload', askConfirmationIfUnsaved);
 });
