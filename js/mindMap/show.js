@@ -80,10 +80,12 @@ function deleteLink(linkIndex)
   success("Link deleted");
 }
 
-function editLink(linkId)
+function updateLinkFromForm()
 {
-  //TODO ask text via dialog
-  var text = "lorem ipsum";
+  $("#editLinkDialog").dialog("close");
+  var text = $("#eldText").val();
+  var linkId = $("#eldLinkId").val();
+  //TODO: arrowLeft...
   //update linkInfo
   mindMapLinks[linkId].text = text;
   if (mindMapLinks[linkId].state == "clean")
@@ -92,6 +94,14 @@ function editLink(linkId)
   }
   //update text in view
   $("#"+linkId).find(".text").html(text);
+}
+
+function editLink(linkId)
+{
+  $("#eldLinkId").val(linkId);
+  $("#eldText").val(mindMapLinks[linkId].text);
+  //TODO checkbox for arrowLeftRight
+  $("#editLinkDialog").dialog("open");
   
 }
 

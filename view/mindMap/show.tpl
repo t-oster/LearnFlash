@@ -25,6 +25,7 @@
     newLinkTextUrl = "{url action="linkText"}";
     mindMapLinks = {$linksAsJson};
   </script>
+  {include file="./editLinkDialog.tpl"}
 {/block}
 
 {block name="sidebar"}
