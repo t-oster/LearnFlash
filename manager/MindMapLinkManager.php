@@ -32,10 +32,17 @@ class MindMapLinkManager extends BaseManager {
 
   public function findByMindMap(\Model\MindMap $currentMindMap)
   {
-    //TODO
-    //
-    //$q = $this->em->cr
-    return $this->em->getRepository($this->getModelClassname())->findAll();
+    //TODO use DQL for more efficiency
+    $result = array();
+    $links = $this->em->getRepository($this->getModelClassname())->findAll();
+    foreach ($links as $l)
+    {
+      if ($l->getLeftNode()->getParent() == $currentMindMap)
+      {
+        $result []= $l;
+      }
+    }
+    return $result;
   }
 }
 
