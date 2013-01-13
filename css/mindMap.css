@@ -25,6 +25,7 @@
   border: 1px solid black;
   border-radius: 2px;
   max-width: 500px;
+  min-height: 90px;
   padding: 3px;
   z-index: 2;
 }
@@ -54,76 +55,66 @@
   z-index: 1;
   border: 1px solid black;
   border-radius: 5px;
+  padding: 3px;
+  min-height: 50px;
   background: #09f;
-  width: 50px;
-  height: 50px;
 }
 
-.toggleLink{
-    padding: 2px 2px;
-    position: absolute;
-    display: none;
-    right: 55px;
-    top: 0px;
+.deleteLink, .editLink, .linkLink, .toggleLink, .editLink {
+  position: absolute;
+  display: none;
+  padding: 0px; 
+  top: 0px;
+  right: 0px;
+  left: auto;
+  bottom: auto;
 }
-.toggleLink:before{
-    padding: 3px 8px;
-    font-weight: 900;
-    position: absolute;
-    content: '^';
-    color: white;
-    background: rgba(99, 86, 86, 0.53);
+
+.deleteLink:before, .editLink:before, .linkLink:before, .toggleLink:before, .editLink:before {
+  color: white;
+  background: rgba(99, 86, 86, 0.53);
+  padding: 4px 8px;
+  font-weight: 900;
+  top: 0px;
+  right: 0px;
+  left: auto;
+  bottom: auto;
+}
+
+.deleteLink:before {
+  content: 'x';
+}
+
+.editLink {
+  top: 30px;
+}
+
+.editLink:before {
+  content: "Edit";
+}
+
+.toggleLink {
+  top: 30px;
+}
+
+.toggleLink:before {
+  content: '^';
 }
 
 .mindMapNode.collapsed .toggleLink:before {
   content: 'v';
-  right: -22px;
 }
 
-.deleteLink{
-    padding: 2px 2px;
-    position: absolute;
-    display: none;
-    right: 2px;
-    top: 2;
-}
-.deleteLink:before{
-    padding: 4px 8px;
-    font-weight: 900;
-    position: absolute;
-    content: 'x';
-    color: white;
-    background: rgba(99, 86, 86, 0.53);
+.linkLink {
+  top: 60px;
 }
 
-.linkLink{
-    font-size: 10px;
-    text-transform: uppercase;
-    color: #7C7C7C;
-    position: absolute;
-    padding: 4px 8px;
-    font-weight: 900;
-    right: 62px;
-    top: 2px;
-    color: white;
-    background: rgba(99, 86, 86, 0.53);
-    display: none;
+.linkLink:before {
+  content: "Link";
 }
 
 
-.mindMapNode:hover .deleteLink{
-  display: inline;
-}
-
-.mindMapNode:hover .linkLink {
-  display: inline;
-}
-
-.mindMapNode:hover .toggleLink {
-  display: inline;
-}
-
-.linkText:hover .deleteLink{
+.mindMapNode:hover .deleteLink, .mindMapNode:hover .linkLink, .mindMapNode:hover .toggleLink, .linkText:hover .editLink, .linkText:hover .deleteLink{
   display: inline;
 }
 
