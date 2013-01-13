@@ -332,5 +332,5 @@ $(document).ready(function(){
     updateLinkPosition(i);
   }
   drawLinks();
-  $(window).bind('beforeunload', askConfirmationIfUnsaved);
+  //$(window).bind('beforeunload', askConfirmationIfUnsaved);
 });

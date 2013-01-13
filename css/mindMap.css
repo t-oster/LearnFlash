@@ -5,14 +5,29 @@
     Description:
         Purpose of the stylesheet follows.
 */
+#mindMap {
+  /*
+  TODO: Fix that it is not in pixel, but percent... and still works ;0
+  */
+  width: 800px;
+  height: 600px;
+  max-width: 940px;
+  position: relative;
+  padding: 2px;
+  overflow: scroll;
+  float: left;
+  border: 1px solid silver;
+}
+
 
 .mindMapNode {
+  background-color: lightgoldenrodyellow;
   position: absolute;
   border: 1px solid black;
-  border-radius: 5px;
-  background: white;
-  width: 100px;
-  height: 75px;
+  border-radius: 2px;
+  width: 150px;
+  height: 100px;
+  padding: 3px;
 }
 
 .mindMapNode.selectedNode {
@@ -28,18 +43,25 @@
   height: 50px;
 }
 
-#mindMap {
-  /*
-  TODO: Fix that it is not in pixel, but percent... and still works ;0
-  */
-  background-color: lightgoldenrodyellow;
-  width: 600px;
-  height: 600px;
-  max-width: 940px;
-  position: relative;
-  padding: 5px;
-  overflow: scroll;
-  float: left;
+
+.deleteLink{
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #7C7C7C;
+    padding: 2px 2px;
+    position: absolute;
+    right: 0px;
+    top: 0;
+}
+.deleteLink:before{
+    padding: 4px 8px;
+    font-weight: 900;
+    position: absolute;
+    left: -20px;
+    top: 2px;
+    content: 'x';
+    color: white;
+    background: rgba(99, 86, 86, 0.53);
 }
 
 .deleteLink {
@@ -58,4 +80,9 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+select#tag
+{
+  width: 100px;
 }

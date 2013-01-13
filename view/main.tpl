@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="lib/js/jQuery-UI/jquery-ui-1.9.1.custom.min.css" />
     <link rel="stylesheet" href="lib/js/ambiance/jquery.ambiance.css" />
+    <!--contains all the unsorted stuff until now-->
     <link rel="stylesheet" href="css/main.css" />
+    <!--contains style for gui elements like buttons, popups,...-->
+    <link rel="stylesheet" href="css/gui.css" />
     <!--[if ie]><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=8, IE=9, chrome=1"/><![endif]-->
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
