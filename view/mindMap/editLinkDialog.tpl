@@ -7,7 +7,6 @@
   $("#editLinkDialog").dialog({
     autoOpen: false,
     buttons: {
-      Cancel: function(){ $(this).dialog("close");},
       Ok: updateLinkFromForm
     }
   });

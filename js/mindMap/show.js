@@ -21,7 +21,6 @@ function drawLine(ctx, x1, y1, x2, y2)
 var lastNewLinkId = 0;
 function linkButtonClicked(nodeId)
 {
-  
   var selectedIds = [];
   $(".selectedNode").each(function(){selectedIds.push($(this).attr("id"))});
   if (selectedIds.length == 0)
@@ -30,6 +29,12 @@ function linkButtonClicked(nodeId)
   }
   else
   {
+    if (nodeId == selectedIds[0])
+    {//don't allow self-links'
+      $("#"+nodeId).removeClass("selectedNode");
+      return;
+    }
+    //TODO: Check if link already exists...
     lastNewLinkId -= 1;
     var linkId = "link"+lastNewLinkId;
     mindMapLinks[linkId] = {
@@ -55,6 +60,7 @@ function linkButtonClicked(nodeId)
         $("#mindMap").append(html);
         $(".selectedNode").removeClass("selectedNode");
         drawLinks();
+        editLink(linkId);
       },
       "html"
     );
@@ -174,6 +180,10 @@ function nodeDragged(node)
 
 function updateLinkPosition(linkIndex)
 {
+  if (mindMapLinks[linkIndex].state == "deleted")
+  {
+    return;
+  }
   var left = $("#"+mindMapLinks[linkIndex].leftId);   
   var right = $("#"+mindMapLinks[linkIndex].rightId);
   mindMapLinks[linkIndex].x1 = left.position().left + left.width() / 2;
