@@ -80,6 +80,21 @@ function deleteLink(linkIndex)
   success("Link deleted");
 }
 
+function editLink(linkId)
+{
+  //TODO ask text via dialog
+  var text = "lorem ipsum";
+  //update linkInfo
+  mindMapLinks[linkId].text = text;
+  if (mindMapLinks[linkId].state == "clean")
+  {
+    mindMapLinks[linkId].state = "updated";
+  }
+  //update text in view
+  $("#"+linkId).find(".text").html(text);
+  
+}
+
 function addMindMap(name)
 {
   lastNewId -= 1;
@@ -255,7 +270,7 @@ function saveChanges()
   for (var j in mindMapLinks)
   {
     var li = mindMapLinks[j];
-    if (li.state != "deleted")
+    if (li.state == "updated" || li.state == "new")
     {
       li.type = "link";
       changes.push(li);
@@ -333,5 +348,5 @@ $(document).ready(function(){
     updateLinkPosition(i);
   }
   drawLinks();
-  //$(window).bind('beforeunload', askConfirmationIfUnsaved);
+  $(window).bind('beforeunload', askConfirmationIfUnsaved);
 });

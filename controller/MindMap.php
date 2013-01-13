@@ -161,7 +161,10 @@ class MindMap extends BaseController {
         }
         else if ($c->type == "link")
         {
-          //TODO
+          $link = $this->lm->findById($c->id);
+          //TODO Make sure that other properties are set in JS and enable
+          //updating them
+          $this->lm->updateLink($link, null, null, $c->text, null, null);
         }
       }
       else if ($c->state == "deleted")
