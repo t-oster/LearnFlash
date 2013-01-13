@@ -24,7 +24,13 @@
   position: absolute;
   border: 1px solid black;
   border-radius: 2px;
+  max-width: 500px;
   padding: 3px;
+  z-index: 2;
+}
+
+.mindMapNode.collapsed {
+  width: auto;
 }
 
 .mindMapNode .collapsedCard {
@@ -45,6 +51,7 @@
 
 .linkText {
   position: absolute;
+  z-index: 1;
   border: 1px solid black;
   border-radius: 5px;
   background: #09f;
@@ -52,32 +59,67 @@
   height: 50px;
 }
 
-
-.deleteLink{
-    font-size: 10px;
-    text-transform: uppercase;
-    color: #7C7C7C;
+.toggleLink{
     padding: 2px 2px;
     position: absolute;
-    right: 0px;
-    top: 0;
+    display: none;
+    right: 55px;
+    top: 0px;
+}
+.toggleLink:before{
+    padding: 3px 8px;
+    font-weight: 900;
+    position: absolute;
+    content: '^';
+    color: white;
+    background: rgba(99, 86, 86, 0.53);
+}
+
+.mindMapNode.collapsed .toggleLink:before {
+  content: 'v';
+  right: -22px;
+}
+
+.deleteLink{
+    padding: 2px 2px;
+    position: absolute;
+    display: none;
+    right: 2px;
+    top: 2;
 }
 .deleteLink:before{
     padding: 4px 8px;
     font-weight: 900;
     position: absolute;
-    left: -20px;
-    top: 2px;
     content: 'x';
     color: white;
     background: rgba(99, 86, 86, 0.53);
 }
 
-.deleteLink {
-  display: none;
+.linkLink{
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #7C7C7C;
+    position: absolute;
+    padding: 4px 8px;
+    font-weight: 900;
+    right: 62px;
+    top: 2px;
+    color: white;
+    background: rgba(99, 86, 86, 0.53);
+    display: none;
 }
 
+
 .mindMapNode:hover .deleteLink{
+  display: inline;
+}
+
+.mindMapNode:hover .linkLink {
+  display: inline;
+}
+
+.mindMapNode:hover .toggleLink {
   display: inline;
 }
 

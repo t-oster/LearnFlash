@@ -1,8 +1,9 @@
 <div id="node{$nodeId}" class="mindMapNode{if $node->isMindMapCard()} mindMapCard{else} mindMap{/if}{if $node->isCollapsed()} collapsed{/if}" style="top: {$node->getY()}px; left: {$node->getX()}px;">
-  <a class="deleteLink"></a>
+  <a class="deleteLink" href="javascript:deleteNode('node{$nodeId}');"></a>
   <a class="linkLink" href="javascript:linkButtonClicked('node{$nodeId}');">Link</a>
+  <a class="toggleLink" href="javascript:toggleNodeCollapsed('node{$nodeId}');"></a>
   {if ($node->isMindMapCard())}
-    <a class="toggleLink" href="javascript:toggleNodeCollapsed('node{$nodeId}');">{$node->getCard()->getTitle()}</a>
+    {$node->getCard()->getTitle()}
     <div class="collapsedCard">
       <p>Q: {substr(strip_tags($node->getCard()->getFrontHtml()), 0, 20)}...</p>
       <p>A: {substr(strip_tags($node->getCard()->getBackHtml()), 0, 20)}...</p>

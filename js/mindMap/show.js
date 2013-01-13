@@ -107,14 +107,12 @@ function addMindMap(name)
   }, "html");
 }
 
-function deleteNode(nodeObject)
+function deleteNode(id)
 {
-  var id = nodeObject.attr("id");
   //delete all links
-  var idNr = id.substring(4);
   for (var i in mindMapLinks)
   {
-    if (mindMapLinks[i].leftId == idNr || mindMapLinks[i].rightId == idNr)
+    if (mindMapLinks[i].leftId == id || mindMapLinks[i].rightId == id)
     {
       deleteLink(i);
     }
@@ -127,6 +125,7 @@ function deleteNode(nodeObject)
   {
     nodeInfos[id] = {state: "deleted"};
   }
+  var nodeObject = $("#"+id);
   nodeObject.fadeOut(500, function(){nodeObject.remove();});
 }
 
@@ -308,7 +307,6 @@ function initializeNodeEvents(nodeElement)
     drag: dragging,
     stop: function(event) {nodeDragged(event.target)}
   });
-  nodeElement.find(".deleteLink").click(function(){deleteNode($(this).parents(".mindMapNode"));});
 }
 
 function askConfirmationIfUnsaved()
