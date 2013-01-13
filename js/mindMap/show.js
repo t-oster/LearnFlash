@@ -348,10 +348,9 @@ function toggleNodeCollapsed(nodeId)
   {
     nodeInfos[nodeId] = {
       id: nodeId.substring(4),
-      state: "modified",
+      state: "updated",
     }
   }
-  mindMapNodes[nodeId].collapsed = node.hasClass("collapsed");
 }
 
 $(document).ready(function(){
