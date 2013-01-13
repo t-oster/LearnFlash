@@ -1,7 +1,8 @@
 //These are filled by the Template
-var mindMapLinks = [];
+var mindMapLinks = {};
 var saveChangesUrl = "";
 var newNodeUrl = "";
+var newLinkTextUrl = "";
 
 //a map indexed by the nodeId and mapping
 //to infos containing state: "updated" or "new" or "deleted"
@@ -30,7 +31,8 @@ function linkButtonClicked(nodeId)
   else
   {
     lastNewLinkId -= 1;
-    mindMapLinks.push({
+    var linkId = "link"+lastNewLinkId;
+    mindMapLinks[linkId] = {
       id: lastNewLinkId,
       leftId: selectedIds[0],
       rightId: nodeId,
@@ -38,31 +40,30 @@ function linkButtonClicked(nodeId)
       state: "new",
       leftArrow: false,
       rightArrow: false
-    });
-    updateLinkPosition(mindMapLinks.length-1);
-    $(".selectedNode").removeClass("selectedNode");
-    drawLinks();
-    //TODO: Add link-text-element
-  }
-}
-
-function deleteLinkById(linkId)
-{
-  for (var i = 0; i < mindMapLinks.length; i++)
-  {
-    if (mindMapLinks[i] && mindMapLinks[i].id == linkId)
-    {
-      deleteLink(i);
-      drawLinks();
-      success("Link deleted");
-      break;
-    }
+    };
+    updateLinkPosition(linkId);
+    $.get(
+      newLinkTextUrl, 
+      {
+        x: (mindMapLinks[linkId].x1 + mindMapLinks[linkId].x2) / 2,
+        y: (mindMapLinks[linkId].y1 + mindMapLinks[linkId].y2) / 2,
+        linkId: mindMapLinks[linkId].id,
+        text: mindMapLinks[linkId].text
+      },
+      function (html)
+      {
+        $("#mindMap").append(html);
+        $(".selectedNode").removeClass("selectedNode");
+        drawLinks();
+      },
+      "html"
+    );
   }
 }
 
 function deleteLink(linkIndex)
 {
-  var text = $("#link"+mindMapLinks[linkIndex].id);
+  var text = $("#"+linkIndex);
   if (text)
   {
     text.remove();
@@ -75,12 +76,14 @@ function deleteLink(linkIndex)
   {
     mindMapLinks[linkIndex].state = "deleted";
   }
+  drawLinks();
+  success("Link deleted");
 }
 
 function addMindMap(name)
 {
   $.get(newNodeUrl, {name: name}, function(html){
-    lastNewId += 1;
+    lastNewId -= 1;
     element = $(html);
     element.attr("id", "nmap"+lastNewId);
     initializeNodeEvents(element);
@@ -95,7 +98,7 @@ function deleteNode(nodeObject)
   var id = nodeObject.attr("id");
   //delete all links
   var idNr = id.substring(4);
-  for (var i = 0; i < mindMapLinks.length; i++)
+  for (var i in mindMapLinks)
   {
     if (mindMapLinks[i].leftId == idNr || mindMapLinks[i].rightId == idNr)
     {
@@ -111,7 +114,6 @@ function deleteNode(nodeObject)
     nodeInfos[id] = {state: "deleted"};
   }
   nodeObject.fadeOut(500, function(){nodeObject.remove();});
-  drawLinks();
 }
 
 //used to update only links connected to the currently dragged node
@@ -121,7 +123,7 @@ function draggingStarted(node)
 {
   connectedLinks = [];
   var id = $(node).attr("id");
-  for (var i = 0; i < mindMapLinks.length; i++)
+  for (var i in mindMapLinks)
   {
     if (mindMapLinks[i].leftId == id || mindMapLinks[i].rightId == id)
     {
@@ -173,7 +175,7 @@ function drawLinks()
   }
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height)
-  for (var i = 0; i < mindMapLinks.length; i++)
+  for (var i in mindMapLinks)
   {
     var l = mindMapLinks[i];
     if (l && l.state != "deleted")
@@ -193,7 +195,7 @@ var lastNewId = 0;
 function addCard(cardId)
 {
   $.get(newNodeUrl, {cardId: cardId}, function(html){
-    lastNewId += 1;
+    lastNewId -= 1;
     element = $(html);
     element.attr("id", "ncrd"+lastNewId);
     initializeNodeEvents(element);
@@ -209,13 +211,9 @@ function saveChanges()
   //changes in format {type: map|card|link, state: new|updated|deleted, (x, y, collapsed, text |name)}
   var changes = [];
   //collect infos on links
-  for (var i = 0; i < mindMapLinks.length; i++)
+  for (var i in mindMapLinks)
   {
     var l = mindMapLinks[i];
-    if (l == undefined)
-    {
-      continue;
-    }
     if (l.state == "deleted")
     {
       changes.push({
@@ -327,7 +325,7 @@ function askConfirmationIfUnsaved()
 $(document).ready(function(){
   $(".mindMapNode").each(function(){initializeNodeEvents($(this));});
   $("#save").click(saveChanges);
-  for (var i = 0; i < mindMapLinks.length; i++)
+  for (var i in mindMapLinks)
   {
     updateLinkPosition(i);
   }

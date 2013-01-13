@@ -1,4 +1,4 @@
-<div {if $link->getId() != null}id="link{$link->getId()}"{/if} class="linkText" style="top: {$y}px; left: {$x}px;">
-  <a href="javascript:deleteLinkById({$link->getId()});" class="deleteLink"></a>
+<div id="link{$linkId}" class="linkText" style="top: {$y}px; left: {$x}px;">
+  <a href="javascript:deleteLink('link{$linkId}');" class="deleteLink"></a>
   {$link->getText()}
 </div>

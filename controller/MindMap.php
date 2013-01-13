@@ -49,10 +49,10 @@ class MindMap extends BaseController {
     $this->assignToView("tags", $this->tm->getTagsByUser());
     $links = $this->lm->findByMindMap($currentMindMap);
     $this->assignToView("links", $links);
-    $linksArray = array();
+    $linksMap = array();
     foreach ($links as $l)
     {
-      $linksArray [] = array(
+      $linksMap["link".$l->getId()] = array(
         "id" => $l->getId(),
         "leftId" => "node".$l->getLeftNode()->getId(),
         "rightId" => "node".$l->getRightNode()->getId(),
@@ -62,7 +62,7 @@ class MindMap extends BaseController {
         "rightArrow" => $l->isRightArrow()
       );
     }
-    $this->assignToView("linksAsJson", json_encode($linksArray));
+    $this->assignToView("linksAsJson", json_encode($linksMap));
   }
    
   public function loadCardListBody($tagId = -1)
@@ -92,6 +92,16 @@ class MindMap extends BaseController {
       $node->setName($name);
     }
     $this->assignToView("node",$node);
+  }
+  
+  public function loadLinkText($linkId, $text, $x, $y)
+  {
+    $link = new \Model\MindMapLink();
+    $link->setText($text);
+    $this->assignToView("linkId", $linkId);
+    $this->assignToView("link", $link);
+    $this->assignToView("x", $x);
+    $this->assignToView("y", $y);
   }
   
   public function loadSaveChanges($mindMapId, $changesAsJson)
