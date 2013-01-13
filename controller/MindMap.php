@@ -78,7 +78,7 @@ class MindMap extends BaseController {
     $this->redirect(null,"show",array("mindMapId"=>$map->getId()));
   }
   
-  public function loadNode($cardId = null, $name = null)
+  public function loadNode($nodeId, $cardId = null, $name = null)
   {
     if ($cardId != null)
     {
@@ -91,6 +91,7 @@ class MindMap extends BaseController {
       $node = new \Model\MindMap();
       $node->setName($name);
     }
+    $this->assignToView("nodeId", $nodeId);
     $this->assignToView("node",$node);
   }
   
@@ -119,28 +120,30 @@ class MindMap extends BaseController {
         {
           $card = $this->cm->findById($c->cardId);
           $nc = $this->mnm->addCardToMindMap($parent, $card, $c->x, $c->y, $c->collapsed);
-          $newNodes[$c->id] = $nc;
+          $newNodes["node".$c->id] = $nc;
         }
         else if ($c->type == "map")
         {
           $m = $this->mnm->createMindMap($c->name, $c->x, $c->y, $c->collapsed, $parent);
-          $newNodes[$c->id] = $m;
+          $newNodes["node".$c->id] = $m;
         }
         else if ($c->type == "link")
         {
+          $left = null;
+          $right = null;
           $lid = substr($c->leftId, 4);
-          if (substr($c->leftId, 0, 4) != "node")
+          if (substr($c->leftId, 4, 1) == "-")
           {//the link refers to a new created node
-            $left = $newNodes[$lid];
+            $left = $newNodes[$c->leftId];
           }
           else 
           {
             $left = $this->mnm->findById($lid);
           }
           $rid = substr($c->rightId, 4);
-          if (substr($c->rightId, 0, 4) != "node")
+          if (substr($c->rightId, 4, 1) == "-")
           {//the link refers to a new created node
-            $right = $newNodes[$lid];
+            $right = $newNodes[$c->rightId];
           }
           else 
           {

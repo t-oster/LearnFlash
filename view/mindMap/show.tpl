@@ -13,7 +13,7 @@
     <canvas id="linkLayer">
     </canvas>
   {foreach $mindmap->getChildren() as $c}    
-    {include file="./node.tpl" node=$c}
+    {include file="./node.tpl" node=$c nodeId=$c->getId()}
   {/foreach}
   {foreach $links as $l}
     {include file="./linkText.tpl" linkId=$l->getId() link=$l x=($l->getLeftNode()->getX()+$l->getRightNode()->getX())/2 y=($l->getLeftNode()->getY()+$l->getRightNode()->getY())/2}

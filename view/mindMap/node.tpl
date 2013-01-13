@@ -1,6 +1,6 @@
-<div {if $node->getId() != null}id="node{$node->getId()}"{/if} class="mindMapNode {if $node->isMindMapCard()}mindMapCard{else}mindMap{/if}" style="top: {$node->getY()}px; left: {$node->getX()}px;">
+<div id="node{$nodeId}" class="mindMapNode {if $node->isMindMapCard()}mindMapCard{else}mindMap{/if}" style="top: {$node->getY()}px; left: {$node->getX()}px;">
   <a class="deleteLink"></a>
-  <a class="linkLink" href="javascript:linkButtonClicked('node{$node->getId()}');">Link</a>
+  <a class="linkLink" href="javascript:linkButtonClicked('node{$nodeId}');">Link</a>
   {if ($node->isMindMapCard())}
     Card: {$node->getCard()->getTitle()}
   {else}

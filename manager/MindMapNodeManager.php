@@ -61,6 +61,7 @@ class MindMapNodeManager extends BaseManager {
     $mc->setParent($map);
     $this->em->persist($mc);
     $this->em->flush();
+    return $mc;
   }
 }
 

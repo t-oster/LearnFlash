@@ -82,13 +82,12 @@ function deleteLink(linkIndex)
 
 function addMindMap(name)
 {
-  $.get(newNodeUrl, {name: name}, function(html){
-    lastNewId -= 1;
+  lastNewId -= 1;
+  $.get(newNodeUrl, {name: name, nodeId: lastNewId}, function(html){
     element = $(html);
-    element.attr("id", "nmap"+lastNewId);
     initializeNodeEvents(element);
     $("#mindMap").append(element);
-    nodeInfos["nmap"+lastNewId] = {state: "new", name: name};
+    nodeInfos[element.attr("id")] = {id: lastNewId, state: "new", name: name};
     success("Map added");
   }, "html");
 }
@@ -194,13 +193,12 @@ function drawLinks()
 var lastNewId = 0;
 function addCard(cardId)
 {
-  $.get(newNodeUrl, {cardId: cardId}, function(html){
-    lastNewId -= 1;
+  lastNewId -= 1;
+  $.get(newNodeUrl, {cardId: cardId, nodeId: lastNewId}, function(html){
     element = $(html);
-    element.attr("id", "ncrd"+lastNewId);
     initializeNodeEvents(element);
     $("#mindMap").append(element);
-    nodeInfos["ncrd"+lastNewId] = {state: "new", cardId: cardId};
+    nodeInfos[element.attr("id")] = {id: lastNewId, state: "new", cardId: cardId};
     success("Card added");
   }, "html");
 }
@@ -210,7 +208,7 @@ function saveChanges()
   $("#save").attr("disabled","disabled");
   //changes in format {type: map|card|link, state: new|updated|deleted, (x, y, collapsed, text |name)}
   var changes = [];
-  //collect infos on links
+  //collect infos on DELETED links
   for (var i in mindMapLinks)
   {
     var l = mindMapLinks[i];
@@ -221,11 +219,6 @@ function saveChanges()
         type: "link",
         id: l.id
       });
-    }
-    else if (l.state == "updated" || l.state == "new")
-    {
-      l.type = "link";
-      changes.push(l);
     }
   }
   //collect infos on cards and maps
@@ -256,6 +249,16 @@ function saveChanges()
         name: info.name,//used only for type=map
         cardId: info.cardId,//used only for type=card
       });
+    }
+  }
+  //collect infos on NEW/UPDATED links
+  for (var j in mindMapLinks)
+  {
+    var li = mindMapLinks[j];
+    if (li.state != "deleted")
+    {
+      li.type = "link";
+      changes.push(li);
     }
   }
   //update database
