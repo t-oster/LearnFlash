@@ -78,7 +78,7 @@ class MindMap extends BaseController {
     $this->redirect(null,"show",array("mindMapId"=>$map->getId()));
   }
   
-  public function loadNode($nodeId, $cardId = null, $name = null)
+  public function loadNode($nodeId, $cardId = null, $name = null, $collapsed = true)
   {
     if ($cardId != null)
     {
@@ -91,6 +91,7 @@ class MindMap extends BaseController {
       $node = new \Model\MindMap();
       $node->setName($name);
     }
+    $node->setCollapsed($collapsed);
     $this->assignToView("nodeId", $nodeId);
     $this->assignToView("node",$node);
   }

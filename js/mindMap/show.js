@@ -209,7 +209,7 @@ var lastNewId = 0;
 function addCard(cardId)
 {
   lastNewId -= 1;
-  $.get(newNodeUrl, {cardId: cardId, nodeId: lastNewId}, function(html){
+  $.get(newNodeUrl, {cardId: cardId, nodeId: lastNewId, collapsed: true}, function(html){
     element = $(html);
     initializeNodeEvents(element);
     $("#mindMap").append(element);
@@ -260,7 +260,7 @@ function saveChanges()
         id: id,//used only for state=changed
         x: element.position().left,
         y: element.position().top,
-        collapsed: false, //TODO
+        collapsed: element.hasClass("collapsed"),
         name: info.name,//used only for type=map
         cardId: info.cardId,//used only for type=card
       });
@@ -338,6 +338,20 @@ function askConfirmationIfUnsaved()
   {
     return "you have unsaved changes";
   }
+}
+
+function toggleNodeCollapsed(nodeId)
+{
+  var node = $("#"+nodeId);
+  node.toggleClass("collapsed");
+  if (!nodeInfos[nodeId])
+  {
+    nodeInfos[nodeId] = {
+      id: nodeId.substring(4),
+      state: "modified",
+    }
+  }
+  mindMapNodes[nodeId].collapsed = node.hasClass("collapsed");
 }
 
 $(document).ready(function(){

@@ -51,7 +51,7 @@ class MindMapNodeManager extends BaseManager {
     return $result;
   }
   
-  public function addCardToMindMap(\Model\MindMap $map, \Model\Card $card, $x = 0, $y = 0, $isCollapsed = false)
+  public function addCardToMindMap(\Model\MindMap $map, \Model\Card $card, $x = 0, $y = 0, $isCollapsed = true)
   {
     $mc = new \Model\MindMapCard();
     $mc->SetCollapsed($isCollapsed);

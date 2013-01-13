@@ -19,15 +19,24 @@
   border: 1px solid silver;
 }
 
-
 .mindMapNode {
   background-color: lightgoldenrodyellow;
   position: absolute;
   border: 1px solid black;
   border-radius: 2px;
-  width: 150px;
-  height: 100px;
   padding: 3px;
+}
+
+.mindMapNode .collapsedCard {
+  display: none;
+}
+
+.mindMapNode.collapsed .collapsedCard {
+  display: inline;
+}
+
+.mindMapNode.collapsed .uncollapsedCard {
+  display: none;
 }
 
 .mindMapNode.selectedNode {
