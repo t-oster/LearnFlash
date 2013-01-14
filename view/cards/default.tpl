@@ -6,7 +6,7 @@
 
 {block name="content"}
 <h2> Your cards </h2>
-<a class="button" href="{url action="add"}">Add</a>
+<a class="newCard" href="{url action="add"}">+</a>
 <div id="cards">
 {foreach $cards as $c}
   <div class="card">
