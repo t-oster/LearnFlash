@@ -322,7 +322,6 @@ function saveChanges()
 function initializeNodeEvents(nodeElement)
 {
   nodeElement.draggable({
-    containment: "parent",
     start: function(event) {draggingStarted(event.target)},
     drag: dragging,
     stop: function(event) {nodeDragged(event.target)}

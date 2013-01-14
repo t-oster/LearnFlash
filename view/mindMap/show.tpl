@@ -9,15 +9,17 @@
   Displaying MindMap with name="{$mindmap->getName()}"
   
   <button id="save" class="button">Save</button>{include file="./addMindMapForm.tpl"}
-  <div id="mindMap">
-    <canvas id="linkLayer">
-    </canvas>
-  {foreach $mindmap->getChildren() as $c}    
-    {include file="./node.tpl" node=$c nodeId=$c->getId()}
-  {/foreach}
-  {foreach $links as $l}
-    {include file="./linkText.tpl" linkId=$l->getId() link=$l x=($l->getLeftNode()->getX()+$l->getRightNode()->getX())/2 y=($l->getLeftNode()->getY()+$l->getRightNode()->getY())/2}
-  {/foreach}
+  <div id="mindMapContainer">
+    <div id="mindMap">
+      <canvas id="linkLayer">
+      </canvas>
+    {foreach $mindmap->getChildren() as $c}    
+      {include file="./node.tpl" node=$c nodeId=$c->getId()}
+    {/foreach}
+    {foreach $links as $l}
+      {include file="./linkText.tpl" linkId=$l->getId() link=$l x=($l->getLeftNode()->getX()+$l->getRightNode()->getX())/2 y=($l->getLeftNode()->getY()+$l->getRightNode()->getY())/2}
+    {/foreach}
+    </div>
   </div>
   <script type="text/javascript">
     saveChangesUrl = "{url action="saveChanges" mindMapId=$mindmap->getId()}";

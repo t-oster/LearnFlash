@@ -5,18 +5,19 @@
     Description:
         Purpose of the stylesheet follows.
 */
-#mindMap {
-  /*
-  TODO: Fix that it is not in pixel, but percent... and still works ;0
-  */
+#mindMapContainer {
   width: 800px;
-  height: 600px;
-  max-width: 940px;
-  position: relative;
-  padding: 2px;
+  height: 450px;
   overflow: scroll;
+  padding: 2px;
   float: left;
   border: 1px solid silver;
+}
+
+#mindMap {
+  width: 1280px;
+  height: 768px;
+  position: relative;
 }
 
 .mindMapNode {
