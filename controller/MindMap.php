@@ -45,8 +45,15 @@ class MindMap extends BaseController {
   {
     $currentMindMap = $this->mnm->findById($mindMapId);
     $this->assignToView("mindmap", $currentMindMap);
-    $this->assignToView("cards", $this->cm->getCardsByUser());
-    $this->assignToView("tags", $this->tm->getTagsByUser());
+    $tags = $this->tm->getTagsByUser();
+    $this->assignToView("tags", $tags);
+    if (count($tags) > 0)
+    {//display only cards of the first tag
+      $this->assignToView("cards", $this->cm->findCards(null, array($tags[0]->getId())));
+    }
+    else {
+      $this->assignToView("cards", $this->cm->getCardsByUser());
+    }
     $links = $this->lm->findByMindMap($currentMindMap);
     $this->assignToView("links", $links);
     $linksMap = array();

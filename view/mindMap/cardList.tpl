@@ -1,9 +1,9 @@
 <label for="tag">Tag:</label>
 <select id="tag" name="tag">
-   <option value="-1">All</option>
   {foreach $tags as $tag}
     <option value="{$tag->getId()}">{$tag->getName()}</option>
   {/foreach}
+  <option value="-1">All</option>
 </select>
 <ul id="clbody">
   {include file="./cardListBody.tpl"}
