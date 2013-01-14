@@ -8,9 +8,22 @@
   {$tag->getColor()}
   </div><br/><br/>
   <h2>Cards</h2>
-  <ul>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Answered</th>
+        <th>Average result</th>
+      </tr>
+    </thead>
+    <tbody>
     {foreach $tag->getCards() as $c}
-      <li><a href="{url controller="Cards" action="show" cardId=$c->getId()}">{$c->getTitle()}</a></li>
+      <tr>
+        <td><a href="{url controller="Cards" action="show" cardId=$c->getId()}">{$c->getTitle()}</a></td>
+        <td>{$c->getCountAnswers()}</td>
+        <td>{$c->getAverageResult()}</td>
+      </tr>
     {/foreach}
-  </ul>
+    </tbody>
+  </table>
 {/block}

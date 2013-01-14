@@ -9,10 +9,10 @@
   <div class=wrap> <input class="updateInfo" type="checkbox" name="tagIds[]" value="{$t->getId()}"/>{include file="../tags/tag.tpl" tag=$t}</div>
 {/foreach}
 </div>
-
+<input class="updateInfo" type="checkbox" name="unlearned" vlaue="true"/>Only unlearned cards<br/>
 <h3>Options</h3>
 <input class="updateInfo" type="checkbox" name="random" value="true"/>Random order<br/>
-<input class="updateInfo" type="checkbox" name="unlearned" vlaue="true"/>Only unlearned cards</br>
+<input class="updateInfo" type="checkbox" name="useSm2" value="true"/>Use SM-2 Algorithm<br/>
 <input id="go" type="submit" value="Go">
 </form>
 <h3>Info</h3>

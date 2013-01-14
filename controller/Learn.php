@@ -20,9 +20,9 @@ class Learn extends BaseCards{
     $this->assignToView("tags", $tags);
   }
   
-  public function loadPrepareLearning($selection = "all", $tagIds = null, $random = false, $unlearned = false, $ajax = false)
+  public function loadPrepareLearning($selection = "all", $tagIds = null, $random = false, $unlearned = false, $useSm2 = false, $ajax = false)
   {
-    $cards = $this->cm->findCards($this->getUserManager()->getLoggedInUser(), $selection == "all" ? null : $tagIds, $unlearned);
+    $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned, $useSm2);
     $_SESSION["toLearn"] = array();
     $count_unlearned = 0;
     $count = 0;

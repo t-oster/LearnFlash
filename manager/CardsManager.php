@@ -126,7 +126,7 @@ class CardsManager extends BaseManager{
     // http://www.supermemo.com/english/ol/sm2.htm
   }
 
-  public function findCards(\Model\User $u = null, $tagIds = null, $unlearned = false)
+  public function findCards(\Model\User $u = null, $tagIds = null, $unlearned = false, $useSm2 = false)
   {
     if ($u == null)
     {
