@@ -503,7 +503,7 @@ a.createlink
     background-color: rgba(192, 192, 192, 0.13);
 }
 
-#menu a,.button
+#menu a,.button,input[type*="submit"]
 {
     cursor: pointer;
     border: 1px solid silver;
@@ -514,7 +514,10 @@ a.createlink
     background-color: #D1D1D1;
     padding: 8px 28px 8px 28px;
 }
-
+input[type*="color"]{
+ height: 31px;
+margin: 0 11px -11px 11px;   
+}
 #loggedinas a
 {
   margin-left: 10px;
@@ -582,7 +585,7 @@ background-color: #fff;
 }
 
 #content{
-    margin: 0 auto 40px auto;
+    margin:20px auto 40px auto;
     width: 100%;
     max-width: 940px;
     position: relative;
