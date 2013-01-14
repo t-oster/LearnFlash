@@ -370,7 +370,6 @@ function toggleNodeCollapsed(nodeId)
 
 $(document).ready(function(){
   $(".mindMapNode").each(function(){initializeNodeEvents($(this));});
-  $("#save").click(saveChanges);
   for (var i in mindMapLinks)
   {
     updateLinkPosition(i);

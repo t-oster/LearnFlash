@@ -8,7 +8,7 @@
 <h2>Mindmap</h2>
   Displaying MindMap with name="{$mindmap->getName()}"
   
-  <button id="save" class="button">Save</button>{include file="./addMindMapForm.tpl"}
+  <a href="javascript:saveChanges();" id="save" class="button">Save</a>{include file="./addMindMapForm.tpl"}
   <div id="mindMapContainer">
     <div id="mindMap">
       <canvas id="linkLayer">
