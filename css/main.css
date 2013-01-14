@@ -503,7 +503,7 @@ a.createlink
     background-color: rgba(192, 192, 192, 0.13);
 }
 
-#menu a
+#menu a,.button
 {
     cursor: pointer;
     border: 1px solid silver;
@@ -521,7 +521,7 @@ a.createlink
   margin-right: 0px;
 }
 
-#menu a:hover {
+#menu a:hover, .button:hover {
 background-color: #fff;
 }
 #loggedinas {
@@ -668,4 +668,14 @@ font-weight: 900;
 
 #title{
   width: 100%;
+}
+
+
+#clbody{
+    
+}
+#clbody li{
+padding: 0 0 2px 0;
+margin: 10px 0 0 0;
+border-bottom: 1px dashed rgba(68, 68, 68, 0.47);   
 }

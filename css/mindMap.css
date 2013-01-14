@@ -6,12 +6,13 @@
         Purpose of the stylesheet follows.
 */
 #mindMapContainer {
-  width: 800px;
-  height: 450px;
-  overflow: scroll;
-  padding: 2px;
-  float: left;
-  border: 1px solid silver;
+ width: 800px;
+height: 450px;
+overflow: scroll;
+padding: 2px;
+float: left;
+border: 1px solid silver;
+margin: 20px 0 20px 0;
 }
 
 #mindMap {
