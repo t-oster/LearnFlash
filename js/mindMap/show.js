@@ -150,24 +150,9 @@ var connectedLinks = [];
 
 function draggingStarted(node)
 {
-  connectedLinks = [];
-  var id = $(node).attr("id");
-  for (var i in mindMapLinks)
-  {
-    if (mindMapLinks[i].leftId == id || mindMapLinks[i].rightId == id)
-    {
-      connectedLinks.push(i);
-    }
-  }
-}
-
-function dragging()
-{
-  for (var i = 0; i < connectedLinks.length; i++)
-  {
-    updateLinkPosition(connectedLinks[i]);
-  }
-  drawLinks();
+  //clear all drawed links
+  drawLinks(true);
+  $(".linkText").hide();
 }
 
 function nodeDragged(node)
@@ -176,6 +161,16 @@ function nodeDragged(node)
   {
     nodeInfos[$(node).attr("id")] = {state: "updated"};
   }
+  var id = $(node).attr("id");
+  for (var i in mindMapLinks)
+  {
+    if (mindMapLinks[i].leftId == id || mindMapLinks[i].rightId == id)
+    {
+      updateLinkPosition(i);
+    }
+  }
+  drawLinks();
+  $(".linkText").show();
 }
 
 function updateLinkPosition(linkIndex)
@@ -198,7 +193,7 @@ function updateLinkPosition(linkIndex)
   }
 }
 
-function drawLinks()
+function drawLinks(clear)
 {
   var canvas = document.getElementById('linkLayer');
   if (canvas.width != $("#mindMap").width() || canvas.height != $("#mindMap").height())
@@ -207,7 +202,11 @@ function drawLinks()
     canvas.height = $("#mindMap").height();
   }
   var ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height)
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if (clear)
+  {
+    return;
+  }
   for (var i in mindMapLinks)
   {
     var l = mindMapLinks[i];
@@ -323,7 +322,6 @@ function initializeNodeEvents(nodeElement)
 {
   nodeElement.draggable({
     start: function(event) {draggingStarted(event.target)},
-    drag: dragging,
     stop: function(event) {nodeDragged(event.target)}
   });
 }

@@ -48,6 +48,9 @@ function smarty_clear_infos_tag($params, $smarty)
   unset($_SESSION["info"]);
 }
 
+$smarty->assign("controller", $controller);
+$smarty->assign("action", $action);
+
 $controllerClass = "Controller\\".ucfirst($controller);
 $actionMethod = "load".ucfirst($action);
 
@@ -60,10 +63,15 @@ if (!class_exists($controllerClass))
 session_start();
 
 $userManager = new Manager\UserManager();
-if ($userManager->getLoggedInUser() == null && strtolower($controller) != "login" && strtolower($controller) != "register")
+$user = $userManager->getLoggedInUser();
+if ($user == null && strtolower($controller) != "login" && strtolower($controller) != "register")
 {
   header("Location: ".generate_url("login", "default", array("redirect" => urlencode($_SERVER["REQUEST_URI"]))));
   exit;
+}
+else 
+{
+  $smarty->assign("user", $user);
 }
 $controllerInstance = new $controllerClass();
 $controllerInstance->load();
