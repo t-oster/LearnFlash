@@ -30,7 +30,7 @@ class Learn extends BaseCards{
     {
       $_SESSION["toLearn"] []= $c->getId();
       $count++;
-      if (count($c->getAnswers()) == 0)
+      if ($c->getCountAnswers() == 0)
       {
         $count_unlearned++;
       }
@@ -54,9 +54,7 @@ class Learn extends BaseCards{
   {
     if ($cardId != null && $result != null)
     {
-      $card = $this->findCardOrError($cardId);
-      $am = new \Manager\AnswerManager();
-      $am->create($this->getUserManager()->getLoggedInUser(), $card, $result);
+      $this->cm->cardAnswered($cardId, $result);
       $_SESSION["toLearn"] = array_slice($_SESSION["toLearn"], 1);
     }
     if (count($_SESSION["toLearn"]) <= 0)

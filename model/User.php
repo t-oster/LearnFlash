@@ -41,19 +41,13 @@ class User {
    * @var Card[]
    */
   protected $cards;
+  
   /**
    * @OneToMany(targetEntity="Tag", mappedBy="owner")
    *
    * @var Tags[]
    */
   protected $tags;
-  
-   /**
-   * @OneToMany(targetEntity="Answer", mappedBy="owner")
-   *
-   * @var Answer[]
-   */
-  protected $answers;
   
   /**
    * @OneToMany(targetEntity="MindMap", mappedBy="owner")
@@ -65,7 +59,6 @@ class User {
   public function __construct() {
     $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     $this->cards = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
     $this->mindMaps = new \Doctrine\Common\Collections\ArrayCollection();
   }
   
@@ -120,12 +113,8 @@ class User {
   public function getTags() {
     return $this->tags;
   }
-  
-   public function getAnswers() {
-    return $this->answers;
-  }
 
-  public function getMindMapss() {
+  public function getMindMaps() {
     return $this->mindMaps;
   }
 }

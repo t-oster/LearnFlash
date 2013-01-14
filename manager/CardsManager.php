@@ -106,6 +106,25 @@ class CardsManager extends BaseManager{
     $this->em->flush();
     return $c;
   }
+  
+  /**
+   * Update a card with a regular answer, result is 1-4
+   * @param type $cardId
+   * @param type $result
+   */
+  public function cardAnswered($cardId, $result)
+  {
+    $c = $this->findById($cardId);
+    $c->addResult($result);
+    $this->em->flush();
+    return $c;
+  }
+  
+  public function cardAnsweredSm2($cardId, $q)
+  {
+    //TODO: implement Sm-2 algorithm here
+    // http://www.supermemo.com/english/ol/sm2.htm
+  }
 
   public function findCards(\Model\User $u = null, $tagIds = null, $unlearned = false)
   {
@@ -133,7 +152,7 @@ class CardsManager extends BaseManager{
           continue;
         }
       }
-      if ($unlearned == true && count($c->getAnswers()) != 0)
+      if ($unlearned == true && $c->getCountAnswers() != 0)
       {
         continue;
       }
