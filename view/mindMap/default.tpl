@@ -6,11 +6,14 @@
 <h2>Your Mindmaps</h2>
 
 {foreach $mindmaps as $mm}
-  <p><a href="{url action="show" mindMapId=$mm->getId()}">{$mm->getName()}</a> ({count($mm->getChildren())} elements)
-    <a href="{url action="delete" mindMapId=$mm->getId()}">delete</a>
-  <p>
+  <ul class=mindMapUl>
+     <li>({count($mm->getChildren())} elements)</li>
+     <li><a href="{url action="show" mindMapId=$mm->getId()}">{$mm->getName()}</a></li>
+    
+     <li><a class="button" href="{url action="delete" mindMapId=$mm->getId()}">delete</a></li>
+  </ul>
 {/foreach}
-
+<hr class="line"/>
 {include file="./addMindMapForm.tpl"}
 
 <script type="text/javascript">
