@@ -14,12 +14,12 @@
   <form action="{url action="next"}" method="POST" id="result" style="display: none;">
     <input id="cardId" type="hidden" name="cardId" value="{$card->getId()}"/>
     {if $smarty.session.usesm2 == true }
-      <button type="submit" name="result" value="0">complete blackout</button>
-      <button type="submit" name="result" value="1">incorrect response; the correct one remembered</button>
-      <button type="submit" name="result" value="2">incorrect response; where the correct one seemed easy to recall</button>
-      <button type="submit" name="result" value="3">correct response recalled with serious difficulty</button>
-      <button type="submit" name="result" value="4">correct response after a hesitation</button>
-      <button type="submit" name="result" value="5">perfect response</button>
+      <button type="submit" name="result" value="0" title= "complete blackout">0</button>
+      <button type="submit" name="result" value="1" title="incorrect response; the correct one remembered">1</button>
+      <button type="submit" name="result" value="2" title="incorrect response; where the correct one seemed easy to recall">2</button>
+      <button type="submit" name="result" value="3" title="correct response recalled with serious difficulty">3</button>
+      <button type="submit" name="result" value="4" title="correct response after a hesitation">4</button>
+      <button type="submit" name="result" value="5" title="perfect response">5</button>
     {else}
       <button type="submit" name="result" value="1">Forgotten</button>
       <button type="submit" name="result" value="2">I was close</button>
