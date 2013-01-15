@@ -44,7 +44,7 @@
       },
       function(cardInfo) {
         $("#frontSide").html(cardInfo.frontHtml);
-        $("#backHtml").html(cardInfo.backHtml);
+        $("#backSide").html(cardInfo.backHtml);
         $("#cardId").val(cardInfo.cardId);
         $("#title").html(cardInfo.title);
         $("#frontSide").slideDown(500);
