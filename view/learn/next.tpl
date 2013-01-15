@@ -10,10 +10,10 @@
   <button id="show">Show answer</button>
   <form action="{url action="next"}" method="POST" id="result" style="display: none;">
     <input id="cardId" type="hidden" name="cardId" value="{$card->getId()}"/>
-    <button type="submit" name="result" value="0">Forgotten</button>
-    <button type="submit" name="result" value="1">I was close</button>
-    <button type="submit" name="result" value="2">I knew it</button>
-    <button type="submit" name="result" value="3">Boaring</button>
+    <button type="submit" name="result" value="1">Forgotten</button>
+    <button type="submit" name="result" value="2">I was close</button>
+    <button type="submit" name="result" value="3">I knew it</button>
+    <button type="submit" name="result" value="4">Boaring</button>
   </form>
 </div>
 <div id="frontSide">

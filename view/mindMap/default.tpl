@@ -3,19 +3,20 @@
   <link rel="stylesheet" href="css/mindMap.css" />
 {/block}
 {block name="content"}
-<h2>Mindmap</h2>
-<h3>Here you see an overview of all your mindmap.</h3>
+<h2>Your Mindmaps</h2>
 
-      {foreach $mindmaps as $mm}
-        <p><a href="{url action="show" mindMapId=$mm->getId()}">{$mm->getName()}</a><p>
-      {/foreach}
-      
-      {include file="./addMindMapForm.tpl"}
+{foreach $mindmaps as $mm}
+  <p><a href="{url action="show" mindMapId=$mm->getId()}">{$mm->getName()}</a> ({count($mm->getChildren())} elements)
+    <a href="{url action="delete" mindMapId=$mm->getId()}">delete</a>
+  <p>
+{/foreach}
 
-      <script type="text/javascript">
-        function addMindMap(name)
-        {
-          window.location = "{url action="addMindMap"}&name="+encodeURI(name);
-        }
-      </script>
+{include file="./addMindMapForm.tpl"}
+
+<script type="text/javascript">
+  function addMindMap(name)
+  {
+    window.location = "{url action="addMindMap"}&name="+encodeURI(name);
+  }
+</script>
 {/block}

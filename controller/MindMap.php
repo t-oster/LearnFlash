@@ -40,6 +40,13 @@ class MindMap extends BaseController {
   public function loadDefault(){
     $this->assignToView("mindmaps", $this->mnm->getTopLevelMindMaps());
   }
+  
+  public function loadDelete($mindMapId)
+  {
+    $this->mnm->deleteById($mindMapId);
+    $this->addInfo("Mind Map sucessfully deleted");
+    $this->redirect();
+  }
  
   public function loadShow($mindMapId)
   {

@@ -5,9 +5,7 @@
 {/block}
 
 {block name="mainContent"}
-<h2>Mindmap</h2>
-  Displaying MindMap with name="{$mindmap->getName()}"
-  
+<h2>{$mindmap->getName()}</h2>
   <a href="javascript:saveChanges();" id="save" class="button">Save</a>{include file="./addMindMapForm.tpl"}
   <div id="mindMapContainer">
     <div id="mindMap">

@@ -20,34 +20,48 @@ class Learn extends BaseCards{
     $this->assignToView("tags", $tags);
   }
   
-  public function loadPrepareLearning($selection = "all", $tagIds = null, $random = false, $unlearned = false, $useSm2 = false, $ajax = false)
+  public function loadCountSelection($selection = "all", $tagIds = null, $order = "creation", $unlearned = false)
   {
-    $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned, $useSm2);
-    $_SESSION["toLearn"] = array();
+    $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned);
     $count_unlearned = 0;
     $count = 0;
     foreach ($cards as $c)
     {
-      $_SESSION["toLearn"] []= $c->getId();
       $count++;
       if ($c->getCountAnswers() == 0)
       {
         $count_unlearned++;
       }
     }
-    if ($random == true)
+    echo json_encode(array("all" => $count, "unlearned" => $count_unlearned));
+    $this->dontRender();
+  }
+  
+  public function loadPrepareLearning($selection = "all", $tagIds = null, $order = "creation", $unlearned = false)
+  {
+    $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned);
+    if ($order == "random")
     {
-      shuffle($_SESSION["toLearn"]);
+      shuffle($cards);
     }
-    if ($ajax)
+    else if ($order == "average")
     {
-      echo json_encode(array("all" => $count, "unlearned" => $count_unlearned));
-      $this->dontRender();
+      usort($cards, function($c1, $c2){return $c1->getAverageResult() <= $c2->getAverageResult() ? -1 : 1;});
     }
-    else
+    else if ($order == "last")
     {
-      $this->redirect(null, "next");
+      usort($cards, function($c1, $c2){return $c1->getLastResult() <= $c2->getLastResult() ? -1 : 1;});
     }
+    else if ($order == "sm2")
+    {
+      //TODO filter only cards which belong to the current time slot
+    }
+    $_SESSION["toLearn"] = array();
+    foreach ($cards as $c)
+    {
+      $_SESSION["toLearn"] []= $c->getId();
+    }
+    $this->redirect(null, "next");
   }
   
   public function loadNext($cardId = null, $result = null, $ajax = false)
