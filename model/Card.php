@@ -266,6 +266,20 @@ class Card {
     $this->lastAnswered = new \DateTime();
   }
  
+  public function addSm2Result($q)
+  {
+    if ($q<3)
+    {
+      $this->repetitions=1;
+    }
+    else
+    {
+      $this->repetitions+=1;
+    }   
+    if($this->easiness <1.3) $this->easiness =1.3;
+    $this->easiness=$this->easiness +(0.1-(5-$q)*(0.08+(5-$q)*0.02));  
+    $this->lastAnswered = new \DateTime();
+  }
   public function getRepetitions() {
     return $this->repetitions;
   }

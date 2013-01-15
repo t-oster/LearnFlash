@@ -27,6 +27,18 @@ class Learn extends BaseCards{
     $count = 0;
     foreach ($cards as $c)
     {
+      if ($order == "sm2")
+      {
+        if ($c->getLastAnswered() != null)
+        {
+          $diffInDays = $now->diff($c->getLastAnswered())->format("%a");
+          $interval= ceil($this->sm2RepetitionInterval($c->getRepetitions(),$c->getEasiness()));
+          if ($diffInDays < $interval)//TODO CHECK IF IN INTERVAL)
+          {
+            continue;
+          }
+        }
+      }
       $count++;
       if ($c->getCountAnswers() == 0)
       {
@@ -37,9 +49,18 @@ class Learn extends BaseCards{
     $this->dontRender();
   }
   
+  private function sm2RepetitionInterval($n, $e)
+  {
+    if($n==0)return 0;
+    if($n==1)return 1;     
+    if($n==2)return 6;
+    if($n>2) return sm2RepetitionInterval($n-1)*$e;     
+  }
+  
   public function loadPrepareLearning($selection = "all", $tagIds = null, $order = "creation", $unlearned = false)
   {
     $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned);
+    $_SESSION["usesm2"]=false;
     if ($order == "random")
     {
       shuffle($cards);
@@ -54,7 +75,24 @@ class Learn extends BaseCards{
     }
     else if ($order == "sm2")
     {
-      //TODO filter only cards which belong to the current time slot
+      $_SESSION["usesm2"]=true;
+      $result=array();
+      $now = new \DateTime();
+      foreach ($cards as $c)
+      {
+        if ($c->getLastAnswered() == null)
+        {
+          $result []= $c;
+          continue;
+        }
+        $diffInDays = $now->diff($c->getLastAnswered())->format("%a");
+        $interval= ceil($this->sm2RepetitionInterval($c->getRepetitions(),$c->getEasiness()));
+        if ($diffInDays >= $interval)//TODO CHECK IF IN INTERVAL)
+        {
+          $result []= $c;
+        }
+      }
+      $cards = $result;
     }
     $_SESSION["toLearn"] = array();
     foreach ($cards as $c)
@@ -68,8 +106,20 @@ class Learn extends BaseCards{
   {
     if ($cardId != null && $result != null)
     {
-      $this->cm->cardAnswered($cardId, $result);
-      $_SESSION["toLearn"] = array_slice($_SESSION["toLearn"], 1);
+      if($_SESSION["usesm2"]==false)
+      {
+        $this->cm->cardAnswered($cardId, $result);
+        $_SESSION["toLearn"] = array_slice($_SESSION["toLearn"], 1);
+      }
+      else 
+      {
+        $this->cm->cardAnsweredsm2($cardId, $result);
+        $_SESSION["toLearn"] = array_slice($_SESSION["toLearn"], 1);
+        if($result<4)
+        {
+          $_SESSION["toLearn"] []=$cardId;
+        }    
+      }
     }
     if (count($_SESSION["toLearn"]) <= 0)
     {
@@ -83,7 +133,7 @@ class Learn extends BaseCards{
           "title" => $card->getTitle(),
           "cardId" => $card->getId(),
           "frontHtml" => $this->replaceReferencesWithLinks($card->getFrontHtml()),
-          "backHtml" => $this->replaceReferencesWithLinks($card->getBackHtml()),s
+          "backHtml" => $this->replaceReferencesWithLinks($card->getBackHtml())
       ));
       $this->dontRender();
     }

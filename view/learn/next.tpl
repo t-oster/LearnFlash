@@ -13,10 +13,19 @@
   <button id="show">Show answer</button>
   <form action="{url action="next"}" method="POST" id="result" style="display: none;">
     <input id="cardId" type="hidden" name="cardId" value="{$card->getId()}"/>
-    <button type="submit" name="result" value="1">Forgotten</button>
-    <button type="submit" name="result" value="2">I was close</button>
-    <button type="submit" name="result" value="3">I knew it</button>
-    <button type="submit" name="result" value="4">Boaring</button>
+    {if $smarty.session.usesm2 == true }
+      <button type="submit" name="result" value="0">complete blackout</button>
+      <button type="submit" name="result" value="1">incorrect response; the correct one remembered</button>
+      <button type="submit" name="result" value="2">incorrect response; where the correct one seemed easy to recall</button>
+      <button type="submit" name="result" value="3">correct response recalled with serious difficulty</button>
+      <button type="submit" name="result" value="4">correct response after a hesitation</button>
+      <button type="submit" name="result" value="5">perfect response</button>
+    {else}
+      <button type="submit" name="result" value="1">Forgotten</button>
+      <button type="submit" name="result" value="2">I was close</button>
+      <button type="submit" name="result" value="3">I knew it</button>
+      <button type="submit" name="result" value="4">Boaring</button>
+    {/if}
   </form>
 </div>
 <div id="frontSide">

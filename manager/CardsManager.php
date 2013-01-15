@@ -122,8 +122,10 @@ class CardsManager extends BaseManager{
   
   public function cardAnsweredSm2($cardId, $q)
   {
-    //TODO: implement Sm-2 algorithm here
-    // http://www.supermemo.com/english/ol/sm2.htm
+    $c = $this->findById($cardId);
+    $c->addSm2Result($q);
+    $this->em->flush();
+    return $c;   
   }
 
   public function findCards(\Model\User $u = null, $tagIds = null, $unlearned = false)
