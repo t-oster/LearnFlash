@@ -280,7 +280,7 @@ function saveChanges()
         y: element.position().top,
         collapsed: element.hasClass("collapsed"),
         name: info.name,//used only for type=map
-        cardId: info.cardId,//used only for type=card
+        cardId: info.cardId//used only for type=card
       });
     }
   }
@@ -363,7 +363,7 @@ function toggleNodeCollapsed(nodeId)
   {
     nodeInfos[nodeId] = {
       id: nodeId.substring(4),
-      state: "updated",
+      state: "updated"
     }
   }
 }
