@@ -66,6 +66,11 @@ class Tags extends BaseController
   {
     $this->assignToView("tag", $this->tm->findById($tagId));
   }
+  
+  public function loadTaglist($cardId)
+  {
+    $this->assignToView("tags", $this->tm->findByCard($cardId));
+  }
 }
 
 ?>

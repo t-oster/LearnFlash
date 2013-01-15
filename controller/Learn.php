@@ -83,7 +83,7 @@ class Learn extends BaseCards{
           "title" => $card->getTitle(),
           "cardId" => $card->getId(),
           "frontHtml" => $this->replaceReferencesWithLinks($card->getFrontHtml()),
-          "backHtml" => $this->replaceReferencesWithLinks($card->getBackHtml())
+          "backHtml" => $this->replaceReferencesWithLinks($card->getBackHtml()),s
       ));
       $this->dontRender();
     }

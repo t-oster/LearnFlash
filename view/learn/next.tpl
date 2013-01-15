@@ -6,6 +6,9 @@
 
 {block name="content"}
 <h1 id="title">{$card->getTitle()}</h1>
+<div id="tagList">
+{include file="./../tags/taglist.tpl" tags=$card->getTags()}
+</div>
 <div id="buttons">
   <button id="show">Show answer</button>
   <form action="{url action="next"}" method="POST" id="result" style="display: none;">
@@ -37,7 +40,7 @@
     $("#frontSide").slideUp(500);
     $("#backSide").slideUp(500);
     $.post(
-      "{url action="next"}",
+      '{url action="next"}',
       {
         cardId: $("#cardId").val(),
         result: result
@@ -46,6 +49,7 @@
         $("#frontSide").html(cardInfo.frontHtml);
         $("#backSide").html(cardInfo.backHtml);
         $("#cardId").val(cardInfo.cardId);
+        $("#tagList").load('{url controller="tags" action="taglist"}', { cardId: cardInfo.cardId});
         $("#title").html(cardInfo.title);
         $("#frontSide").slideDown(500);
         $("#show").show();

@@ -9,6 +9,12 @@ namespace Manager;
 class TagsManager extends BaseManager
 {
 
+  public function findByCard($cardId)
+  {
+    $c = $this->em->getRepository("\Model\Card")->find($cardId);
+    return $c->getTags();
+  }
+  
   public function findByName($name, \Model\User $owner = null)
   {
     if ($owner == null)
