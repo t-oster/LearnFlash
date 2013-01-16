@@ -793,10 +793,11 @@ hr.line{
   float: left;
   font-weight: 900;
   color: rgb(0, 0, 0);
-  padding: 2px 8px;
-  margin: 4px 4px 0 0;
+  padding: 4px 8px;
+  margin-right: 4px;
+  margin-top: 4px;
   border-radius: 3px;
-  border: 2px solid gray;
+  border: 2px solid black ;
 }
 
 .tag a{
