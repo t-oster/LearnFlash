@@ -37,6 +37,7 @@ $config->setQueryCacheImpl($cache);
 $conn = array(
     'driver' => 'pdo_sqlite',
     'path' => __DIR__ . '/tmp/db.sqlite',
+    'driverOptions' => array(1002=>'SET NAMES utf8')
 );
 // obtaining the entity manager (7)
 $evm = new Doctrine\Common\EventManager();
