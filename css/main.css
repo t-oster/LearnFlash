@@ -583,6 +583,15 @@ position: absolute;
 left: 8px;
 top: 20px;
 }
+.deleteButton:before{
+ content: 'x';
+position: absolute;
+top: -3px;
+left: 10px;
+color: rgb(151, 149, 149);
+font-size: 26px;
+font-weight: 900;
+}
 .deleteButton{
 right: 14px;       
 } .editButton{
