@@ -4,6 +4,8 @@
 {/block}
 {block name="content"}
 <h2>Your Mindmaps</h2>
+{include file="./addMindMapForm.tpl"}
+<hr class="line"/>
 
 {foreach $mindmaps as $mm}
   <ul class=mindMapUl>
@@ -13,8 +15,6 @@
      <li><a class="button" href="{url action="delete" mindMapId=$mm->getId()}">delete</a></li>
   </ul>
 {/foreach}
-<hr class="line"/>
-{include file="./addMindMapForm.tpl"}
 
 <script type="text/javascript">
   function addMindMap(name)

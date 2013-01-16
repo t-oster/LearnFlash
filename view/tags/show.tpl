@@ -1,8 +1,8 @@
 {extends file="../main.tpl"}
 {block name="content"}
   <h1>{$tag->getName()}</h1>
-  <a class="editlink button" href="{url action="edit" tagId=$tag->getId()}">edit</a>
-  <a class="deletelink button" href="{url action="delete" tagId=$tag->getId()}">delete</a>
+  <a class="button" href="{url action="edit" tagId=$tag->getId()}">Edit</a>
+  <a class="button" href="{url action="delete" tagId=$tag->getId()}">Delete</a>
   <h2>Color</h2>
   <div class="tag" style="background-color: {$tag->getColor()};">
   {$tag->getColor()}
