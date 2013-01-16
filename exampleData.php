@@ -10,25 +10,10 @@ $cm = new \Manager\CardsManager();
 
 import_dir(__DIR__.'/exampleCards', array());
 
-function import_file($path, $tags)
-{
-  global $cm, $um;
-  $f = fopen($path, "r");
-  while(!feof($f))
-  {
-    $line = fgets($f);
-    $qa = explode("\t", $line);
-    if (!isset($qa[0]) || !isset($qa[1]) || $qa[0] == "" || $qa[1] == "")
-    {
-      continue;
-    }
-    $cm->createCard($um->getLoggedInUser(), "", $qa[0], $qa[1], $tags);
-  }
-  fclose($f);
-}
 
 function import_dir($path, $tags)
 {
+  global $cm;
   $dir = opendir($path);
   while (false !== ($entry = readdir($dir)))
   {
@@ -41,7 +26,7 @@ function import_dir($path, $tags)
       }
       else if (is_file($f))
       {
-        import_file($f, array_merge($tags, array($entry)));
+        $cm->importFile($f, array_merge($tags, array($entry)));
       }
     }
   }

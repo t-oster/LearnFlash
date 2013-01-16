@@ -7,6 +7,14 @@ namespace Controller;
  */
 class Cards extends BaseCards{
   
+  public function loadDoImport($format, $tags)
+  {
+    $path = $_FILES['file']['tmp_name'];
+    $count = $this->cm->importFile($path, explode(",", $tags), $format);
+    $this->addInfo($count." cards imported");
+    $this->redirect();
+  }
+  
   public function loadAdd($title = null)
   {
     $this->assignToView("title", $title != null ? $title : "");

@@ -7,6 +7,42 @@ namespace Manager;
  */
 class CardsManager extends BaseManager{
   
+  public function importFile($path, $tags, $format = "tabs")
+  {
+    $f = fopen($path, "r");
+    $i = 0;
+    $count = 0;
+    while(!feof($f))
+    {
+      $line = fgets($f);
+      if ($format == "tabs")
+      {
+        $qa = explode("\t", $line);
+      }
+      else if ($format == "lines")
+      {
+        $qa[$i] = $line;
+        $i = 1-$i;
+        if ($i == 0)
+        {
+          continue;
+        }
+      }
+      else
+      {
+        throw new \Exception("Unknown format '$format'");
+      }
+      if (!isset($qa[0]) || !isset($qa[1]) || $qa[0] == "" || $qa[1] == "")
+      {
+        continue;
+      }
+      $this->createCard(null, "", $qa[0], $qa[1], $tags);
+      $count++;
+    }
+    fclose($f);
+    return $count;
+  }
+  
   public function setTags(\Model\Card $c, array $itags)
   {
     //remove all empty tags, create 2 arrays
