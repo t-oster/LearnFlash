@@ -132,6 +132,7 @@ class Learn extends BaseCards{
       echo json_encode(array(
           "title" => $card->getTitle(),
           "cardId" => $card->getId(),
+          "cardsLeft" => count($_SESSION["toLearn"]),
           "frontHtml" => $this->replaceReferencesWithLinks($card->getFrontHtml()),
           "backHtml" => $this->replaceReferencesWithLinks($card->getBackHtml())
       ));

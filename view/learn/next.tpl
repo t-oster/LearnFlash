@@ -6,6 +6,7 @@
 
 {block name="content"}
 <h1 id="title">{$card->getTitle()}</h1>
+<span id="cardsLeftNote">{count($smarty.session.toLearn)} cards left</span>
 <div id="tagList">
 {include file="./../tags/taglist.tpl" tags=$card->getTags()}
 </div>
@@ -67,6 +68,7 @@
         $("#backSide").html(cardInfo.backHtml);
         $("#cardId").val(cardInfo.cardId);
         $("#tagList").load('{url controller="tags" action="taglist"}', { cardId: cardInfo.cardId});
+        $("#cardsLeftNote").html(cardInfo.cardsLeft+" cards left");
         $("#title").html(cardInfo.title);
         $("#frontSide").slideDown(500);
       },
