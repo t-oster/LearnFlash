@@ -278,6 +278,8 @@ function saveChanges()
         id: id,//used only for state=changed
         x: element.position().left,
         y: element.position().top,
+        width: element.css("width").splice(0, -2),//TODO test
+        height: element.css("height").splice(0, -2),
         collapsed: element.hasClass("collapsed"),
         name: info.name,//used only for type=map
         cardId: info.cardId//used only for type=card
@@ -320,10 +322,21 @@ function saveChanges()
 
 function initializeNodeEvents(nodeElement)
 {
+  var o = $("#mindMap");
   nodeElement.draggable({
+    scroll: true,
     start: function(event) {draggingStarted(event.target)},
+    drag: function(event, ui) {
+        if (nodeElement.position().top > o.height() - nodeElement.height()) {
+            o.height(o.height() + 10);
+        }
+        if (nodeElement.position().left > o.width() - nodeElement.width()) {
+            o.width(o.width() + 10);
+        }
+    },
     stop: function(event) {nodeDragged(event.target)}
   });
+  nodeElement.resizable();
 }
 
 function askConfirmationIfUnsaved()

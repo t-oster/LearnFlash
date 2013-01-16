@@ -172,7 +172,7 @@ class MindMap extends BaseController {
         if ($c->type == "card" || $c->type == "map")
         {
           $node = $this->mnm->findById($c->id);
-          $this->mnm->updateNode($node, $c->x, $c->y, $c->collapsed);
+          $this->mnm->updateNode($node, $c->x, $c->y, $c->width, $c->height, $c->collapsed);
         }
         else if ($c->type == "link")
         {

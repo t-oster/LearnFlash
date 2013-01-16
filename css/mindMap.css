@@ -16,8 +16,6 @@ margin: 20px 0 20px 0;
 }
 
 #mindMap {
-  min-width: 1920px;
-  min-height: 1080px;
   position: relative;
 }
 
@@ -28,8 +26,6 @@ margin: 20px 0 20px 0;
   position: absolute;
   box-shadow: 0 1px 2px 1px silver;
   border-radius: 3px;
-  max-width: 500px;
-  min-height: 90px;
   padding: 3px;
   z-index: 2;
 }
@@ -137,4 +133,42 @@ margin: 20px 0 20px 0;
 select#tag
 {
   width: 100px;
+}
+
+.arrow_box {
+	position: relative;
+	background: #56d52f;
+	border: 0px solid #3bf5ab;
+  height: 3px;
+  width: 200px;
+   -moz-transform:rotate(12deg);
+  -webkit-transform:rotate(12deg);
+  -o-transform:rotate(12deg);
+  transform:rotate(12deg);
+  
+}
+.arrow_box:after, .arrow_box:before {
+	left: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(86, 213, 47, 0);
+	border-left-color: #56d52f;
+	border-width: 10px;
+	top: 50%;
+	margin-top: -9px;
+}
+.arrow_box:before {
+	border-color: rgba(59, 245, 171, 0);
+	border-right-color: #56d52f;
+	border-width: 10px;
+	left: 0;
+	margin-top: -8px;
+  margin-left: -10px;
 }
