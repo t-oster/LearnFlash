@@ -14,8 +14,11 @@
     <a class="title" href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
     <a class="editButton" href="{url action="edit" cardId=$c->getId()}">Edit</a>
     <a class="deleteButton" href="{url action="delete" cardId=$c->getId()}">Delete</a>
-    <p>Answered: {if $c->getCountAnswers() == 1}1 time{else}{$c->getCountAnswers()} times{/if}</p>
-    <p>Average result: {$c->getAverageResult()}</p>
+    
+    <p>{substr(strip_tags($c->getFrontHtml()), 0, 75)}...</p>
+    
+    <!--<p>Answered: {if $c->getCountAnswers() == 1}1 time{else}{$c->getCountAnswers()} times{/if}</p>
+    <p>Average result: {$c->getAverageResult()}</p>-->
     {include file="../tags/taglist.tpl" tags=$c->getTags()}
   </div>
   
