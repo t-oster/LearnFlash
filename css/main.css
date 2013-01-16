@@ -551,6 +551,38 @@ top: 12px;
 .deleteButton:hover, .editButton:hover{
   background: rgba(194, 194, 194,0.8);  
 }
+.editButton:before{
+border: 1px solid rgb(111, 111, 111);
+-webkit-transform: rotate(40deg);
+-moz-transform: rotate(40deg);
+-ms-transform: rotate(40deg);
+-o-transform: rotate(40deg);
+transform: rotate(40deg);
+content: '';
+position: absolute;
+box-shadow: inset 0 5px 0 rgb(104, 104, 104),inset 0 7px 0 rgb(209, 180, 180);
+left: 16px;
+top: 4px;
+width: 6px;
+height: 16px;
+background-color: rgb(243, 243, 243);
+}
+.editButton:after{
+ -webkit-transform: rotate(40deg);
+-moz-transform: rotate(40deg);
+-ms-transform: rotate(40deg);
+-o-transform: rotate(40deg);
+transform: rotate(40deg);
+content: '';
+width: 0;
+height: 0;
+border-top: 3px solid rgb(87, 81, 81);
+border-left: 3px solid transparent;
+border-right: 3px solid transparent;
+position: absolute;
+left: 8px;
+top: 20px;
+}
 .deleteButton{
 right: 14px;       
 } .editButton{
