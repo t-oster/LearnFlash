@@ -1,6 +1,6 @@
 <?php
 require 'bootstrap.php';
-
+header("Content-Type: text/html; charset=utf-8");
 function generate_url($controller, $action = "default", $params = null)
 {
   $redirecturl = "index.php?controller=$controller&action=$action";
