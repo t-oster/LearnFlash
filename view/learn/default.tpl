@@ -21,9 +21,9 @@
   <option value="last">last result</option>
   <option value="sm2">SM2-Algorithm</option>
 </select>
-<label>Selected cards: </label>
+<b>Selected cards: </b>
 <span id="countAll"></span><br/>
-<label>Unlearned cards in selection: </label>
+<b>Unlearned cards in selection: </b>
 <span id="countUnlearned"></span><br/>
 <br/>
 <input id="go" type="submit" value="Start Learning"/>

@@ -9,36 +9,43 @@
 <div id="tagList">
 {include file="./../tags/taglist.tpl" tags=$card->getTags()}
 </div>
+<div class="clear"></div>
+<center>
 <div id="buttons">
-  <button id="show">Show answer</button>
-  <form action="{url action="next"}" method="POST" id="result" style="display: none;">
+  <form action="{url action="next"}" method="POST">
     <input id="cardId" type="hidden" name="cardId" value="{$card->getId()}"/>
+      <button class="button" id="show">Show answer</button>
+      <div id="result" style="display: none;">
     {if $smarty.session.usesm2 == true }
-      <button type="submit" name="result" value="0" title= "complete blackout">0</button>
-      <button type="submit" name="result" value="1" title="incorrect response; the correct one remembered">1</button>
-      <button type="submit" name="result" value="2" title="incorrect response; where the correct one seemed easy to recall">2</button>
-      <button type="submit" name="result" value="3" title="correct response recalled with serious difficulty">3</button>
-      <button type="submit" name="result" value="4" title="correct response after a hesitation">4</button>
-      <button type="submit" name="result" value="5" title="perfect response">5</button>
+      <button class="button" type="submit" name="result" value="0" title= "complete blackout">0</button>
+      <button class="button" type="submit" name="result" value="1" title="incorrect response; the correct one remembered">1</button>
+      <button class="button" type="submit" name="result" value="2" title="incorrect response; where the correct one seemed easy to recall">2</button>
+      <button class="button" type="submit" name="result" value="3" title="correct response recalled with serious difficulty">3</button>
+      <button class="button" type="submit" name="result" value="4" title="correct response after a hesitation">4</button>
+      <button class="button" type="submit" name="result" value="5" title="perfect response">5</button>
     {else}
-      <button type="submit" name="result" value="1">Forgotten</button>
-      <button type="submit" name="result" value="2">I was close</button>
-      <button type="submit" name="result" value="3">I knew it</button>
-      <button type="submit" name="result" value="4">Boaring</button>
+      <button class="button" type="submit" name="result" value="1">Forgotten</button>
+      <button class="button" type="submit" name="result" value="2">I was close</button>
+      <button class="button" type="submit" name="result" value="3">I knew it</button>
+      <button class="button" type="submit" name="result" value="4">Boring</button>
     {/if}
+    </div>
   </form>
 </div>
-<div id="frontSide">
+<div id="frontSide" class="card">
   {$frontHtml}
 </div>
-<div id="backSide" style="display: none;">
+<div class="clear"></div>
+<div id="backSide" class="card" style="display: none;">
   {$backHtml}
 </div>
+</center>
 <script type="text/javascript">
   $("#show").click(function(){
     $("#show").hide();
     $("#backSide").slideDown(500);
     $("#result").fadeIn(1000);
+    return false;
   });
   /*
    Instead of using the form, we use ajax to update only the important parts
@@ -46,6 +53,7 @@
   $('button[type="submit"]').click(function(){
     var result = $(this).val();
     $("#result").hide();
+    $("#show").fadeIn(1000);
     $("#frontSide").slideUp(500);
     $("#backSide").slideUp(500);
     $.post(
@@ -61,7 +69,6 @@
         $("#tagList").load('{url controller="tags" action="taglist"}', { cardId: cardInfo.cardId});
         $("#title").html(cardInfo.title);
         $("#frontSide").slideDown(500);
-        $("#show").show();
       },
       "json"
     );
