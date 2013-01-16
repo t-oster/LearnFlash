@@ -639,7 +639,7 @@ background-image: -ms-linear-gradient(top, rgba(241, 241, 241, 0.53) 50%, rgba(2
 background-image: -o-linear-gradient(top, rgba(241, 241, 241, 0.53) 50%, rgba(235, 233, 233, 0.81) 50%);
 background-image: linear-gradient(top, #F1F1F1 50%, rgba(235, 233, 233, 0.81) 50%);
 }
-div.card,#menu a:hover{
+div.card,#menu a:hover, .mindMapNode{
 background-image: -khtml-linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 0%, rgba(244, 244, 244, 0.35) 50%, rgba(225, 225, 225, 0) 51%, rgba(246, 246, 246, 0) 100%);
 background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(50%, rgba(244, 244, 244, 0.35)), color-stop(51%, rgba(225, 225, 225, 0)), color-stop(100%, rgba(246, 246, 246, 0)));
 background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 0%, rgba(244, 244, 244, 0.35) 50%, rgba(225, 225, 225, 0) 51%, rgba(246, 246, 246, 0) 100%);
