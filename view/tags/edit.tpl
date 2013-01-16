@@ -7,6 +7,6 @@
     <label for="color">Color:</label>
     <input type="color" name="color" value="{$tag->getColor()}"/>
     <input type="submit" name="Save" value="Save"/>
-or <a href="{url action="show" tagId=$tag->getId()}">Cancel</a>
+<span class="or">or</span> <a class="button" href="{url action="show" tagId=$tag->getId()}">Cancel</a>
   </form>
 {/block}

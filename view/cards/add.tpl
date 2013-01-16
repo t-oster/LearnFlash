@@ -14,7 +14,7 @@
   <textarea class="tinymce" id="backHtml" name="backHtml"></textarea>
   {include file="./../tags/tagInputField.tpl" value="" tags=$tags}
   <input type="submit" value="Create"/>
-  or <a href="{url}">Cancel</a>
+  <span class="or">or</span> <a class="button" href="{url}">Cancel</a>
 </form>
 <hr class=freeBox>
 <script type="text/javascript" src="lib/js/tinymce/jscripts/tiny_mce/jquery.tinymce.js"></script>

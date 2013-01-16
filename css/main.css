@@ -537,7 +537,79 @@ background-color: rgb(184, 184, 184);
   float: right;
 }
 
+.deleteButton, .editButton{
+box-shadow: 0px 2px 3px rgb(99, 99, 99);
+text-shadow: 1px 1px 0 black;
+color: white;
+padding: 6px 10px 6px 34px;
+background: rgb(146, 146, 146);
+position: absolute;
+top: 7px;
+}
+.deleteButton{
+right: 14px;       
+} .editButton{
+right: 105px;    
+}
 
+div.card {
+display: inline-block;
+width: 49.59999%;
+margin: 2% 0 0 .1%;
+background-color: rgb(226, 226, 226);
+padding: 30px 10px 10px 10px;
+position: relative;
+}
+.editLink{
+font-size: 10px;
+text-transform: uppercase;
+color: #7C7C7C;
+padding: 4px 10px;
+position: absolute;
+top: 0px;
+right: 80px; 
+}
+.editLink:before{
+font-size: 16px;
+text-indent: -4px;
+padding: 0px 11px;
+font-weight: 900;
+position: absolute;
+left: -20px;
+top: 2px;
+content: '.';
+color: white;
+background: rgba(99, 86, 86, 0.53);
+}
+.editLink:after{
+content: '';
+position: absolute;
+
+}
+#frontSide {
+  border-radius: 2px;
+  float: left;
+  width: 47.4%;
+  margin: 2% 0 0 2%;
+  background: #AFE6F3;
+  padding: 30px 10px 2px 10px;
+  position: relative;
+  border: 1px solid #70E8F8;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #C2C2C2;
+}
+
+#backSide {
+  border-radius: 2px;
+  float: left;
+  clear: left;
+  width: 47.4%;
+  margin: 2% 0 0 2%;
+  background: #AFE6F3;
+  padding: 30px 10px 2px 10px;
+  position: relative;
+  border: 1px solid #70E8F8;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #C2C2C2;
+}
 /*= --------------------------------------------
         FOOTER
     --------------------------------------------*/
@@ -662,7 +734,7 @@ font-weight: 900;
     padding:20px;
 }
 
-.marginNullAuto{ 
+form label{ 
      display: table;
      margin: 10px 0;
      font-weight: 900;
@@ -713,4 +785,25 @@ hr.line{
     margin-bottom:20px;
     border:none;
     background:transparent;
+}
+
+.tag{
+ font-weight: 900;
+color: rgb(0, 0, 0);
+padding: 10px;
+margin: 4px 0 0 0;
+}
+
+.or{
+margin: 0 20px 0 0;
+}
+input[type="text"] {
+width: 100%;
+margin: 0 0 10px 0;
+}
+
+form {
+background-color: #F7F7F7;
+margin-top: 20px;
+padding: 20px;
 }
