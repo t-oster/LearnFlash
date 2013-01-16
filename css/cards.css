@@ -10,6 +10,12 @@
   width:100%;
 }
 
+form label {
+  width: 90px;
+  float: left;
+  display: block;
+}
+
 .addCard {
   font-weight: 900;
   border-bottom: 2px solid cornflowerBlue;
