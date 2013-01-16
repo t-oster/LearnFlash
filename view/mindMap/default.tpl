@@ -4,15 +4,14 @@
 {/block}
 {block name="content"}
 <h2>Your Mindmaps</h2>
-{include file="./addMindMapForm.tpl"}
+{include file="./addMindMapForm.tpl" text="New Mindmap"}
 <hr class="line"/>
 
 {foreach $mindmaps as $mm}
   <ul class=mindMapUl>
-     <li>({count($mm->getChildren())} elements)</li>
-     <li><a href="{url action="show" mindMapId=$mm->getId()}">{$mm->getName()}</a></li>
+     <li>{$mm->getName()}<span style="float:right;">({count($mm->getChildren())} elements)</span></li>
     
-     <li><a class="button" href="{url action="delete" mindMapId=$mm->getId()}">delete</a></li>
+     <li><a class="button" href="{url action="delete" mindMapId=$mm->getId()}">Delete</a><a class="button" href="{url action="show" mindMapId=$mm->getId()}">Open</a></li>
   </ul>
 {/foreach}
 
