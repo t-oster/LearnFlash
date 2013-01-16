@@ -38,6 +38,14 @@ Unlearned cards in selection: <span id="countUnlearned"></span><br/>
     $("#countAll").html("");
     $("#countUnlearned").html("");
     $.getJSON("{url action="countSelection"}", $("#form").serialize(), function(result){
+      if(result.all==0)
+      {
+        $("#go").attr("disabled", "disabled");    
+      }
+      else 
+      {
+        $("#go").removeAttr("disabled");
+      }
       $("#countAll").html(result.all);
       $("#countUnlearned").html(result.unlearned);
     });
