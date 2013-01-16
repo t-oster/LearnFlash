@@ -14,7 +14,9 @@
   right: 12px;
 }
 
-
+#cardsLeftNote {
+ float: right;
+}
 
 #buttons {
 }

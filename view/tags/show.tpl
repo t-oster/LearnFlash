@@ -5,7 +5,7 @@
   <br/><br/><br/><br/>
   <a class="button" href="{url action="edit" tagId=$tag->getId()}">Edit Tag</a>
   <a class="button" href="{url action="delete" tagId=$tag->getId()}">Delete Tag</a>
-  
+  <a class="button" href="{url controller='learn' action='default' tag=$tag->getId()}">Learn Tag</a> 
   <br/><br/>
   <h3>Cards with this tag:</h3>
   <table class="cardinfo">
