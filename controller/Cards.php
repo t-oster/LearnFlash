@@ -15,9 +15,17 @@ class Cards extends BaseCards{
     $this->redirect();
   }
   
+  public function loadImport()
+  {
+    $tm = new \Manager\TagsManager();
+    $this->assignToView("tags", $tm->getTagsByUser());
+  }
+  
   public function loadAdd($title = null)
   {
     $this->assignToView("title", $title != null ? $title : "");
+    $tm = new \Manager\TagsManager();
+    $this->assignToView("tags", $tm->getTagsByUser());
   }
 
   public function loadDefault()
@@ -44,6 +52,8 @@ class Cards extends BaseCards{
       $stringTags .= ($stringTags == "" ? "" : ", ") . $t->getName();
     }
     $this->assignToView("stringTags", $stringTags);
+    $tm = new \Manager\TagsManager();
+    $this->assignToView("tags", $tm->getTagsByUser());
   }
   
   public function loadUpdate($cardId, $title, $frontHtml, $backHtml, $ajax, $tags)

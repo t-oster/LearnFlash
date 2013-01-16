@@ -19,8 +19,7 @@
       <input type="file" name="file"/>
     </p>
     <p>
-      <label for="tags">Tags:</label>
-      <input type="text" name="tags"/>
+      {include file="./../tags/tagInputField.tpl" tags=$tags value=""}
     </p>
     <p>
       <input type="submit" value="Import"/>

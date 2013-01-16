@@ -12,8 +12,7 @@
   <textarea class="tinymce" id="frontHtml" name="frontHtml"></textarea>
   <label class=marginNullAuto for="backHtml">Back</label>
   <textarea class="tinymce" id="backHtml" name="backHtml"></textarea>
-  <label for="tags">Tags</label>
-  <input type="text" id="tags" name="tags" value=""/>
+  {include file="./../tags/tagInputField.tpl" value="" tags=$tags}
   <input type="submit" value="Create"/>
   or <a href="{url}">Cancel</a>
 </form>
