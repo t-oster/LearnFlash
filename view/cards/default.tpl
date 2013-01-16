@@ -11,9 +11,9 @@
 <div id="cards">
 {foreach $cards as $c}
   <div class="card">
-    <a class="getTitle" href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
-    <a class="editLink" href="{url action="edit" cardId=$c->getId()}">edit</a>
-    <a class="deleteLink" href="{url action="delete" cardId=$c->getId()}">delete</a>
+    <a class="title" href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
+    <a class="editButton" href="{url action="edit" cardId=$c->getId()}">Edit</a>
+    <a class="deleteButton" href="{url action="delete" cardId=$c->getId()}">Delete</a>
     <p>Answered: {if $c->getCountAnswers() == 1}1 time{else}{$c->getCountAnswers()} times{/if}</p>
     <p>Average result: {$c->getAverageResult()}</p>
     {include file="../tags/taglist.tpl" tags=$c->getTags()}

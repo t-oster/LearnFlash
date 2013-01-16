@@ -25,10 +25,22 @@ div.card {
   width: 47.4%;
   margin: 2% 0 0 2%;
   background: #AFE6F3;
-  padding: 30px 10px 2px 10px;
   position: relative;
   border: 1px solid #70E8F8;
   box-shadow: 0 0 0 2px white, 0 0 0 4px #C2C2C2;
+}
+
+div.card a.title {
+  float: top;
+}
+
+div.card a.editButton {
+  float: right;
+}
+
+div.card a.deleteButton {
+  float: right;
+  background-image: "lib/images/edit.png";
 }
 
 #frontSide {
