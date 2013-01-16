@@ -16,8 +16,8 @@ margin: 20px 0 20px 0;
 }
 
 #mindMap {
-  width: 1280px;
-  height: 768px;
+  min-width: 1920px;
+  min-height: 1080px;
   position: relative;
 }
 
