@@ -655,6 +655,12 @@ background-image: linear-gradient(-55deg, rgba(255, 255, 255, 0.1) 0%, rgba(244,
     position:relative;
 }
 
+.clear {
+  clear: both;
+  width: 100%;
+  display: block;
+}
+
 #registerForm label,#loginForm label{
   display:table;
 }
@@ -715,6 +721,12 @@ font-weight: 900;
     --------------------------------------------*/
 
 .wrap{
+  display: inline-block;
+}
+
+.grey {
+  background-color: lightgray!important;
+  color: grey!important;
 }
 
 .wrap input {
