@@ -40,7 +40,7 @@ class Learn extends BaseCards{
         }
       }
       $count++;
-      if ($c->getCountAnswers() == 0)
+      if ($c->isUnlearned())
       {
         $count_unlearned++;
       }
