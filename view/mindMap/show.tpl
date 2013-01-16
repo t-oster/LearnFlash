@@ -8,7 +8,7 @@
 <h2>{$mindmap->getName()}</h2>
   <a href="javascript:saveChanges();" id="save" class="button">Save</a>{include file="./addMindMapForm.tpl" text="Add Submap"}
   <div id="mindMapContainer">
-    <div id="mindMap" style="width: {$mindmap->getWidth()}px; height: {$mindmap->getHeight()}px;">
+    <div id="mindMap">
       <canvas id="linkLayer">
       </canvas>
     {foreach $mindmap->getChildren() as $c}    
