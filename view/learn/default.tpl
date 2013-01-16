@@ -24,7 +24,7 @@
 <label>Unlearned cards in selection: </label>
 <span id="countUnlearned"></span><br/>
 <br/>
-<input id="go" type="submit" value="Go"/>
+<input id="go" type="submit" value="Start Learning"/>
 </form>
 
 <script type="text/javascript">
