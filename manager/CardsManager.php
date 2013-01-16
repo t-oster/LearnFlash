@@ -190,7 +190,7 @@ class CardsManager extends BaseManager{
           continue;
         }
       }
-      if ($unlearned == true && $c->getCountAnswers() != 0)
+      if ($unlearned == true && !$c->isUnlearned())
       {
         continue;
       }

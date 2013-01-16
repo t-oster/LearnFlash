@@ -7,15 +7,15 @@
 {block name="content"}
 <form action="{url action="update"}" method="POST">
   <input type="hidden" name="cardId" value="{$card->getId()}"/>
-  <label for="title">Title</label>
+  <label class="marginNullAuto" for="title">Title</label>
   <input type="text" id="title" name="title" value="{$card->getTitle()}"/>
-  <label for="frontHtml">Front</label>
+  <label class="marginNullAuto" for="frontHtml">Front</label>
   <textarea class="tinymce" id="frontHtml" name="frontHtml">{$card->getFrontHtml()}</textarea>
-  <label for="backHtml">Back</label>
+  <label class="marginNullAuto" for="backHtml">Back</label>
   <textarea class="tinymce" id="backHtml" name="backHtml">{$card->getBackHtml()}</textarea>
   {include file="../tags/tagInputField.tpl" tags=$tags value=$stringTags}
   <input type="submit" value="Update"/>
-  or <a href="{url}">Cancel</a>
+  <span class="or">or</span> <a class="button" href="{url}">Cancel</a>
 </form>
 <script type="text/javascript" src="lib/js/tinymce/jscripts/tiny_mce/jquery.tinymce.js"></script>
 <script type="text/javascript">

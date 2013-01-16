@@ -25,9 +25,15 @@
 .button:hover
 {
   cursor: hand; cursor: pointer; 
+<<<<<<< HEAD
 }*/
 
 /* Use this class whenever displaying a tag */
+=======
+}
+*/
+/* Use this class whenever displaying a tag
+>>>>>>> d8ba71c663a61d047298c96e6b1a1e72204f6109
 
 .tag {
     color: black;
@@ -38,7 +44,8 @@
     border-radius: 8px;
     border: 2px solid black;
 }
-
+ 
 .tag a {
   color: black;
 }
+*/

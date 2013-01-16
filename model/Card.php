@@ -238,6 +238,11 @@ class Card {
     return $count == 0 ? 0 : ($this->countResult1+2*$this->countResult2+3*$this->countResult3+4*$this->countResult4) / $count;
   }
   
+  public function isUnlearned()
+  {
+    return $this->lastAnswered == null;
+  }
+  
   public function addResult($result) {
     switch ($result)
     {

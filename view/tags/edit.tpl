@@ -1,11 +1,7 @@
 {extends file="../main.tpl"}
 {block name="head"}
   <link rel="stylesheet" href="lib/js/colorpicker.css"/>
-  
   <script type="text/javascript" src="lib/js/colorpicker.js"></script>
-  <script type="text/javascript" src="lib/js/eye.js"></script>
-  <script type="text/javascript" src="lib/js/layout.js"></script>
-  <script type="text/javascript" src="lib/js/utils.js"></script>
 {/block}
 
 {block name="content"}

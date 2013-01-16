@@ -1,4 +1,4 @@
-<label for="tags">Tags</label>
+<label class="marginNullAuto" for="tags">Tags</label>
 <input type="text" id="tags" name="tags" value="{$value}"/>
 <style>
   .ui-autocomplete {
