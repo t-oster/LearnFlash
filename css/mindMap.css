@@ -126,27 +126,23 @@ margin: 20px 0 20px 0;
   display: inline;
 }
 
-#linkLayer {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 select#tag
 {
   width: 100px;
 }
 
 .arrow_box {
-	position: relative;
+  top: 200px;
+  left: 200px;
+	position: absolute;
 	background: #56d52f;
 	border: 0px solid #3bf5ab;
   height: 3px;
   width: 200px;
-   -moz-transform:rotate(12deg);
-  -webkit-transform:rotate(12deg);
-  -o-transform:rotate(12deg);
-  transform:rotate(12deg);
+  -moz-transform:rotate(0deg);
+  -webkit-transform:rotate(0deg);
+  -o-transform:rotate(0deg);
+  transform:rotate(0deg);
   
 }
 .arrow_box:after, .arrow_box:before {

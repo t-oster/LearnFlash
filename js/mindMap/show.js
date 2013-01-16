@@ -9,15 +9,6 @@ var newLinkTextUrl = "";
 //used to keep track of changed/added nodes
 var nodeInfos = {};
 
-function drawLine(ctx, x1, y1, x2, y2)
-{
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.stroke();
-}
-
 var lastNewLinkId = 0;
 function linkButtonClicked(nodeId)
 {
@@ -46,7 +37,7 @@ function linkButtonClicked(nodeId)
       leftArrow: false,
       rightArrow: false
     };
-    updateLinkPosition(linkId);
+    createLinkDiv(linkId);
     $.get(
       newLinkTextUrl, 
       {
@@ -82,7 +73,7 @@ function deleteLink(linkIndex)
   {
     mindMapLinks[linkIndex].state = "deleted";
   }
-  drawLinks();
+  $("#"+linkIndex).remove();
   success("Link deleted");
 }
 
@@ -150,71 +141,73 @@ var connectedLinks = [];
 
 function draggingStarted(node)
 {
-  //clear all drawed links
-  drawLinks(true);
-  $(".linkText").hide();
-}
-
-function nodeDragged(node)
-{
-  if (!nodeInfos[$(node).attr("id")])
-  {
-    nodeInfos[$(node).attr("id")] = {state: "updated"};
-  }
   var id = $(node).attr("id");
   for (var i in mindMapLinks)
   {
     if (mindMapLinks[i].leftId == id || mindMapLinks[i].rightId == id)
     {
-      updateLinkPosition(i);
+      connectedLinks.push(i);
     }
   }
-  drawLinks();
-  $(".linkText").show();
+}
+
+function draggingActive(node)
+{
+  for (var i = 0; i < connectedLinks.length; i++)
+  {
+    updateLinkPosition(connectedLinks[i]);
+  }
+}
+
+function draggingStopped(node)
+{
+  //mark note as modified
+  if (!nodeInfos[$(node).attr("id")])
+  {
+    nodeInfos[$(node).attr("id")] = {state: "updated"};
+  }
+  connectedLinks = [];
 }
 
 function updateLinkPosition(linkIndex)
 {
+
   if (mindMapLinks[linkIndex].state == "deleted")
   {
     return;
   }
+  
+
+  var arrow = $('#'+linkIndex+'Arrow');
+  //left node
   var left = $("#"+mindMapLinks[linkIndex].leftId);   
+  //right node
   var right = $("#"+mindMapLinks[linkIndex].rightId);
-  mindMapLinks[linkIndex].x1 = left.position().left + left.width() / 2;
-  mindMapLinks[linkIndex].y1 = left.position().top + left.height() / 2;
-  mindMapLinks[linkIndex].x2 = right.position().left + right.width() / 2;
-  mindMapLinks[linkIndex].y2 = right.position().top + right.height() / 2;
+  var x1 = left.position().left + left.width() / 2;
+  var y1 = left.position().top + left.height() / 2;
+  var x2 = right.position().left + right.width() / 2;
+  var y2 = right.position().top + right.height() / 2;
   var text = $("#link"+mindMapLinks[linkIndex].id);
   if (text)
   {
-    text.css("left", (mindMapLinks[linkIndex].x1+mindMapLinks[linkIndex].x2) / 2);
-    text.css("top", (mindMapLinks[linkIndex].y1+mindMapLinks[linkIndex].y2) / 2);
+    text.css("left", ((x1+x2)/2)+"px");
+    text.css("top", ((y1+y2)/2)+"px");
   }
+  
+  var angle = 90;
+  angle = "rotate("+angle+"deg)";
+  arrow.css("-moz-transform",angle);
+  arrow.css("-webkit-transform",angle);
+  arrow.css("-o-transform",angle);
+  arrow.css("transform",angle);
 }
 
-function drawLinks(clear)
+function createLinkDiv(linkIndex)
 {
-  var canvas = document.getElementById('linkLayer');
-  if (canvas.width != $("#mindMap").width() || canvas.height != $("#mindMap").height())
-  {
-    canvas.width = $("#mindMap").width();
-    canvas.height = $("#mindMap").height();
-  }
-  var ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  if (clear)
-  {
-    return;
-  }
-  for (var i in mindMapLinks)
-  {
-    var l = mindMapLinks[i];
-    if (l && l.state != "deleted")
-    {
-      drawLine(ctx, l.x1, l.y1, l.x2, l.y2);
-    }
-  }
+  var link = mindMapLinks[linkIndex];
+  var linkDiv = $("<div id='"+linkIndex+"Arrow' class='arrow_box'> </div>");
+  $("#mindMap").append(linkDiv);
+  updateLinkPosition(linkIndex);
 }
 
 /**
@@ -333,8 +326,9 @@ function initializeNodeEvents(nodeElement)
         if (nodeElement.position().left > o.width() - nodeElement.width()) {
             o.width(o.width() + 10);
         }
+        draggingActive(nodeElement);
     },
-    stop: function(event) {nodeDragged(event.target)}
+    stop: function(event) {draggingStopped(event.target)}
   });
   nodeElement.resizable();
 }
@@ -385,8 +379,7 @@ $(document).ready(function(){
   $(".mindMapNode").each(function(){initializeNodeEvents($(this));});
   for (var i in mindMapLinks)
   {
-    updateLinkPosition(i);
+    createLinkDiv(i);
   }
-  drawLinks();
   $(window).bind('beforeunload', askConfirmationIfUnsaved);
 });
