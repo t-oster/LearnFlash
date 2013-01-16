@@ -7,10 +7,15 @@
 {block name="mainContent"}
 <h2>{$mindmap->getName()}</h2>
   <a href="javascript:saveChanges();" id="save" class="button">Save</a>{include file="./addMindMapForm.tpl" text="Add Submap"}
+  <div class="arrow_box"></div>
+
   <div id="mindMapContainer">
     <div id="mindMap">
       <canvas id="linkLayer">
       </canvas>
+      
+      
+      
     {foreach $mindmap->getChildren() as $c}    
       {include file="./node.tpl" node=$c nodeId=$c->getId()}
     {/foreach}
