@@ -6,11 +6,11 @@
 
 {block name="content"}
 <form class=testForm action="{url action="create"}" method="POST">
-  <label class=marginNullAuto for="title">Title</label>
+  <label class=marginNullAuto for="title">Title:</label>
   <input type="text" id="title" name="title" value="{$title}"/>
-  <label class=marginNullAuto for="frontHtml">Front</label>
+  <label class=marginNullAuto for="frontHtml">Front:</label>
   <textarea class="tinymce" id="frontHtml" name="frontHtml"></textarea>
-  <label class=marginNullAuto for="backHtml">Back</label>
+  <label class=marginNullAuto for="backHtml">Back:</label>
   <textarea class="tinymce" id="backHtml" name="backHtml"></textarea>
   {include file="./../tags/tagInputField.tpl" value="" tags=$tags}
   <input type="submit" value="Create"/>

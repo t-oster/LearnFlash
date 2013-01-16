@@ -6,10 +6,6 @@
         Purpose of the stylesheet follows.
 */
 
-#backHtml_tbl,#frontHtml_tbl{
-  width:100%;
-}
-
 .addCard {
   font-weight: 900;
   border-bottom: 2px solid cornflowerBlue;

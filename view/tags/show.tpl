@@ -1,15 +1,14 @@
 {extends file="../main.tpl"}
 {block name="content"}
   <h2>Tag: {$tag->getName()}</h2><br />
-  
   {include file="./../tags/tag.tpl" tag=$tag}
-  <br /><br />
+  <br/><br/><br/><br/>
   <a class="button" href="{url action="edit" tagId=$tag->getId()}">Edit Tag</a>
   <a class="button" href="{url action="delete" tagId=$tag->getId()}">Delete Tag</a>
   
   <br/><br/>
   <h3>Cards with this tag:</h3>
-  <table>
+  <table class="cardinfo">
     <thead>
       <tr>
         <th>Title</th>
