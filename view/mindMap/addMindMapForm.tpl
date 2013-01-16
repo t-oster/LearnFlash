@@ -1,4 +1,4 @@
-<a href="javascript:showAddMindMapDialog();" class="button">Add a new MindMap</a>
+<a href="javascript:showAddMindMapDialog();" class="button">New MindMap</a>
 
 <form style="display: none;" id="addMindMapForm" action="{url action="addMindMap"}" method="POST" title="Add new MindMap">
       <label for="mindMapName">Name</label>
