@@ -144,7 +144,7 @@ select#tag
   height: 3px;
   width: 200px;
    -moz-transform:rotate(12deg);
-  -webkit-transform:rotate(0deg);
+  -webkit-transform:rotate(12deg);
   -o-transform:rotate(12deg);
   transform:rotate(12deg);
   
