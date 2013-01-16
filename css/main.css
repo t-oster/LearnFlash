@@ -609,14 +609,6 @@ background-color: #fff;
   top: 60px;
 }
 
-div.tag {
-    color: white;
-    margin: 10px 0 0 0;
-    margin-left: 4px;
-    padding: 5px;
-    float: left;
-}
-
 .deleteLink{
     font-size: 10px;
     text-transform: uppercase;
@@ -650,7 +642,7 @@ font-weight: 900;
     display: table-cell;
 }
 
-.wrap input, .wrap div.tag{
+.wrap input {
     float:left;
     margin: 0 0 0 12px;
 }
