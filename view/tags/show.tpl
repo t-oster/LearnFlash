@@ -1,13 +1,14 @@
 {extends file="../main.tpl"}
 {block name="content"}
-  <h1>{$tag->getName()}</h1>
-  <a class="button" href="{url action="edit" tagId=$tag->getId()}">Edit</a>
-  <a class="button" href="{url action="delete" tagId=$tag->getId()}">Delete</a>
-  <h2>Color</h2>
-  <div class="tag" style="background-color: {$tag->getColor()};">
-  {$tag->getColor()}
-  </div><br/><br/>
-  <h2>Cards</h2>
+  <h2>Tag: {$tag->getName()}</h2><br />
+  
+  {include file="./../tags/tag.tpl" tag=$tag}
+  <br /><br />
+  <a class="button" href="{url action="edit" tagId=$tag->getId()}">Edit Tag</a>
+  <a class="button" href="{url action="delete" tagId=$tag->getId()}">Delete Tag</a>
+  
+  <br/><br/>
+  <h3>Cards with this tag:</h3>
   <table>
     <thead>
       <tr>
