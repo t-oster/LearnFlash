@@ -3,11 +3,11 @@
 <h2>Which Cards do you want to learn?</h2>
 <form id="form" action="{url action="prepareLearning"}" method="POST">
   <label>Selection</label>
-  <input class="updateInfo" id="rdAll" type="radio" checked="checked" name="selection" value="all"/>All<br/>
-<input class="updateInfo" id="rdTags" type="radio" name="selection" value="byTags"/>By Tags<br/>
+  <input class="updateInfo" id="rdAll" type="radio" {if $tag == null}checked="checked"{/if} name="selection" value="all"/>All<br/>
+<input class="updateInfo" id="rdTags" type="radio" {if $tag != null}checked="checked"{/if} name="selection" value="byTags"/>By Tags<br/>
 <div id="tags" style="margin-top: 10px;">
 {foreach $tags as $t}
-  <div class=wrap> <input disabled="disabled" class="updateInfo" type="checkbox" name="tagIds[]" value="{$t->getId()}"/>{include file="../tags/tag.tpl" tag=$t}</div>
+  <div class=wrap> <input {if $tag == null}disabled="disabled"{elseif $tag == $t->getId()}checked="checked"{/if} class="updateInfo" type="checkbox" name="tagIds[]" value="{$t->getId()}"/>{include file="../tags/tag.tpl" tag=$t}</div>
 {/foreach}
 </div>
 <div class="clear"></div>
@@ -30,7 +30,9 @@
 </form>
 
 <script type="text/javascript">
-  $("#tags .tag").addClass("grey");
+  {if $tag == null}
+    $("#tags .tag").addClass("grey");
+  {/if}
   $("#rdAll").click(function(){
     $("#tags input").attr("disabled", "disabled");
     $("#tags .tag").addClass("grey");

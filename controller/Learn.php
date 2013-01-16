@@ -8,16 +8,22 @@ namespace Controller;
  */
 class Learn extends BaseCards{
   
-  public function loadDefault($ignoreSession = false)
+  public function loadDefault($ignoreSession = false, $tag = null)
   {
     if (!$ignoreSession && isset($_SESSION["toLearn"]) && count($_SESSION["toLearn"]) > 0)
     {
-      $this->redirect(null, "continueQuestion");
+      $this->redirect(null, "continueQuestion", array("tag" => $tag));
       return;
     }
     $tm = new \Manager\TagsManager();
     $tags = $tm->getTagsByUser($this->getUserManager()->getLoggedInUser());
     $this->assignToView("tags", $tags);
+    $this->assignToView("tag", $tag);
+  }
+  
+  public function loadContinueQuestion($tag = null)
+  {
+    $this->assignToView("tag", $tag);
   }
   
   public function loadCountSelection($selection = "all", $tagIds = null, $order = "creation", $unlearned = false)
