@@ -8,10 +8,6 @@
 <h2>Edit Tag: {$tag->getName()}</h2>
 
   {include file="./../tags/tag.tpl" tag=$tag}
-  <br />
-  <br />
-  <br />
-  <br />
 
 <form action="{url action="update"}" method="POST">
 <table>
