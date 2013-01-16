@@ -715,12 +715,11 @@ font-weight: 900;
     --------------------------------------------*/
 
 .wrap{
-    display: table-cell;
 }
 
 .wrap input {
     float:left;
-    margin: 0 0 0 12px;
+    margin: 9px 5px 0 12px;
 }
 
 
@@ -797,7 +796,7 @@ hr.line{
   margin-right: 4px;
   margin-top: 4px;
   border-radius: 3px;
-  border: 2px solid black ;
+  box-shadow: 0 1px 2px 1px silver;
 }
 
 .tag a{

@@ -5,9 +5,9 @@
   <label>Selection</label>
   <input class="updateInfo" id="rdAll" type="radio" checked="checked" name="selection" value="all"/>All<br/>
 <input class="updateInfo" id="rdTags" type="radio" name="selection" value="byTags"/>By Tags<br/>
-<div id="tags" class="disabled">
+<div id="tags">
 {foreach $tags as $t}
-  <div class=wrap> <input class="updateInfo" type="checkbox" name="tagIds[]" value="{$t->getId()}"/>{include file="../tags/tag.tpl" tag=$t}</div>
+  <div class=wrap> <input disabled="disabled" class="updateInfo" type="checkbox" name="tagIds[]" value="{$t->getId()}"/>{include file="../tags/tag.tpl" tag=$t}</div>
 {/foreach}
 </div>
 <input class="updateInfo" type="checkbox" name="unlearned" vlaue="true"/>Only unlearned cards<br/>
@@ -29,10 +29,10 @@
 
 <script type="text/javascript">
   $("#rdAll").click(function(){
-    $("#tags").addClass("disabled");
+    $("#tags input").attr("disabled", "disabled");
   });
   $("#rdTags").click(function(){
-    $("#tags").removeClass("disabled");
+    $("#tags input").removeAttr("disabled");
   });
   function updateInfo()
   {
