@@ -6,7 +6,7 @@
 
 {block name="mainContent"}
 <h2>{$mindmap->getName()}</h2>
-  <a href="javascript:saveChanges();" id="save" class="button">Save</a>{include file="./addMindMapForm.tpl"}
+  <a href="javascript:saveChanges();" id="save" class="button">Save</a>{include file="./addMindMapForm.tpl" text="Add Submap"}
   <div id="mindMapContainer">
     <div id="mindMap">
       <canvas id="linkLayer">
@@ -19,6 +19,7 @@
     {/foreach}
     </div>
   </div>
+  
   <script type="text/javascript">
     saveChangesUrl = "{url action="saveChanges" mindMapId=$mindmap->getId()}";
     newNodeUrl ="{url action="node"}";
