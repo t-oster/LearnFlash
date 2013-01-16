@@ -10,7 +10,7 @@
   <div class="arrow_box"></div>
 
   <div id="mindMapContainer">
-    <div id="mindMap">
+    <div id="mindMap" style="width: {$mindmap->getWidth()}px; height: {$mindmap->getHeight()}px;">
       <canvas id="linkLayer">
       </canvas>
       
