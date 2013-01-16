@@ -24,6 +24,8 @@ margin: 20px 0 20px 0;
   background-color: rgb(226, 226, 226);
   padding: 30px 10px 10px 10px;
   position: absolute;
+  min-width: 160px;
+  min-height: 80px;
   box-shadow: 0 1px 2px 1px silver;
   border-radius: 3px;
   padding: 3px;
@@ -148,7 +150,6 @@ select#tag
   
 }
 .arrow_box:after, .arrow_box:before {
-	left: 100%;
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -161,8 +162,9 @@ select#tag
 	border-color: rgba(86, 213, 47, 0);
 	border-left-color: #56d52f;
 	border-width: 10px;
-	top: 50%;
-	margin-top: -9px;
+	right: 0;
+  margin-top: -8px;
+	margin-right: 0px;
 }
 .arrow_box:before {
 	border-color: rgba(59, 245, 171, 0);
@@ -170,5 +172,5 @@ select#tag
 	border-width: 10px;
 	left: 0;
 	margin-top: -8px;
-  margin-left: -10px;
+  margin-left: 0px;
 }

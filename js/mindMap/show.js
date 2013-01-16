@@ -278,8 +278,8 @@ function saveChanges()
         id: id,//used only for state=changed
         x: element.position().left,
         y: element.position().top,
-        width: element.css("width").splice(0, -2),//TODO test
-        height: element.css("height").splice(0, -2),
+        width: element.css("width").slice(0, -2),//TODO test
+        height: element.css("height").slice(0, -2),
         collapsed: element.hasClass("collapsed"),
         name: info.name,//used only for type=map
         cardId: info.cardId//used only for type=card
