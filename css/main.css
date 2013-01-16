@@ -795,6 +795,23 @@ padding: 2px 8px;
 margin: 4px 4px 0 0;
 }
 
+tbody tr{
+text-indent: 44px;
+line-height: 40px;
+height: 40px;
+margin-top: 4px;
+padding: 10px 0;
+}
+
+tbody tr:nth-child(odd){
+    color: black;
+background: rgb(247, 247, 247);
+}
+tbody tr:nth-child(even){
+background: rgb(180, 180, 180);
+}
+
+
 .or{
 margin: 0 20px 0 0;
 }
