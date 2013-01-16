@@ -19,6 +19,16 @@ class MindMapNodeManager extends BaseManager {
     $m->setOwner($this->um->getLoggedInUser());
     $m->setX($x);
     $m->setY($y);
+    if ($parent == null)
+    {
+      $m->setWidth(1024);
+      $m->setHeight(768);
+    }
+    else
+    {
+      $m->setWidth(100);
+      $m->setHeight(100);
+    }
     $m->setCollapsed($isCollapsed);
     $m->setName($name);
     if ($parent != null)
@@ -30,10 +40,12 @@ class MindMapNodeManager extends BaseManager {
     return $m;
   }
   
-  public function updateNode(\Model\MindMapNode $map, $x, $y, $isCollapsed)
+  public function updateNode(\Model\MindMapNode $map, $x, $y, $width, $height, $isCollapsed)
   {
     $map->setX($x);
     $map->setY($y);
+    $map->setWidth($width);
+    $map->setHeight($height);
     $map->setCollapsed($isCollapsed);
     $this->em->flush();
   }
@@ -58,6 +70,8 @@ class MindMapNodeManager extends BaseManager {
     $mc->setCard($card);
     $mc->setX($x);
     $mc->setY($y);
+    $mc->setWidth(160);
+    $mc->setHeight(100);
     $mc->setParent($map);
     $this->em->persist($mc);
     $this->em->flush();

@@ -21,16 +21,28 @@ abstract class MindMapNode {
   protected $parent;
   
   /** 
-   * @Column(type="decimal") 
-   * @var double
+   * @Column(type="integer") 
+   * @var int
    */
   protected $x;
   
   /** 
-   * @Column(type="decimal") 
-   * @var double
+   * @Column(type="integer") 
+   * @var int
    */
   protected $y;
+  
+  /** 
+   * @Column(type="integer") 
+   * @var int
+   */
+  protected $width;
+  
+  /** 
+   * @Column(type="integer") 
+   * @var int
+   */
+  protected $height;
   
   /** 
    * @Column(type="boolean") 
@@ -69,6 +81,22 @@ abstract class MindMapNode {
   public function setY($newY)
   {
     $this->y = $newY;
+  }
+  
+  public function getWidth() {
+    return $this->width;
+  }
+
+  public function setWidth($width) {
+    $this->width = $width;
+  }
+
+  public function getHeight() {
+    return $this->height;
+  }
+
+  public function setHeight($height) {
+    $this->height = $height;
   }
   
   public function isCollapsed()
