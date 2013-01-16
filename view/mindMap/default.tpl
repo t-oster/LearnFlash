@@ -9,9 +9,9 @@
 
 {foreach $mindmaps as $mm}
   <ul class=mindMapUl>
+     <li><a class="deleteButton" href="{url action="delete" mindMapId=$mm->getId()}">Delete</a></li>
      <li>{$mm->getName()}<span style="float:right;">({count($mm->getChildren())} elements)</span></li>
-    
-     <li><a class="button" href="{url action="delete" mindMapId=$mm->getId()}">Delete</a><a class="button" href="{url action="show" mindMapId=$mm->getId()}">Open</a></li>
+     <li><a class="button" href="{url action="show" mindMapId=$mm->getId()}">Open</a></li>
   </ul>
 {/foreach}
 
