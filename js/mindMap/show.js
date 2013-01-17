@@ -271,6 +271,7 @@ function saveChanges()
         id: id,//used only for state=changed
         x: element.position().left,
         y: element.position().top,
+        z: element.css("z-index"),
         width: element.css("width").slice(0, -2),//TODO test
         height: element.css("height").slice(0, -2),
         collapsed: element.hasClass("collapsed"),
