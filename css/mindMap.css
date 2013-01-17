@@ -119,6 +119,10 @@ margin: 20px 0 20px 0;
   top: 60px;
 }
 
+.mindMap .linkLink {
+  top: 30px;
+}
+
 .linkLink:before {
   content: "Link";
 }
