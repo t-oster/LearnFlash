@@ -195,6 +195,8 @@ function updateLinkPosition(linkIndex)
   //dimensions of arrow
   var w = Math.sqrt((x1-x2)*(x1-x2));
   var h = Math.sqrt((y1-y2)*(y1-y2));
+  var d1;
+  var d2; 
   //coords of postition between two cards
   var centerX = (x1+x2)/2;
   var centerY = (y1+y2)/2;
@@ -206,29 +208,26 @@ function updateLinkPosition(linkIndex)
     text.css("left", centerX-text.width()+"px");
     text.css("top", centerY-text.height()+"px");
   }
+  d1 = Math.sqrt(left.height()*left.height()+left.width()*left.width())/2;
+  d2 = Math.sqrt(right.height()*right.height()+right.width()*right.width())/2;
 
-
-  arrow.css("width",distance);
+  arrow.css("width",distance-d1-d2);
   arrow.css("left",(-arrow.width()/2)+"px");
   arrow.css("top",(-arrow.height()/2)+"px");
   var translate = "translate("+(centerX)+"px, "+(centerY)+"px)";
-
-
-
   var angle = Math.acos(w/distance);
   if((x2>x1 && y2<y1) || (x2<x1 && y2>y1)){
-    angle = "rotate(-"+angle+"rad)";  
+    angle = "rotate(-"+angle+"rad)";
+
   }else{
     angle = "rotate("+angle+"rad)";
+    //d1 = left.width()/2/w* distance;
+    //d2 = right.width()/2/w* distance;
   }
   arrow.css("-moz-transform",translate+" "+angle);
   arrow.css("-webkit-transform",translate+" "+angle);
   arrow.css("-o-transform",translate+" "+angle);
   arrow.css("transform",translate+" "+angle);
- // arrow.css({"-moz-transform": angle"-moz-transform": translate});
- // arrow.css({"-webkit-transform":angle, "-webkit-transform":translate});
- // arrow.css({"-o-transform":angle,"-o-transform":translate});
- // arrow.css({"transform":angle,"transform":translate});
 }
 
 function createLinkDiv(linkIndex)
