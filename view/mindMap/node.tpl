@@ -17,6 +17,9 @@
       </div>
     </div>
   {else}
-    <a href="{url action="show" mindMapId=$node->getId()}">Map: {$node->getName()}</a>
+  <center>
+    <h4>{$node->getName()}</h4>
+    <a class="button" href="{url action="show" mindMapId=$node->getId()}">Open</a>
+  </center>
   {/if}
 </div>
