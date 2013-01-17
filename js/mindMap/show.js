@@ -210,22 +210,24 @@ function updateLinkPosition(linkIndex)
     arrow.addClass("arrow_boxLeftRight");
   }
 
-  //left node
   var left = $("#"+mindMapLinks[linkIndex].leftId);   
-  //right node
   var right = $("#"+mindMapLinks[linkIndex].rightId);
-  var x1 = left.position().left + (left.width()/2);
-  var y1 = left.position().top + (left.height()/2);
-  var x2 = right.position().left + (right.width()/2);
-  var y2 = right.position().top + (right.height()/2);
+  //middle points
+  var w1 = left.width();
+  var h1 = left.height();
+  var w2 = right.width();
+  var h2 = right.height();
+  var x1 = left.position().left + (w1/2);
+  var y1 = left.position().top + (h1/2);
+  var x2 = right.position().left + (w2/2);
+  var y2 = right.position().top + (h2/2);
   //dimensions of arrow
   var w = Math.sqrt((x1-x2)*(x1-x2));
   var h = Math.sqrt((y1-y2)*(y1-y2));
-  var d1;
-  var d2; 
   //coords of postition between two cards
   var centerX = (x1+x2)/2;
   var centerY = (y1+y2)/2;
+  //distance between the two centers
   var distance = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
   
   var text = $("#link"+mindMapLinks[linkIndex].id);
@@ -234,23 +236,145 @@ function updateLinkPosition(linkIndex)
     text.css("left", (centerX-(text.width()/2))+"px");
     text.css("top", (centerY-(text.height()/2))+"px");
   }
-  d1 = Math.sqrt(left.height()*left.height()+left.width()*left.width())/2;
-  d2 = Math.sqrt(right.height()*right.height()+right.width()*right.width())/2;
+  //this will be obsolete
+  var d1 = Math.sqrt(left.height()*left.height()+left.width()*left.width())/2;
+  var d2 = Math.sqrt(right.height()*right.height()+right.width()*right.width())/2;
+  
+  var angle = Math.acos(w/distance);
+  
+  //alle winkel in [0,2*pi]
+  //drehrichtung im uhrzeigersinn durch html vorgegeben
+  var angleL; //winkel ab dem die seute für den feil aendert
+  var angleR; //winkel ab dem die seute für den feil aendert
+  var newX1 = x1; //new coords for left end of arrow
+  var newY1 = y1;
+  var newX2 = x2; //new coords for right end of arrow
+  var newY2 = y2;
+  var a; //adjacant
+  var o; //oppose
+  var validAngle;
+  if(x2>x1 && y2<y1){ //Q1
+    angle = (2*Math.PI-angle);
+    angleL = 2*Math.PI-Math.atan(h1/w1);
+    angleR = 2*Math.PI-Math.atan(h2/w2);
+    if(angle>angleL){
+      newX1 = x1+w1/2;
+      o = Math.tan(2*Math.PI-angle)*w1/2;
+      newY1 = y1-o;
+    }else{
+      a = h1/2/Math.tan(2*Math.PI-angle);
+      newX1 = x1+a;
+      newY1 = y1-h1/2;
+    }
+    newY1+=10;
+    newX1+=15;
+    if(angle<angleR){
+      a = h2/2/Math.tan(2*Math.PI-angle);
+      newX2 = x2-a;
+      newY2 = y2+h2/2;
+    }else{
+      newX2 = x2-w2/2;
+      o = Math.tan(2*Math.PI-angle)*w2/2;
+      newY2 = y2+o;
+    }
+    newY2+=30;
+    newX2-=15;
+  }else if(x2<x1 && y2>y1){ //Q3
+    angle = (Math.PI-angle);
+    angleL = Math.PI-Math.atan(h1/w1);
+    angleR = Math.PI-Math.atan(h2/w2);
+    if(angle>angleL){
+      newX1 = x1-w1/2;
+      o = Math.tan(Math.PI-angle)*w1/2;
+      newY1 = y1+o;
+    }else{
+      a = h1/2/Math.tan(Math.PI-angle);
+      newX1 = x1-a;
+      newY1 = y1+h1/2;
+    }
+    newY1+=30;
+    newX1-=15;
+    if(angle>angleR){
+      newX2 = x2+w2/2;
+      o = Math.tan(Math.PI-angle)*w2/2;
+      newY2 = y2-o;
+    }else{
+      a = h2/2/Math.tan(Math.PI-angle);
+      newX2 = x2+a;
+      newY2 = y2-h2/2;
+    }
+    newY2+=10;
+    newX2+=15;
+  }else if(x2<x1 && y2<y1){ //Q2
+    angle = (angle+Math.PI);
+    angleL = Math.PI+Math.atan(h1/w1);
+    angleR = Math.PI+Math.atan(h2/w2);
+    if(angle>angleL){
+      a = h1/2/Math.tan(angle-Math.PI);
+      newX1 = x1-a;
+      newY1 = y1-h1/2;
+    }else{
+      newX1 = x1-w1/2;
+      o = Math.tan(angle-Math.PI)*w1/2;
+      newY1 = y1-o;
+    }
+    newY1+=10;
+    newX1-=15;
+    if(angle>angleR){
+      a = h2/2/Math.tan(angle-Math.PI);
+      newX2 = x2+a;
+      newY2 = y2+h2/2;
+    }else{
+      newX2 = x2+w2/2;
+      o = Math.tan(angle-Math.PI)*w2/2;
+      newY2 = y2+o;
+    }
+    newY2+=30;
+    newX2+=15;
+  }else if(x2>x1 && y2>y1){ //Q4
+    angle = angle;
+    angleL = Math.atan(h1/w1);
+    angleR = Math.atan(h2/w2);
+    if(angle>angleL){
+      a = h1/2/Math.tan(angle);
+      newX1 = x1+a;
+      newY1 = y1+h1/2;
+    }else{
+      newX1 = x1+w1/2;
+      o = Math.tan(angle)*w1/2;
+      newY1 = y1+o;
+    }
+    newY1+=30;
+    newX1+=15;
+    if(angle>angleR){
+      a = h2/2/Math.tan(angle);
+      newX2 = x2-a;
+      newY2 = y2-h2/2;
+    }else{
+      newX2 = x2-w2/2;
+      o = Math.tan(angle)*w2/2;
+      newY2 = y2-o;
+    }
+    newY2+=10;
+    newX2-=15;
+  }
+  
+  angle = "rotate("+angle+"rad)";
+  
+  //if(text){
+  //  text.text(angle);
+  //}
+  //recompute distance and centers
 
-  arrow.css("width",distance-d1-d2);
+  distance = Math.sqrt((newX1-newX2)*(newX1-newX2) + (newY1-newY2)*(newY1-newY2));
+  centerX = (newX1+newX2)/2;
+  centerY = (newY1+newY2)/2;
+  
+  arrow.css("width",distance);
   arrow.css("left",(-arrow.width()/2)+"px");
   arrow.css("top",(-arrow.height()/2)+"px");
   var translate = "translate("+(centerX)+"px, "+(centerY)+"px)";
-  var angle = Math.acos(w/distance);
-  if(x2>x1 && y2<y1){ //Q1
-    angle = "rotate(-"+angle+"rad)";
-  }else if(x2<x1 && y2>y1){ //Q3
-    angle = "rotate(-"+(angle+Math.PI)+"rad)";
-  }else if(x2<x1 && y2<y1){ //Q2
-    angle = "rotate("+(angle+Math.PI)+"rad)";
-  }else if(x2>x1 && y2>y1){ //Q4
-    angle = "rotate("+(angle)+"rad)";
-  }
+  
   arrow.css("-moz-transform",translate+" "+angle);
   arrow.css("-webkit-transform",translate+" "+angle);
   arrow.css("-o-transform",translate+" "+angle);
