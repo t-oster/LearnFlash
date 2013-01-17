@@ -242,13 +242,14 @@ function updateLinkPosition(linkIndex)
   arrow.css("top",(-arrow.height()/2)+"px");
   var translate = "translate("+(centerX)+"px, "+(centerY)+"px)";
   var angle = Math.acos(w/distance);
-  if((x2>x1 && y2<y1) || (x2<x1 && y2>y1)){
+  if(x2>x1 && y2<y1){ //Q1
     angle = "rotate(-"+angle+"rad)";
-
-  }else{
-    angle = "rotate("+angle+"rad)";
-    //d1 = left.width()/2/w* distance;
-    //d2 = right.width()/2/w* distance;
+  }else if(x2<x1 && y2>y1){ //Q3
+    angle = "rotate(-"+(angle+Math.PI)+"rad)";
+  }else if(x2<x1 && y2<y1){ //Q2
+    angle = "rotate("+(angle+Math.PI)+"rad)";
+  }else if(x2>x1 && y2>y1){ //Q4
+    angle = "rotate("+(angle)+"rad)";
   }
   arrow.css("-moz-transform",translate+" "+angle);
   arrow.css("-webkit-transform",translate+" "+angle);
