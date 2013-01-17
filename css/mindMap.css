@@ -51,9 +51,7 @@ margin: 20px 0 20px 0;
 .mindMapNode.selectedNode {
   border: 2px solid yellow;
 }
-.mini{
-    font-size: 8px;
-}
+
 .linkText {
   position: absolute;
   z-index: 1;
@@ -101,6 +99,7 @@ margin: 20px 0 20px 0;
 
 .editLink:before {
   content: "Edit";
+  font-size:10px;
 }
 
 .toggleLink {
