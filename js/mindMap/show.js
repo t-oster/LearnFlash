@@ -159,13 +159,18 @@ function draggingActive(node)
   }
 }
 
-function draggingStopped(node)
+function markAsDirty(node)
 {
   //mark note as modified
   if (!nodeInfos[$(node).attr("id")])
   {
     nodeInfos[$(node).attr("id")] = {state: "updated"};
   }
+}
+
+function draggingStopped(node)
+{
+  markAsDirty(node);
   connectedLinks = [];
 }
 
@@ -291,6 +296,7 @@ function saveChanges()
         id: id,//used only for state=changed
         x: element.position().left,
         y: element.position().top,
+        z: element.css("z-index"),
         width: element.css("width").slice(0, -2),//TODO test
         height: element.css("height").slice(0, -2),
         collapsed: element.hasClass("collapsed"),
@@ -338,6 +344,7 @@ function initializeNodeEvents(nodeElement)
   var o = $("#mindMap");
   nodeElement.draggable({
     scroll: true,
+    stack: "#mindMap .mindMapNode",
     start: function(event) {draggingStarted(event.target)},
     drag: function(event, ui) {
         if (nodeElement.position().top > o.height() - nodeElement.height()) {
@@ -350,7 +357,9 @@ function initializeNodeEvents(nodeElement)
     },
     stop: function(event) {draggingStopped(event.target)}
   });
-  nodeElement.resizable();
+  nodeElement.resizable({
+    stop: function(event) {markAsDirty(nodeElement);}
+  });
 }
 
 function askConfirmationIfUnsaved()

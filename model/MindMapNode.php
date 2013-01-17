@@ -36,6 +36,12 @@ abstract class MindMapNode {
    * @Column(type="integer") 
    * @var int
    */
+  protected $z = 0;
+  
+  /** 
+   * @Column(type="integer") 
+   * @var int
+   */
   protected $width;
   
   /** 
@@ -81,6 +87,14 @@ abstract class MindMapNode {
   public function setY($newY)
   {
     $this->y = $newY;
+  }
+  
+  public function getZ() {
+    return $this->z;
+  }
+
+  public function setZ($z) {
+    $this->z = $z;
   }
   
   public function getWidth() {

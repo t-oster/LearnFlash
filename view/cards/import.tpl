@@ -16,7 +16,7 @@
     </p>
     <p>
       <label for="file">File:</label>
-      <input type="file" name="file"/>
+      <input type="file" size="200" name="file"/>
     </p>
     <p>
       {include file="./../tags/tagInputField.tpl" tags=$tags value=""}

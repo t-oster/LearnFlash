@@ -134,12 +134,12 @@ class MindMap extends BaseController {
         if ($c->type == "card")
         {
           $card = $this->cm->findById($c->cardId);
-          $nc = $this->mnm->addCardToMindMap($parent, $card, $c->x, $c->y, $c->collapsed);
+          $nc = $this->mnm->addCardToMindMap($parent, $card, $c->x, $c->y, $c->z, $c->width, $c->height, $c->collapsed);
           $newNodes["node".$c->id] = $nc;
         }
         else if ($c->type == "map")
         {
-          $m = $this->mnm->createMindMap($c->name, $c->x, $c->y, $c->collapsed, $parent);
+          $m = $this->mnm->createMindMap($c->name, $c->x, $c->y, $c->z, $c->width, $c->height, $c->collapsed, $parent);
           $newNodes["node".$c->id] = $m;
         }
         else if ($c->type == "link")
@@ -172,7 +172,7 @@ class MindMap extends BaseController {
         if ($c->type == "card" || $c->type == "map")
         {
           $node = $this->mnm->findById($c->id);
-          $this->mnm->updateNode($node, $c->x, $c->y, $c->width, $c->height, $c->collapsed);
+          $this->mnm->updateNode($node, $c->x, $c->y, $c->z, $c->width, $c->height, $c->collapsed);
         }
         else if ($c->type == "link")
         {

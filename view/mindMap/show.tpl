@@ -6,7 +6,8 @@
 
 {block name="mainContent"}
 <h2>{$mindmap->getName()}</h2>
-  <a href="javascript:saveChanges();" id="save" class="button">Save</a>{include file="./addMindMapForm.tpl" text="Add Submap"}
+
+  <a href="javascript:saveChanges();" id="save" class="button save">Save</a>{include file="./addMindMapForm.tpl" text="Add Submap"}
 
   <div id="mindMapContainer">
     <div id="mindMap">
