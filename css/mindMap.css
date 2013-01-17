@@ -132,17 +132,16 @@ select#tag
 }
 
 .arrow_box {
-  top: 200px;
-  left: 200px;
 	position: absolute;
 	background: #56d52f;
 	border: 0px solid #3bf5ab;
   height: 3px;
-  width: 200px;
   -moz-transform:rotate(0deg);
   -webkit-transform:rotate(0deg);
   -o-transform:rotate(0deg);
   transform:rotate(0deg);
+  
+  -webkit-transform: translate(0px, 0px);
   
 }
 .arrow_box:after, .arrow_box:before {
