@@ -318,6 +318,7 @@ function initializeNodeEvents(nodeElement)
   var o = $("#mindMap");
   nodeElement.draggable({
     scroll: true,
+    stack: "#mindMap .mindMapNode",
     start: function(event) {draggingStarted(event.target)},
     drag: function(event, ui) {
         if (nodeElement.position().top > o.height() - nodeElement.height()) {
