@@ -900,7 +900,13 @@ background: rgb(124, 124, 124);
 position:relative;
 }
 .save:before{
- content:'';
- position:absolute;
- 
+border-bottom-right-radius: 6px;
+border-bottom-left-radius: 6px;
+top: 5px;
+left: 4px;
+width: 21px;
+height: 22px;
+border: 1px solid rgb(124, 119, 119);
+content: '';
+position: absolute;
 }
