@@ -604,7 +604,9 @@ font-weight: 900;
 }
 .deleteButton{
 right: 14px;       
-} .editButton{
+} 
+
+.editButton{
 right: 105px;    
 }
 
