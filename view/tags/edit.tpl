@@ -10,33 +10,13 @@
   {include file="./../tags/tag.tpl" tag=$tag}
 
 <form action="{url action="update"}" method="POST">
-<table>
-  <tr>
-    <td>
-      <input type="hidden" name="tagId" value="{$tag->getId()}"/>
-      <label for="name">Name:</label>
-    </td>
-    <td>
-      <input type="text" name="name" value="{$tag->getName()}"/>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label for="color">Color:</label>
-    </td>
-    <td>
-      <input type="text" name="color" id="colorpickerField1" value="{$tag->getColor()}"/>
-    </td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>
-      <input class="button" type="submit" name="Save" value="Save"/>
-      <a class="button" href="{url action="show" tagId=$tag->getId()}">Cancel</a>
-    </td>
-  </tr>
- </table>
-  </form>
+  <input type="hidden" name="tagId" value="{$tag->getId()}"/>
+  <label for="name">Name:</label>
+  <input type="text" name="name" value="{$tag->getName()}"/>
+  <label for="color">Color:</label>
+  <input type="text" name="color" id="colorpickerField1" value="{$tag->getColor()}"/>
+  <a class="button" href="{url action="show" tagId=$tag->getId()}">Cancel</a><input class="button save" type="submit" name="Save" value="Save"/>
+</form>
 <script type="text/javascript">
   
   $('#colorpickerField1').ColorPicker({
