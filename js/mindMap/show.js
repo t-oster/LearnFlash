@@ -196,23 +196,19 @@ function updateLinkPosition(linkIndex)
   var lA = mindMapLinks[linkIndex].leftArrow;
   var rA = mindMapLinks[linkIndex].rightArrow;
 
-  if (rA == "false" && lA == "false")
-  {
+  if (rA == false && lA == false){
     arrow.removeClass();
-    arrow.addClass(arrow_box);
-  }else if (rA == "true" && lA == "false")
-  {
+    arrow.addClass("arrow_box");
+  }else if (rA == true && lA == false){
     arrow.removeClass();
-    arrow.addClass(arrowRight_box);
-  }else if (rA == "false" && lA == "true")
-  {
+    arrow.addClass("arrow_boxRight");
+  }else if (rA == false && lA == true){
     arrow.removeClass();
-    arrow.addClass(arrowLeft_box);
-  }else if (rA == "true" && lA == "true")
-  {
+    arrow.addClass("arrow_boxLeft");
+  }else if (rA==true && lA==true){
     arrow.removeClass();
-    arrow.addClass(arrowLeftRight_box);
-  }else
+    arrow.addClass("arrow_boxLeftRight");
+  }
 
   //left node
   var left = $("#"+mindMapLinks[linkIndex].leftId);   
