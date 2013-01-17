@@ -82,24 +82,32 @@ function updateLinkFromForm()
   $("#editLinkDialog").dialog("close");
   var text = $("#eldText").val();
   var linkId = $("#eldLinkId").val();
-  //TODO: arrowLeft...
   //update linkInfo
   mindMapLinks[linkId].text = text;
+  mindMapLinks[linkId].leftArrow = ($("#eldLeftArrow").attr("checked") == "checked");
+  mindMapLinks[linkId].rightArrow = ($("#eldRightArrow").attr("checked") == "checked");
   if (mindMapLinks[linkId].state == "clean")
   {
     mindMapLinks[linkId].state = "updated";
   }
   //update text in view
   $("#"+linkId).find(".text").html(text);
+  updateLinkPosition(linkId);
 }
 
 function editLink(linkId)
 {
   $("#eldLinkId").val(linkId);
   $("#eldText").val(mindMapLinks[linkId].text);
-  //TODO checkbox for arrowLeftRight
+  if (mindMapLinks[linkId].leftArrow)
+    $("#eldLeftArrow").attr("checked", "checked")
+  else
+    $("#eldLeftArrow").removeAttr("checked");
+  if (mindMapLinks[linkId].rightArrow)
+    $("#eldRightArrow").attr("checked", "checked")
+  else
+    $("#eldRightArrow").removeAttr("checked");
   $("#editLinkDialog").dialog("open");
-  
 }
 
 function addMindMap(name)
