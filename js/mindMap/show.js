@@ -231,8 +231,8 @@ function updateLinkPosition(linkIndex)
   var text = $("#link"+mindMapLinks[linkIndex].id);
   if (text)
   {
-    text.css("left", centerX-text.width()+"px");
-    text.css("top", centerY-text.height()+"px");
+    text.css("left", (centerX-(text.width()/2))+"px");
+    text.css("top", (centerY-(text.height()/2))+"px");
   }
   d1 = Math.sqrt(left.height()*left.height()+left.width()*left.width())/2;
   d2 = Math.sqrt(right.height()*right.height()+right.width()*right.width())/2;
