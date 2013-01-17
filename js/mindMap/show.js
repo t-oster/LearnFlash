@@ -183,19 +183,39 @@ function updateLinkPosition(linkIndex)
   var left = $("#"+mindMapLinks[linkIndex].leftId);   
   //right node
   var right = $("#"+mindMapLinks[linkIndex].rightId);
-  var x1 = left.position().left + left.width() / 2;
-  var y1 = left.position().top + left.height() / 2;
-  var x2 = right.position().left + right.width() / 2;
-  var y2 = right.position().top + right.height() / 2;
+  var x1 = left.position().left + (left.width()/2);
+  var y1 = left.position().top + (left.height()/2);
+  var x2 = right.position().left + (right.width()/2);
+  var y2 = right.position().top + (right.height()/2);
+  //dimensions of arrow
+  var w = Math.sqrt((x1-x2)*(x1-x2));
+  var h = Math.sqrt((y1-y2)*(y1-y2));
+  //coords of postition between two cards
+  var centerX = (x1+x2)/2;
+  var centerY = (y1+y2)/2;
+  var distance = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+  
   var text = $("#link"+mindMapLinks[linkIndex].id);
   if (text)
   {
-    text.css("left", ((x1+x2)/2)+"px");
-    text.css("top", ((y1+y2)/2)+"px");
+    text.css("left", centerX-text.width()+"px");
+    text.css("top", centerY-text.height()+"px");
   }
   
-  var angle = 90;
-  angle = "rotate("+angle+"deg)";
+ // var translate = "translate("+(centerX)+"px, "+(centerY)+"px)";
+ // arrow.css("-moz-transform","translate(-100px, -100px)");
+ // arrow.css("-webkit-transform",translate);
+ // arrow.css("-o-transform",translate);
+ // arrow.css("transform",translate);
+  arrow.css("width",distance);
+  arrow.css("left",(centerX)+"px");
+  arrow.css("top",(centerY)+"px");
+  var angle = Math.acos(w/distance);
+  if((x2>x1 && y2<y1) || (x2<x1 && y2>y1)){
+    angle = "rotate(-"+angle+"rad)";  
+  }else{
+    angle = "rotate("+angle+"rad)";
+  }
   arrow.css("-moz-transform",angle);
   arrow.css("-webkit-transform",angle);
   arrow.css("-o-transform",angle);
