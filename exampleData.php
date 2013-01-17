@@ -40,8 +40,8 @@ foreach ($cards as $c){
   if($x++ == 5) break;
   $mnm->addCardToMindMap($map, $c);
 }
-$a = $mnm->createMindMap("untermap",300,200,false,$map);
-$b = $mnm->createMindMap("untermap",600,300,true,$map);
+$a = $mnm->createMindMap("untermap",300,200,0, 120, 80, false,$map);
+$b = $mnm->createMindMap("untermap",600,300,0, 120, 80, true,$map);
 $lm = new Manager\MindMapLinkManager;
 $lm->createLink($a, $b, "is an", false, true);
 
