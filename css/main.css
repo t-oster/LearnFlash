@@ -919,4 +919,5 @@ height: 6px;
 background: rgb(207, 196, 196);
 left: 9px;
 bottom: 4px;
+box-shadow: inset 0 2px 5px;
 }
