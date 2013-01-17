@@ -181,9 +181,31 @@ function updateLinkPosition(linkIndex)
   {
     return;
   }
-  
+
 
   var arrow = $('#'+linkIndex+'Arrow');
+  
+  var lA = mindMapLinks[linkIndex].leftArrow;
+  var rA = mindMapLinks[linkIndex].rightArrow;
+
+  if (rA == "false" && lA == "false")
+  {
+    arrow.removeClass();
+    arrow.addClass(arrow_box);
+  }else if (rA == "true" && lA == "false")
+  {
+    arrow.removeClass();
+    arrow.addClass(arrowRight_box);
+  }else if (rA == "false" && lA == "true")
+  {
+    arrow.removeClass();
+    arrow.addClass(arrowLeft_box);
+  }else if (rA == "true" && lA == "true")
+  {
+    arrow.removeClass();
+    arrow.addClass(arrowLeftRight_box);
+  }else
+
   //left node
   var left = $("#"+mindMapLinks[linkIndex].leftId);   
   //right node
