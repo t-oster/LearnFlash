@@ -398,6 +398,8 @@ function toggleNodeCollapsed(nodeId)
 {
   var node = $("#"+nodeId);
   node.toggleClass("collapsed");
+  node.css("width", "auto");
+  node.css("height", "auto");
   if (!nodeInfos[nodeId])
   {
     nodeInfos[nodeId] = {
