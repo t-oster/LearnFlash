@@ -14,7 +14,7 @@
   <label class="marginNullAuto" for="backHtml">Back:</label>
   <textarea class="tinymce" id="backHtml" name="backHtml">{$card->getBackHtml()}</textarea>
   {include file="../tags/tagInputField.tpl" tags=$tags value=$stringTags}
-  <a class="button" href="{url}">Cancel</a><input class="button save" type="submit" value="Save"/>
+  <a class="button cancel" href="{url}">Cancel</a><button class="button save">Save</button>
 </form>
 <script type="text/javascript" src="lib/js/tinymce/jscripts/tiny_mce/jquery.tinymce.js"></script>
 <script type="text/javascript">

@@ -3,8 +3,8 @@
   <h2>Tag: {$tag->getName()}</h2><br />
   {include file="./../tags/tag.tpl" tag=$tag}
   <br/><br/><br/><br/>
-  <a class="button" href="{url action="edit" tagId=$tag->getId()}">Edit Tag</a>
-  <a class="button" href="{url action="delete" tagId=$tag->getId()}">Delete Tag</a>
+  <a class="button edit" href="{url action="edit" tagId=$tag->getId()}">Edit Tag</a>
+  <a class="button delete" href="{url action="delete" tagId=$tag->getId()}">Delete Tag</a>
   <a class="button" href="{url controller='learn' action='default' tag=$tag->getId()}">Learn Tag</a> 
   <br/><br/>
   <h3>Cards with this tag:</h3>

@@ -6,14 +6,14 @@
 
 {block name="content"}
 <h2> Your cards </h2>
-<a class="button" href="{url action="add"}">New Card</a>
-<a class="button" href="{url action="import"}">Import Card</a>
+<a class="button add" href="{url action="add"}">Add</a>
+<a class="button add" href="{url action="import"}">Import Card</a>
 <div id="cards">
 {foreach $cards as $c}
   <div class="card">
     <a class="title" href="{url action="show" cardId=$c->getId()}">{$c->getTitle()}</a>
-    <a class="editButton" href="{url action="edit" cardId=$c->getId()}">Edit</a>
-    <a class="deleteButton" href="{url action="delete" cardId=$c->getId()}">Delete</a>
+    <a class="editButton edit" href="{url action="edit" cardId=$c->getId()}">Edit</a>
+    <a class="deleteButton delete" href="{url action="delete" cardId=$c->getId()}">Delete</a>
     
     <p>{substr(strip_tags($c->getFrontHtml()), 0, 75)}...</p>
     

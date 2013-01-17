@@ -13,7 +13,7 @@
   <label class=marginNullAuto for="backHtml">Back:</label>
   <textarea class="tinymce" id="backHtml" name="backHtml"></textarea>
   {include file="./../tags/tagInputField.tpl" value="" tags=$tags}
-  <a class="button" href="{url}">Cancel</a><input class="button save" type="submit" value="Save"/>
+  <a class="button cancel" href="{url}">Cancel</a><button class="button save">Save</button>
 </form>
 <hr class=freeBox>
 <script type="text/javascript" src="lib/js/tinymce/jscripts/tiny_mce/jquery.tinymce.js"></script>

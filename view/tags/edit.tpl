@@ -15,7 +15,7 @@
   <input type="text" name="name" value="{$tag->getName()}"/>
   <label for="color">Color:</label>
   <input type="text" name="color" id="colorpickerField1" value="{$tag->getColor()}"/>
-  <a class="button" href="{url action="show" tagId=$tag->getId()}">Cancel</a><input class="button save" type="submit" name="Save" value="Save"/>
+  <a class="button cancel" href="{url action="show" tagId=$tag->getId()}">Cancel</a><button class="button save">Save</button>
 </form>
 <script type="text/javascript">
   
