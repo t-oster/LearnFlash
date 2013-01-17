@@ -64,13 +64,26 @@
         result: result
       },
       function(cardInfo) {
-        $("#frontSide").html(cardInfo.frontHtml);
-        $("#backSide").html(cardInfo.backHtml);
-        $("#cardId").val(cardInfo.cardId);
-        $("#tagList").load('{url controller="tags" action="taglist"}', { cardId: cardInfo.cardId});
-        $("#cardsLeftNote").html(cardInfo.cardsLeft+" cards left");
-        $("#title").html(cardInfo.title);
-        $("#frontSide").slideDown(500);
+        if (cardInfo == "end")
+        {
+            success("You did it.");
+            $("#frontSide").html("No more cards to learn");
+            $("#frontSide").fadeIn(1000);
+            $("#show").hide();
+            $("#tagList").hide();
+            $("#title").hide();
+            $("#cardsLeftNote").hide();
+        }
+        else
+        {
+          $("#frontSide").html(cardInfo.frontHtml);
+          $("#backSide").html(cardInfo.backHtml);
+          $("#cardId").val(cardInfo.cardId);
+          $("#tagList").load('{url controller="tags" action="taglist"}', { cardId: cardInfo.cardId});
+          $("#cardsLeftNote").html(cardInfo.cardsLeft+" cards left");
+          $("#title").html(cardInfo.title);
+          $("#frontSide").slideDown(500);
+        }
       },
       "json"
     );

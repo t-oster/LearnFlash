@@ -129,8 +129,17 @@ class Learn extends BaseCards{
     }
     if (count($_SESSION["toLearn"]) <= 0)
     {
-      $this->redirect();
-      return;
+      if ($ajax)
+      {
+        echo json_encode("end");
+        $this->dontRender();
+        return;
+      }
+      else
+      {
+        $this->redirect();
+        return;
+      }
     }
     $card = $this->findCardOrError($_SESSION["toLearn"][0]);
     if ($ajax)

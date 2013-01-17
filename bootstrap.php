@@ -2,7 +2,7 @@
 //initialize autoloader
 spl_autoload_register (function ($classname){
   $file = lcfirst(str_replace("\\", "/", $classname)).".php";
-  if (is_file($file))
+  if (is_file(__DIR__.'/'.$file))
   {
     include $file;
     return true;
@@ -11,7 +11,7 @@ spl_autoload_register (function ($classname){
 });
 
 //initialize smarty
-require('lib/php/Smarty-3.1.12/libs/Smarty.class.php');
+require(__DIR__.'/lib/php/Smarty-3.1.12/libs/Smarty.class.php');
 $smarty = new Smarty();
 $smarty->setCacheDir("tmp");
 $smarty->setCompileDir("tmp");
@@ -19,8 +19,8 @@ $smarty->setCompileDir("tmp");
 //initialize doctrine
 date_default_timezone_set("Europe/Berlin");
 // Setup Autoloader (1)
-require 'lib/php/DoctrineORM-2.3.0/Doctrine/ORM/Tools/Setup.php';
-Doctrine\ORM\Tools\Setup::registerAutoloadDirectory("lib/php/DoctrineORM-2.3.0");
+require __DIR__.'/lib/php/DoctrineORM-2.3.0/Doctrine/ORM/Tools/Setup.php';
+Doctrine\ORM\Tools\Setup::registerAutoloadDirectory(__DIR__."/lib/php/DoctrineORM-2.3.0");
 $config = new Doctrine\ORM\Configuration(); // (2)
 // Proxy Configuration (3)
 $config->setProxyDir(__DIR__.'/tmp');
@@ -70,9 +70,9 @@ if (!is_file($conn["path"]))
       // Lots of errors!
       echo implode("\n\n", $e);
     }
-    unlink("tmp/db.sqlite");
+    unlink(__DIR__."/tmp/db.sqlite");
     exit;
   }
-  include "exampleData.php";
+  include __DIR__."/exampleData.php";
 }
 ?>
