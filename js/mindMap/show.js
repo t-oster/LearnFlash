@@ -206,25 +206,29 @@ function updateLinkPosition(linkIndex)
     text.css("left", centerX-text.width()+"px");
     text.css("top", centerY-text.height()+"px");
   }
-  
- // var translate = "translate("+(centerX)+"px, "+(centerY)+"px)";
- // arrow.css("-moz-transform","translate(-100px, -100px)");
- // arrow.css("-webkit-transform",translate);
- // arrow.css("-o-transform",translate);
- // arrow.css("transform",translate);
+
+
   arrow.css("width",distance);
-  arrow.css("left",(centerX)+"px");
-  arrow.css("top",(centerY)+"px");
+  arrow.css("left",(-arrow.width()/2)+"px");
+  arrow.css("top",(-arrow.height()/2)+"px");
+  var translate = "translate("+(centerX)+"px, "+(centerY)+"px)";
+
+
+
   var angle = Math.acos(w/distance);
   if((x2>x1 && y2<y1) || (x2<x1 && y2>y1)){
     angle = "rotate(-"+angle+"rad)";  
   }else{
     angle = "rotate("+angle+"rad)";
   }
-  arrow.css("-moz-transform",angle);
-  arrow.css("-webkit-transform",angle);
-  arrow.css("-o-transform",angle);
-  arrow.css("transform",angle);
+  arrow.css("-moz-transform",translate+" "+angle);
+  arrow.css("-webkit-transform",translate+" "+angle);
+  arrow.css("-o-transform",translate+" "+angle);
+  arrow.css("transform",translate+" "+angle);
+ // arrow.css({"-moz-transform": angle"-moz-transform": translate});
+ // arrow.css({"-webkit-transform":angle, "-webkit-transform":translate});
+ // arrow.css({"-o-transform":angle,"-o-transform":translate});
+ // arrow.css({"transform":angle,"transform":translate});
 }
 
 function createLinkDiv(linkIndex)

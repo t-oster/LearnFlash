@@ -140,7 +140,7 @@ select#tag
   -webkit-transform:rotate(0deg);
   -o-transform:rotate(0deg);
   transform:rotate(0deg);
-  
+  z-index: -1;
   -webkit-transform: translate(0px, 0px);
   
 }
