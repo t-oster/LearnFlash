@@ -159,13 +159,18 @@ function draggingActive(node)
   }
 }
 
-function draggingStopped(node)
+function markAsDirty(node)
 {
   //mark note as modified
   if (!nodeInfos[$(node).attr("id")])
   {
     nodeInfos[$(node).attr("id")] = {state: "updated"};
   }
+}
+
+function draggingStopped(node)
+{
+  markAsDirty(node);
   connectedLinks = [];
 }
 
@@ -332,7 +337,9 @@ function initializeNodeEvents(nodeElement)
     },
     stop: function(event) {draggingStopped(event.target)}
   });
-  nodeElement.resizable();
+  nodeElement.resizable({
+    stop: function(event) {markAsDirty(nodeElement);}
+  });
 }
 
 function askConfirmationIfUnsaved()
