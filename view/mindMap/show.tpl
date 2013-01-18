@@ -2,6 +2,9 @@
 {block name="head"}
   <script type="text/javascript" src="js/mindMap/show.js"></script>
   <link rel="stylesheet" href="css/mindMap.css"/>
+  <script type="text/javascript"
+    src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
 {/block}
 
 {block name="mainContent"}
