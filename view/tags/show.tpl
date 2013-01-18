@@ -6,6 +6,7 @@
   <a class="button edit" href="{url action="edit" tagId=$tag->getId()}">Edit Tag</a>
   <a class="button delete" href="{url action="delete" tagId=$tag->getId()}">Delete Tag</a>
   <a class="button" href="{url controller='learn' action='default' tag=$tag->getId()}">Learn Tag</a> 
+  <a class="button" href="{url controller='cards' action='export' tag=$tag->getId()}">Export Tag</a> 
   <br/><br/>
   <h3>Cards with this tag:</h3>
   <table class="cardinfo">

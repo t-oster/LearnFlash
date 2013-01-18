@@ -39,6 +39,7 @@
     {/block}
    
   </body>
+  {if isset($smarty.session.error) || isset($smarty.session.info)}
   <script type="text/javascript">
     $(document).ready(function()
     {
@@ -56,4 +57,5 @@
       {/if}
     });
   </script>
+  {/if}
 </html>

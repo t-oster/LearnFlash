@@ -7,12 +7,31 @@ namespace Controller;
  */
 class Cards extends BaseCards{
   
+  public function loadDoExport($selection, $tagIds, $format, $unlearned = false)
+  {
+    $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned);
+    $text = $this->cm->exportFile($cards, $format);
+    header("Content-Type: text/plain");
+    header("Content-Length: ".strlen($text));
+    header("Content-Filename: export.csv");
+    echo $text;
+    $this->dontRender();
+  }
+  
   public function loadDoImport($format, $tags)
   {
     $path = $_FILES['file']['tmp_name'];
     $count = $this->cm->importFile($path, explode(",", $tags), $format);
     $this->addInfo($count." cards imported");
     $this->redirect();
+  }
+  
+  public function loadExport($tag = null)
+  {
+    $tm = new \Manager\TagsManager();
+    $tags = $tm->getTagsByUser($this->getUserManager()->getLoggedInUser());
+    $this->assignToView("tags", $tags);
+    $this->assignToView("tag", $tag);
   }
   
   public function loadImport()

@@ -7,6 +7,23 @@ namespace Manager;
  */
 class CardsManager extends BaseManager{
   
+  private function escape($text)
+  {
+    return str_replace("\t", "    ", str_replace("\n", "<br/>", $text));
+  }
+  
+  public function exportFile($cards, $format = "tabs")
+  {
+    $result = "";
+    foreach ($cards as $c)
+    {
+      $result .= $this->escape($c->getFrontHtml())
+              .($format == "tabs" ? "\t" : "\n")
+              .$this->escape($c->getBackHtml())."\n";
+    }
+    return $result;
+  }
+  
   public function importFile($path, $tags, $format = "tabs")
   {
     $f = fopen($path, "r");

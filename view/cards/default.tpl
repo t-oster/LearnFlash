@@ -7,7 +7,8 @@
 {block name="content"}
 <h2> Your cards </h2>
 <a class="button add" href="{url action="add"}">Add</a>
-<a class="button add" href="{url action="import"}">Import Card</a>
+<a class="button add" href="{url action="import"}">Import Cards</a>
+<a class="button edit" href="{url action="export"}">Export Cards</a>
 <div id="cards">
 {foreach $cards as $c}
   <div class="card">
