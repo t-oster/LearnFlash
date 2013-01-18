@@ -228,16 +228,6 @@ function updateLinkPosition(linkIndex)
   //distance between the two centers
   var distance = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
   
-  var text = $("#link"+mindMapLinks[linkIndex].id);
-  if (text)
-  {
-    text.css("left", (centerX-(text.width()/2))+"px");
-    text.css("top", (centerY-(text.height()/2))+"px");
-  }
-  //this will be obsolete
-  var d1 = Math.sqrt(left.height()*left.height()+left.width()*left.width())/2;
-  var d2 = Math.sqrt(right.height()*right.height()+right.width()*right.width())/2;
-  
   var angle = Math.acos(w/distance);
   
   //alle winkel in [0,2*pi]
@@ -373,6 +363,13 @@ function updateLinkPosition(linkIndex)
   arrow.css("-webkit-transform",translate+" "+angle);
   arrow.css("-o-transform",translate+" "+angle);
   arrow.css("transform",translate+" "+angle);
+  
+  var text = $("#link"+mindMapLinks[linkIndex].id);
+  if (text)
+  {
+    text.css("left", (centerX-(text.width()/2))+"px");
+    text.css("top", (centerY-(text.height()/2))+"px");
+  }
 }
 
 function createLinkDiv(linkIndex)
