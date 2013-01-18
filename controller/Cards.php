@@ -7,14 +7,17 @@ namespace Controller;
  */
 class Cards extends BaseCards{
   
-  public function loadDoExport($selection, $tagIds, $format, $unlearned = false)
+  public function loadDoExport($selection, $format, $unlearned = false, $tagIds = null)
   {
     $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned);
     $text = $this->cm->exportFile($cards, $format);
     //TODO: set headers so, that this appears as download
-    header("Content-Type: text/plain");
     header("Content-Length: ".strlen($text));
-    header("Content-Filename: export.csv");
+    header("Cache-Control: public");
+    header("Content-Description: File Transfer");
+    header("Content-Disposition: attachment; filename=export.".($format == "json" ? "js" : "csv"));
+    header("Content-Type: text/plain");
+    header("Content-Transfer-Encoding: binary");
     echo $text;
     $this->dontRender();
   }
