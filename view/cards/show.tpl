@@ -6,8 +6,10 @@
 </script>
 {/block}
 {block name="content"}
-<h2>{$card->getTitle()}</h2><a class="editlink edit" href="{url action="edit" cardId=$card->getId()}">Edit</a>
-<div id="frontSide">
+<h2>{$card->getTitle()}</h2><a class="button edit" href="{url action="edit" cardId=$card->getId()}">Edit</a>
+<div class="clear"></div>
+<br/>
+<div id="frontSide" >
   {$frontHtml}
 </div>
 <div id="backSide">
