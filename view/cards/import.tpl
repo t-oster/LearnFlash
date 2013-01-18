@@ -12,6 +12,7 @@
       <select name="format">
         <option value="tabs">Tab separated Q/A</option>
         <option value="lines">Line separated Q/A</option>
+        <option value="json">Json (including tags)</option>
       </select>
     </p>
     <p>

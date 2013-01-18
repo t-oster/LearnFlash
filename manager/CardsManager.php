@@ -15,20 +15,51 @@ class CardsManager extends BaseManager{
   public function exportFile($cards, $format = "tabs")
   {
     $result = "";
-    foreach ($cards as $c)
+    if ($format == "json")
     {
-      $result .= $this->escape($c->getFrontHtml())
-              .($format == "tabs" ? "\t" : "\n")
-              .$this->escape($c->getBackHtml())."\n";
+      $arr = array();
+      foreach ($cards as $c)
+      {
+        $tags = array();
+        foreach ($c->getTags() as $t)
+        {
+          $tags []= $t->getName();
+        }
+        $arr []= array(
+            "front" => $c->getFrontHtml(),
+            "back" => $c->getBackHtml(),
+            "tags" => $tags
+        );
+      }
+      $result = json_encode($arr);
+    }
+    else
+    {
+      foreach ($cards as $c)
+      {
+        $result .= $this->escape($c->getFrontHtml())
+                .($format == "tabs" ? "\t" : "\n")
+                .$this->escape($c->getBackHtml())."\n";
+      }
     }
     return $result;
   }
   
   public function importFile($path, $tags, $format = "tabs")
   {
+    $count = 0;
+    if ($format == "json")
+    {
+      $data = json_decode(file_get_contents($path));
+      foreach ($data as $c)
+      {
+        $this->createCard(null, "", $c->front, $c->back, array_merge($tags, $c->tags));
+        $count++;
+      }
+      return $count;
+    }
     $f = fopen($path, "r");
     $i = 0;
-    $count = 0;
     while(!feof($f))
     {
       $line = fgets($f);

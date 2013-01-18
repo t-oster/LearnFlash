@@ -11,6 +11,7 @@ class Cards extends BaseCards{
   {
     $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned);
     $text = $this->cm->exportFile($cards, $format);
+    //TODO: set headers so, that this appears as download
     header("Content-Type: text/plain");
     header("Content-Length: ".strlen($text));
     header("Content-Filename: export.csv");
