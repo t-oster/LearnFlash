@@ -37,7 +37,6 @@ function linkButtonClicked(nodeId)
       leftArrow: false,
       rightArrow: false
     };
-    createLinkDiv(linkId);
     $.get(
       newLinkTextUrl, 
       {
@@ -50,7 +49,7 @@ function linkButtonClicked(nodeId)
       {
         $("#mindMap").append(html);
         $(".selectedNode").removeClass("selectedNode");
-        drawLinks();
+        createLinkDiv(linkId);
         editLink(linkId);
       },
       "html"
@@ -223,7 +222,6 @@ function updateLinkPosition(linkIndex)
   var y2 = right.position().top + (h2/2);
   //dimensions of arrow
   var w = Math.sqrt((x1-x2)*(x1-x2));
-  var h = Math.sqrt((y1-y2)*(y1-y2));
   //coords of postition between two cards
   var centerX = (x1+x2)/2;
   var centerY = (y1+y2)/2;
@@ -252,7 +250,6 @@ function updateLinkPosition(linkIndex)
   var newY2 = y2;
   var a; //adjacant
   var o; //oppose
-  var validAngle;
   if(x2>x1 && y2<y1){ //Q1
     angle = (2*Math.PI-angle);
     angleL = 2*Math.PI-Math.atan(h1/w1);
@@ -361,9 +358,6 @@ function updateLinkPosition(linkIndex)
   
   angle = "rotate("+angle+"rad)";
   
-  //if(text){
-  //  text.text(angle);
-  //}
   //recompute distance and centers
 
   distance = Math.sqrt((newX1-newX2)*(newX1-newX2) + (newY1-newY2)*(newY1-newY2));
@@ -383,7 +377,6 @@ function updateLinkPosition(linkIndex)
 
 function createLinkDiv(linkIndex)
 {
-  var link = mindMapLinks[linkIndex];
   var linkDiv = $("<div id='"+linkIndex+"Arrow' class='arrow_box'> </div>");
   $("#mindMap").append(linkDiv);
   updateLinkPosition(linkIndex);
