@@ -158,11 +158,20 @@ function draggingStarted(node)
   }
 }
 
+var skipFrames = 0;
 function draggingActive(node)
 {
-  for (var i = 0; i < connectedLinks.length; i++)
+  if (skipFrames == 0)
   {
-    updateLinkPosition(connectedLinks[i]);
+    for (var i = 0; i < connectedLinks.length; i++)
+    {
+      updateLinkPosition(connectedLinks[i]);
+    }
+    skipFrames = 3;
+  }
+  else
+  {
+    skipFrames -= 1;
   }
 }
 
@@ -177,6 +186,11 @@ function markAsDirty(node)
 
 function draggingStopped(node)
 {
+  for (var i = 0; i < connectedLinks.length; i++)
+  {
+    updateLinkPosition(connectedLinks[i]);
+  }
+  skipFrames = 0;
   markAsDirty(node);
   connectedLinks = [];
 }
