@@ -15,6 +15,11 @@ border: 1px solid silver;
 margin: 20px 0 20px 0;
 }
 
+
+.addLink {
+  float: right;
+}
+
 #mindMap {
   position: relative;
 }

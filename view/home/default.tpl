@@ -19,7 +19,7 @@
   <p>After creating some cards you can now make a test of your
     knowledge.</br> Go to <b>LEARN</b> and choose which cards you want to learn:
   you have here</br> the three possibilities:
-  <ul>
+  <ul class="list">
      <li>Learn all cards</li>
      <li>Learn only cards with selected tags</li>
      <li>Learn unlearned cards (if you have learned some of them already!)</li>

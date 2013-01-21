@@ -266,12 +266,20 @@ a[href$=".pdf"]:before {
 blockquote, q {
 quotes:none;
 }
+
 nav ul, nav ul li, ul li, ul ul li, nav ul ol,nav ol,li,ul {
 list-style:none;
 list-style-image:none;
 margin:0;
 padding:0;
 }
+
+ul.list, ul.list li
+{
+  list-style: disc;
+  list-style-image: none
+}
+
 .thumbnail a:after,
 imgParent:before {
 bottom: 0;
