@@ -15,14 +15,16 @@
         <th>Title</th>
         <th>Answered</th>
         <th>Average result</th>
+        <th>SM2 easyness</th>
       </tr>
     </thead>
     <tbody>
     {foreach $tag->getCards() as $c}
       <tr>
         <td><a href="{url controller="Cards" action="show" cardId=$c->getId()}">{$c->getTitle()}</a></td>
-        <td>{$c->getCountAnswers()}</td>
+        <td>{$c->getCountAllAnswers()}</td>
         <td>{$c->getAverageResultText()}</td>
+        <td>{$c->getEasiness()}</td>
       </tr>
     {/foreach}
     </tbody>

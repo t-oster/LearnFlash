@@ -232,6 +232,11 @@ class Card {
     return $this->countResult1 + $this->countResult2 + $this->countResult3 + $this->countResult4;
   }
   
+  public function getCountAllAnswers()
+  {
+    return $this->getCountAnswers() + $this->getRepetitions();
+  }
+  
   public function getAverageResult()
   {
     $count = $this->getCountAnswers();
