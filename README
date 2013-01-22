@@ -13,7 +13,7 @@
 SETUP:
 ================================
 * A live demo can be seen here:
-  http://137.226.142.25:5080/flash/
+  http://137.226.142.25:5080/wwwshare/flash/
   username and password "test"
 * The easiest way is to install NetBeans
   with PHP support, configure PHP to
