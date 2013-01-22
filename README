@@ -1,0 +1,87 @@
+================================
+======= LearnFlash =============
+================================
+===== Copyright 2013 by:   =====
+=== * Lidia Lang           =====
+=== * Francis Engelmann    =====
+=== * Thomas Oster         =====
+=== * Gildas Tambo         =====
+=== * Tuan Dung Nguyen     =====
+================================
+
+
+SETUP:
+================================
+* You will need PHP >= 5.3 with enabled
+  pdo_sqlite extension
+* The "tmp" folder in the application root
+  has to be writable from the webserver.
+  it will be created if it does not exist
+  and filled with example content
+* An example user with username and password
+  "test" will be created everytime the tmp
+  folder is deleted.
+
+CODE STRUCTURE:
+================================
+The Application consists of Controllers
+with Actions. Each request references
+exactly one Controller/Action pair with
+an arbitrary number of Parameters.
+
+---- bootstrap.php ------
+The bootstrap.php sets up the used Libraries,
+namely Doctrine for Database-Access and
+Smarty as Template engine.
+
+---- index.php ----------
+The index.php then extracts the important
+variables from the request: $controller (name
+of the controller) $action (name of the action)
+and $ajax (true if request is done via jQuery Ajax.
+
+Then it instanciates the class in the "controller"
+folder which has the same name like the $controller
+variable.
+
+If the controller has a method called load$action,
+index.php tries to fill all parameters of this
+methods from the GET and POST parameters (and the
+$ajax variable) and calls that method.
+
+If the method did not call the dontRender() method,
+after running, index.php will look for a template
+called "view/$controller/$action.tpl" and
+call Smarty to display that template.
+
+---- workflow ----------
+The usual workflow: A controller's action
+method is used, to call some Managers (classes
+from the "managers" folder) to provide information
+for the template with the assignToView() method.
+The Managers interact with Doctrine in order to
+read and write in the Database.
+In the template, all objects the controller assigned
+are available for creating the display HTML.
+
+If an action is for writing in the database,
+it usually does this and then calls "redirect", which
+outputs a redirect-header to the browser and then
+calls dontRender(), so no templates exist for
+such mehtods.
+
+---- ajax ------------
+in order to re-use the templates and not specify
+html once in PHP and once again in JavaScript,
+dynamic pages usually load content also via 
+calling a controller's load$action mehtod.
+The templates in this case don't inerhit from
+main.tpl (which contains the whole site structure)
+but only include the HTML for the to-load content.
+The advantage is, that the very same template can
+be used in other templates via {include}, so that
+the HTML is the same, no matter if prefilled on
+the initial request or re-loaded via ajax.
+
+If you have problems or quesions, please contact:
+thomas.oster@rwth-aachen.de
