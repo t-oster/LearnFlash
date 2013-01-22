@@ -1,6 +1,6 @@
 {extends file="../main.tpl"}
 {block name="content"}
-<h><FONT SIZE=3>Welcome to the <FONT FACE="Comic Sans MS"><font color="#FF0000">Smart</font><font color="#0000FF">Card</font><font color="#00C000">Learn</font></FONT>!
+<h><FONT SIZE=3>Welcome to the <FONT FACE="Comic Sans MS"><font color="#FF0000">Learn</font><font color="#0000FF">F</font><font color="#00C000">lash</font></FONT>!
   You are sucessfully logged in.</h></FONT>
 
 <HR SIZE=1>

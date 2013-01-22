@@ -1,0 +1,2 @@
+A teilt n, also $$a|n$$ ist $$\Leftrightarrow$$	$$\exists b: a\cdot b=n$$
+Regeln in $$\mathbb Z_n$$	$$\exists a^{-1} \Leftrightarrow ggT(a,n)=1$$
