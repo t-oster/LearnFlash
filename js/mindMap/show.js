@@ -117,6 +117,8 @@ function addMindMap(name)
     initializeNodeEvents(element);
     $("#mindMap").append(element);
     nodeInfos[element.attr("id")] = {id: lastNewId, state: "new", name: name};
+    //render math
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     success("Map added");
   }, "html");
 }
@@ -408,6 +410,8 @@ function addCard(cardId)
     initializeNodeEvents(element);
     $("#mindMap").append(element);
     nodeInfos[element.attr("id")] = {id: lastNewId, state: "new", cardId: cardId};
+    //render math
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     success("Card added");
   }, "html");
 }

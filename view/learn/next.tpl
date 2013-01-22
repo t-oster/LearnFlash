@@ -2,6 +2,9 @@
 
 {block name="head"}
   <link rel="stylesheet" href="css/cards.css" />
+  <script type="text/javascript"
+    src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
 {/block}
 
 {block name="content"}
