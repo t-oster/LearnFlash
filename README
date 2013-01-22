@@ -12,6 +12,14 @@
 
 SETUP:
 ================================
+* A live demo can be seen here:
+  http://137.226.142.25:5080/flash/
+  username and password "test"
+* The easiest way is to install NetBeans
+  with PHP support, configure PHP to
+  use pdo_sqlite (php.ini) and run
+  the project with NetBeans internal
+  webserver.
 * You will need PHP >= 5.3 with enabled
   pdo_sqlite extension
 * The "tmp" folder in the application root
