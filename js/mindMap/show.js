@@ -72,7 +72,7 @@ function deleteLink(linkIndex)
   {
     mindMapLinks[linkIndex].state = "deleted";
   }
-  $("#"+linkIndex).remove();
+  $("#"+linkIndex+"Arrow").remove();
   success("Link deleted");
 }
 
