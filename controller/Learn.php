@@ -30,6 +30,7 @@ class Learn extends BaseCards{
   {
     $cards = $this->cm->findCards(null, $selection == "all" ? null : $tagIds, $unlearned);
     $count_unlearned = 0;
+    $now = new \DateTime();
     $count = 0;
     foreach ($cards as $c)
     {
@@ -60,7 +61,7 @@ class Learn extends BaseCards{
     if($n==0)return 0;
     if($n==1)return 1;     
     if($n==2)return 6;
-    if($n>2) return sm2RepetitionInterval($n-1)*$e;     
+    if($n>2) return $this->sm2RepetitionInterval($n-1)*$e;     
   }
   
   public function loadPrepareLearning($selection = "all", $tagIds = null, $order = "creation", $unlearned = false)

@@ -85,6 +85,8 @@
           $("#tagList").load('{url controller="tags" action="taglist"}', { cardId: cardInfo.cardId});
           $("#cardsLeftNote").html(cardInfo.cardsLeft+" cards left");
           $("#title").html(cardInfo.title);
+          //render math
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
           $("#frontSide").slideDown(500);
         }
       },
