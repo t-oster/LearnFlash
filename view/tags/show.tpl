@@ -22,7 +22,7 @@
       <tr>
         <td><a href="{url controller="Cards" action="show" cardId=$c->getId()}">{$c->getTitle()}</a></td>
         <td>{$c->getCountAnswers()}</td>
-        <td>{$c->getAverageResult()}</td>
+        <td>{$c->getAverageResultText()}</td>
       </tr>
     {/foreach}
     </tbody>

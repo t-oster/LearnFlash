@@ -238,6 +238,31 @@ class Card {
     return $count == 0 ? 0 : ($this->countResult1+2*$this->countResult2+3*$this->countResult3+4*$this->countResult4) / $count;
   }
   
+  public function getAverageResultText()
+  {
+    $a = $this->getAverageResult();
+    if ($a < 1)
+    {
+      return "unlearned";
+    }
+    else if ($a < 1.5)
+    {
+      return "forgotten";
+    }
+    else if ($a < 2.5)
+    {
+      return "I was close";
+    }
+    else if ($a < 3.5)
+    {
+      return "I knew it";
+    }
+    else
+    {
+      return "boring";
+    }
+  }
+  
   public function isUnlearned()
   {
     return $this->lastAnswered == null;
